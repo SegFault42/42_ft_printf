@@ -12,7 +12,7 @@
 
 NAME = libftprintf.a
 
-SRCS = 
+SRCS = ./sources/ft_printf.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -40,7 +40,7 @@ $(NAME): $(OBJS)
 
 clean:
 	@echo "\033[31mdeleting all .o ...\033[0m"
-	@rm -f $(SRCS)
+	@rm -f $(OBJS)
 	@make -s clean -C ./libft/
 	@echo "\033[32mThe folder is clean !\033[0m"
 

@@ -14,6 +14,8 @@
 # define FT_PRINTF_H
 
 # include <stdarg.h>
-# include "../../sources_libft/includes/libft.h"
+# include "../../libft/includes/libft.h"
+
+void afficher (const char *format, const char *espace, ...);
 
 #endif
