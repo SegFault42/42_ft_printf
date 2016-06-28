@@ -6,5 +6,6 @@
 int main ()
 {
     /*afficher ("doHefGcsp"," ",9572,9572,9572,6569.28,6569.28,6569.28,'$',"Exemple",NULL);*/
-	printf("%s, %d\n", 42, "lol");
+	ft_printf("%%");
+	return (0);
 }

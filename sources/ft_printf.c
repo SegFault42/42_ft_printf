@@ -1,61 +1,45 @@
+
 #include "./includes/ft_printf.h"
 #include <stdio.h>
 
-void afficher (const char *format, const char *espace, ...)
+void	ft_printf(const char *format, ...)
 {
-    /* Liste des arguments */
-    va_list args;
-    /* Initialisation, à partir du dernier paramètre connu */
-    va_start (args,espace);
+	va_list pa;
+	int		n;
+	char	*s;
+	char	c;
+	float	f;
 
-    /* Parcours de la chaîne de format et affichage des données */
-    int i;
-    for (i=0; format[i]; i++)
-        switch (format[i])
-        {
-            /* Note au niveau des conversions :
-             * – les arguments de type char ou short sont automatiquement convertis en int ;
-             * – les arguments de type float sont automatiquement convertis en double.
-             */
-            case 'C' : case 'c' :
-                printf ("%c%s",va_arg(args,int),espace);
-                break;
-            case 'D' : case 'd' :
-                printf ("%d%s",va_arg(args,int),espace);
-                break;
-            case 'E' :
-                printf ("%E%s",va_arg(args,double),espace);
-                break;
-            case 'e' :
-                printf ("%e%s",va_arg(args,double),espace);
-                break;
-            case 'F' : case 'f' :
-                printf ("%f%s",va_arg(args,double),espace);
-                break;
-            case 'G' :
-                printf ("%G%s",va_arg(args,double),espace);
-                break;
-            case 'g' :
-                printf ("%g%s",va_arg(args,double),espace);
-                break;
-            case 'H' :
-                printf ("%X%s",va_arg(args,int),espace);
-                break;
-            case 'h' :
-                printf ("%x%s",va_arg(args,int),espace);
-                break;
-            case 'O' : case 'o' :
-                printf ("%o%s",va_arg(args,int),espace);
-                break;
-            case 'P' : case 'p' :
-                printf ("%p%s",va_arg(args,void*),espace);
-                break;
-            case 'S' : case 's' :
-                printf ("%s%s",va_arg(args,char*),espace);
-                break;
-            default : ;
-        }
-    /* Fermeture */
-    va_end (args);
+	va_start(pa, format);
+	while (*format != '\0')
+	{
+		if ( *format == '%')
+		{
+			switch (*++format) 
+			{
+				case '%' : putchar('%'); break;
+				case 'c' : /* affichage d'un caractère */
+				c = va_arg(pa, int);
+				putchar(c);
+				break;
+				case 'd' : /* affichage d'un entier */
+				n = va_arg(pa, int);
+				printf("%d", n);
+				break;
+				case 'f' : /* affichage d'un float */
+				f = va_arg(pa, double);    /* !!!!! */
+				printf("%f", f);
+				break;
+				case 's' : /* affichage d'une chaîne */
+				s = va_arg(pa, char *);
+				for ( ; *s != '\0'; s++ )
+				putchar( *s );
+				break;
+			} /* end switch */
+		}
+	else
+	putchar( *format );
+	format++;
+	}
+	va_end(pa);
 }
-

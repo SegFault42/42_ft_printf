@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/27 21:24:52 by rabougue          #+#    #+#             */
-/*   Updated: 2016/06/27 23:42:33 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/06/28 16:56:32 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 # include <stdarg.h>
 # include "../../libft/includes/libft.h"
 
-void afficher (const char *format, const char *espace, ...);
+void	ft_printf(const char *format, ...);
 
 #endif

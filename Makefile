@@ -6,7 +6,7 @@
 #    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
-#    Updated: 2016/06/28 00:34:43 by rabougue         ###   ########.fr        #
+#    Updated: 2016/06/28 18:12:36 by rabougue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ $(NAME): $(OBJS)
 	@ranlib $(NAME)
 	@echo "\033[32mLibrary Created !\033[0m"
 
-%.o : %.c $(HEAD)
+%.o : %.c $(HEADS)
 	$(CC) -c $(FLAG) $< -o $@
 
 clean:
