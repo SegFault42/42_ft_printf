@@ -3,10 +3,12 @@
 
 int main ()
 {
-	printf("test 1\n");
-	ft_printf("Bonjour caca\n");
-	printf("\ntest 2\n");
-	ft_printf("%   %", "test");
+	printf("-----------\n");
+	ft_printf("%s", "this is a string");
+	printf("\n-----------\n");
+	ft_printf("%s ", "this is a string");
+	printf("\n-----------\n");
+	ft_printf("%s  ", "this is a string");
 
 	return (0);
 }

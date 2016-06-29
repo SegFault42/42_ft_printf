@@ -6,7 +6,7 @@
 #    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
-#    Updated: 2016/06/28 18:12:36 by rabougue         ###   ########.fr        #
+#    Updated: 2016/06/29 16:54:40 by rabougue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ fclean:
 	@make -s fclean -C ./libft/
 	@echo "\033[32mThe folder is clean\033[0m"
 
-bin: 
+bin:
 	@clang main.c libftprintf.a
 
 re: fclean all
