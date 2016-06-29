@@ -6,20 +6,36 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/06/29 15:47:43 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/06/29 16:19:38 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/ft_printf.h"
 #include <stdio.h>
 
+int	percent_percent(int ret)
+{
+	ft_putchar('%');
+	ret++;
+	return (ret);
+}
+
+int	percent_c(va_list pa, int ret)
+{
+	char	c;
+
+	c = va_arg(pa, int);
+	ft_putchar(c);
+	ret++;
+	return (ret);
+}
+
 int	ft_printf(const char *format, ...)
 {
-	va_list pa;
+	va_list	pa;
 	int		n;
 	char	*s;
 	char	c;
-	float	f;
 	int ret = 0;
 
 	va_start(pa, format);
@@ -28,21 +44,16 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			if (*++format == '%')
-			{
-				ft_putchar('%');
-				ret++;
-			}
+				ret += percent_percent(ret);
 			else if (*++format == 'c')
-			{
-				c = va_arg(pa, int);
-				ft_putchar(c);
-				ret++;
-			}
+				ret += percent_c(pa, ret);
 		}
 		else
-		ft_putchar(*format);
+		{
+			ft_putchar(*format);
+			ret++;
+		}
 		format++;
-		ret++;
 	}
 	va_end(pa);
 	return (ret);
