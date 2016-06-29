@@ -16,6 +16,6 @@
 # include <stdarg.h>
 # include "../../libft/includes/libft.h"
 
-void	ft_printf(const char *format, ...);
+int	ft_printf(const char *format, ...);
 
 #endif
