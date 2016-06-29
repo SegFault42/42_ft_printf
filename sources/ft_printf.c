@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
+/*   Updated: 2016/06/29 15:47:43 by rabougue         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "./includes/ft_printf.h"
 #include <stdio.h>
@@ -27,34 +38,12 @@ int	ft_printf(const char *format, ...)
 				ft_putchar(c);
 				ret++;
 			}
-			/*switch (*++format) */
-			/*{*/
-				/*case '%' : ft_putchar('%'); break;*/
-				/*case 'c' : [> affichage d'un caractère <]*/
-				/*c = va_arg(pa, int);*/
-				/*putchar(c);*/
-				/*break;*/
-				/*case 'd' : [> affichage d'un entier <]*/
-				/*n = va_arg(pa, int);*/
-				/*printf("%d", n);*/
-				/*break;*/
-				/*case 'f' : [> affichage d'un float <]*/
-				/*f = va_arg(pa, double);    [> !!!!! <]*/
-				/*printf("%f", f);*/
-				/*break;*/
-				/*case 's' : [> affichage d'une chaîne <]*/
-				/*s = va_arg(pa, char *);*/
-				/*for ( ; *s != '\0'; s++ )*/
-				/*putchar( *s );*/
-				/*break;*/
-			/*} [> end switch <]*/
 		}
 		else
-		putchar( *format );
+		ft_putchar(*format);
 		format++;
 		ret++;
 	}
 	va_end(pa);
-	ft_putnbr(ret);
 	return (ret);
 }

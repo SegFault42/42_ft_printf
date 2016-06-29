@@ -3,6 +3,6 @@
 
 int main ()
 {
-	ft_printf("%%\nlol");
+	ft_printf("Bonjour caca\n");
 	return (0);
 }
