@@ -16,6 +16,11 @@
 # include <stdarg.h>
 # include "../../libft/includes/libft.h"
 
+typedef struct	s_printf
+{
+	char		*string;
+}				t_printf;
+
 int	ft_printf(const char *format, ...);
 
 #endif

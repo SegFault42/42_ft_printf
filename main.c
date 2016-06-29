@@ -3,12 +3,13 @@
 
 int main ()
 {
+	int ret = 0;
+
+	ret = ft_printf("%s %s", "this is", "a string");
+	printf("\nret = %d\n", ret);
 	printf("-----------\n");
-	ft_printf("%s", "this is a string");
-	printf("\n-----------\n");
-	ft_printf("%s ", "this is a string");
-	printf("\n-----------\n");
-	ft_printf("%s  ", "this is a string");
+	ret = printf("%s %s", "this is", "a string");
+	printf("\nret = %d\n", ret);
 
 	return (0);
 }

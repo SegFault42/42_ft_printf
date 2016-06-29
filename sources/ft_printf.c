@@ -44,18 +44,27 @@ int	percent_c(va_list pa, int ret)
 	return (ret);
 }
 
-int	percent_s(va_list pa, int ret)
+int	percent_s(va_list pa, int ret, t_printf *print)
 {
 	char	*s;
+	int i = 0;
 
 	s = va_arg(pa, char*);
-	ft_putstr(s);
-	ret += ft_strlen(s);
+	print->string = (char *)malloc(sizeof(char) * (ft_strlen(print->string)));
+	ft_debug();
+	while (s)
+	{
+		print->string[i] = s[i];
+		i++;
+	}
+	ft_putstr(print->string);
+	ret += ft_strlen(print->string);
 	return (ret);
 }
 
 int	ft_printf(const char *format, ...)
 {
+	t_printf	print;
 	va_list	pa;
 	int		n;
 	char	*s;
@@ -68,10 +77,10 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			if (*++format == 's')
-				ret += percent_s(pa, ret);
-			if (*++format == '%')
+				ret += percent_s(pa, ret, &print);
+			else if (*++format == '%')
 				ret += percent_percent(ret);
-			else if (*++format == 'c')
+			else if(*++format == 'c')
 				ret += percent_c(pa, ret);
 		}
 		else
