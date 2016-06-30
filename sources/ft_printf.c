@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/06/30 08:29:49 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/06/30 20:01:07 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	percent_x(va_list pa, int ret)
 	int	x;
 
 	x = va_arg(pa, int);
-	ret = ft_strlen(ft_itoa_base(x, 16));
+	ret = ft_strlen(ft_itoa_base(x, "16"));
 	return ret;
 }
 
