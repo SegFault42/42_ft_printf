@@ -6,7 +6,7 @@
 /*   By: rabougue <rabougue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 18:34:24 by rabougue          #+#    #+#             */
-/*   Updated: 2016/06/30 19:59:21 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/06/30 20:09:45 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 
 # define BUFF_SIZE 10
+# define RC ft_putchar('\n');
 
 typedef struct		s_list
 {
