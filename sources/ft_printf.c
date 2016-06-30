@@ -27,12 +27,14 @@ int	percent_digit(int ret, const char *format)
 	return (ret);
 }
 
-int	percent_percent(va_list pa, int ret)
+int	percent_percent(const char *format, int ret)
 {
-	char *per;
+	/*char *per;*/
 
-	per = va_arg(pa, char*);
-	ft_putchar('%');
+	/*per = va_arg(pa, char*);*/
+	ft_putstr(format);
+	ft_putchar('\n');
+	/*ft_putchar('%');*/
 	ret = 1;
 	return (ret);
 }
@@ -61,7 +63,7 @@ int	percent_x(va_list pa, int ret)
 	int	x;
 
 	x = va_arg(pa, int);
-	ret = ft_strlen(ft_itoa_base(x, "16"));
+	ret = ft_strlen(ft_itoa_base(x, 16));
 	return ret;
 }
 
@@ -89,8 +91,8 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
-			if (*++format == '%')
-				ret += percent_percent(pa, ret);
+			if (*++format == '%' || ft_isdigit(*++format) == 1)
+				ret += percent_percent(format, ret);
 			/*else if (*++format == 's')*/
 				/*ret += percent_s(pa, ret);*/
 			/*else if (*++format == 'c')*/
@@ -103,7 +105,7 @@ int	ft_printf(const char *format, ...)
 		else
 		{
 			ft_putchar(*format);
-			ret += ft_strlen(format);
+			ret ++;
 		}
 		format++;
 	}

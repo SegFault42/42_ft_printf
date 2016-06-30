@@ -5,7 +5,7 @@ int main ()
 {
 	int ret = 0;
 
-	ft_printf("%5%");
+	ft_printf("%555%");
 	/*ret = printf("%s %s", "this is", "a string");*/
 	/*printf("\nret = %d\n", ret);*/
 	/*printf("-----------\n");*/
