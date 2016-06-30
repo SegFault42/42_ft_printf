@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/06/29 19:35:58 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/06/30 02:03:27 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,10 @@ int	percent_c(va_list pa, int ret)
 int	percent_s(va_list pa, int ret, t_printf *print)
 {
 	char	*s;
-	int i = 0;
 
 	s = va_arg(pa, char*);
-	print->string = (char *)malloc(sizeof(char) * (ft_strlen(print->string)));
-	ft_debug();
-	while (s)
-	{
-		print->string[i] = s[i];
-		i++;
-	}
-	ft_putstr(print->string);
-	ret += ft_strlen(print->string);
+	ft_putstr(s);
+	ret = ft_strlen(s);
 	return (ret);
 }
 
