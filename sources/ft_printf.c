@@ -33,7 +33,6 @@ int	percent_percent(const char *format, int ret)
 
 	/*per = va_arg(pa, char*);*/
 	ft_putstr(format);
-	ft_putchar('\n');
 	/*ft_putchar('%');*/
 	ret = 1;
 	return (ret);
