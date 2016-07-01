@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/06/30 20:01:07 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/01 04:02:04 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,10 @@ int	ft_printf(const char *format, ...)
 	char	*s;
 	char	c;
 	int ret = 0;
+	char num[10];
+	int i = 0;
+	int j = 0;
+	int nb_char = 0;
 
 	n = 0;
 	va_start(pa, format);
@@ -90,8 +94,36 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
-			if (*++format == '%' || ft_isdigit(*++format) == 1)
-				ret += percent_percent(format, ret);
+			++format;
+			if (*format == '%')
+			{
+				ft_putchar('%');
+				ret++;
+			}
+			else if (ft_isdigit(*format) == 1)
+			{
+				while (ft_isdigit(*format) == 1)
+				{
+					num[i] = *format;
+					format++;
+					i++;
+				}
+				num[i] = 'a';
+					/*ft_putnbr(ft_strlen(format));*/
+				if ((ft_strlen(format) + i) < (nb_char = ft_atoi(num)))
+				{
+					/*printf("nb_char = %d", nb_char);*/
+					ret += nb_char - i;
+					while ((nb_char - 1) > 0)
+					{
+						ft_putchar(' ');
+						nb_char--;
+					}
+					ret++;
+				}
+				ft_putchar('%');
+				ret ++;
+			}
 			/*else if (*++format == 's')*/
 				/*ret += percent_s(pa, ret);*/
 			/*else if (*++format == 'c')*/

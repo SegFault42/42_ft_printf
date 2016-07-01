@@ -48,7 +48,7 @@ int main ()
 	ret = printf("test\n");
 	printf("| ret = %d", ret);
 	printf("\n");
-	
+
 	printf("\n---------------------------------------------------------------\n");
 	ft_putstr("ft_printf(\"1234\") |");
 	ret = ft_printf("1234");
@@ -59,7 +59,7 @@ int main ()
 	ret = printf("1234");
 	printf("| ret = %d", ret);
 	printf("\n");
-	
+
 	printf("\n---------------------------------------------------------------\n");
 	ft_putstr("ft_printf(\"%%\") |");
 	ret = ft_printf("%%");
@@ -68,6 +68,17 @@ int main ()
 
 	ft_putstr("   printf(\"%%\") |");
 	ret = printf("%%");
+	printf("| ret = %d", ret);
+	printf("\n");
+
+	printf("\n---------------------------------------------------------------\n");
+	ft_putstr("ft_printf(\"%5%\") |");
+	ret = ft_printf("%5%");
+	printf("| ret = %d", ret);
+	printf("\n");
+
+	ft_putstr("   printf(\"%5%\") |");
+	ret = printf("%5%");
 	printf("| ret = %d", ret);
 	printf("\n");
 	return (0);
