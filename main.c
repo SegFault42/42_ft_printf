@@ -81,5 +81,16 @@ int main ()
 	ret = printf("%5%");
 	printf("| ret = %d", ret);
 	printf("\n");
+
+	printf("\n---------------------------------------------------------------\n");
+	ft_putstr("ft_printf(\"%-5%\") |");
+	ret = ft_printf("%-5%");
+	printf("| ret = %d", ret);
+	printf("\n");
+
+	ft_putstr("   printf(\"%-5%\") |");
+	ret = printf("%-5%");
+	printf("| ret = %d", ret);
+	printf("\n");
 	return (0);
 }

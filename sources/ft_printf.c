@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/01 04:02:04 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/01 06:08:58 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	ft_printf(const char *format, ...)
 				ft_putchar('%');
 				ret++;
 			}
-			else if (ft_isdigit(*format) == 1)
+			else if (ft_isdigit(*format) == 1 || *format == '-')
 			{
 				while (ft_isdigit(*format) == 1)
 				{
@@ -113,16 +113,26 @@ int	ft_printf(const char *format, ...)
 				if ((ft_strlen(format) + i) < (nb_char = ft_atoi(num)))
 				{
 					/*printf("nb_char = %d", nb_char);*/
-					ret += nb_char - i;
+					ret += nb_char;
+					if (format[1] != '-')
+					{
+						while ((nb_char - 1) > 0)
+						{
+							ft_putchar(' ');
+							nb_char--;
+						}
+					}
+				}
+				ft_putchar('%');
+			if (format[0] == '-')
+				{
 					while ((nb_char - 1) > 0)
 					{
 						ft_putchar(' ');
 						nb_char--;
 					}
-					ret++;
 				}
-				ft_putchar('%');
-				ret ++;
+				/*ret ++;*/
 			}
 			/*else if (*++format == 's')*/
 				/*ret += percent_s(pa, ret);*/
