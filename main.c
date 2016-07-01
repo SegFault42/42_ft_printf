@@ -83,6 +83,28 @@ int main ()
 	printf("\n");
 
 	printf("\n------------------------------8--------------------------------\n");
+	ft_putstr("ft_printf(\"%5% Bonjour\") |");
+	ret = ft_printf("%5% Bonjour");
+	printf("| ret = %d", ret);
+	printf("\n");
+
+	ft_putstr("   printf(\"%5% Bonjour\") |");
+	ret = printf("%5% Bonjour");
+	printf("| ret = %d", ret);
+	printf("\n");
+
+	printf("\n------------------------------9--------------------------------\n");
+	ft_putstr("ft_printf(\"%    %\") |");
+	ret = ft_printf("%    %");
+	printf("| ret = %d", ret);
+	printf("\n");
+
+	ft_putstr("   printf(\"%    %\") |");
+	ret = printf("%    %");
+	printf("| ret = %d", ret);
+	printf("\n");
+
+	printf("\n------------------------------10--------------------------------\n");
 	ft_putstr("ft_printf(\"%-5%\") |");
 	ret = ft_printf("%-5%");
 	printf("| ret = %d", ret);
@@ -92,6 +114,7 @@ int main ()
 	ret = printf("%-5%");
 	printf("| ret = %d", ret);
 	printf("\n");
+
 
 return (0);
 }

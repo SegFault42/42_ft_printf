@@ -80,14 +80,22 @@ int	percent_percent(const char *format, int ret)
 	}
 	num[i] = 'a';
 	nb_char = ft_atoi(num);
-	len_format = ft_strlen(format);
+	len_format = ft_strclen(format, '%') + 1;
+	if (format[0] == '-')
+	{
+		ft_putchar('%');
+		ret++;
+	}
 	while (len_format < nb_char--)
 	{
 		ft_putchar(' ');
 		ret++;
 	}
-	ft_putchar('%');
-	ret++;
+	if (format[0] != '-')
+	{
+		ft_putchar('%');
+		ret++;
+	}
 	return (ret);
 }
 
@@ -106,7 +114,9 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			if (*format == '%' /*|| *format == '-' */|| ft_isdigit(*format) == 1)
+			while (*format == ' ')
+				format++;
+			if (*format == '%' || *format == '-' || ft_isdigit(*format) == 1)
 			{
 				ret += percent_percent(format, ret);
 				while (ft_isdigit(*format) == 1)

@@ -99,5 +99,6 @@ double				ft_sqrt(double a);
 long				ft_atol(const char *str);
 void				ft_count_2d_tab(char **tab);
 char				*ft_itoa_base(unsigned long long n, char *base);
+size_t				ft_strclen(const char *s, char c);
 
 #endif
