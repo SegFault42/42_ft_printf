@@ -27,17 +27,6 @@ int	percent_digit(int ret, const char *format)
 	return (ret);
 }
 
-int	percent_percent(const char *format, int ret)
-{
-	/*char *per;*/
-
-	/*per = va_arg(pa, char*);*/
-	ft_putstr(format);
-	/*ft_putchar('%');*/
-	ret = 1;
-	return (ret);
-}
-
 int	percent_c(va_list pa, int ret)
 {
 	char	c;
@@ -76,6 +65,32 @@ int	percent_d(va_list pa, int ret)
 	return (ret);
 }
 
+int	percent_percent(const char *format, int ret)
+{
+	char num[10];
+	int i = 0;
+	int nb_char = 0;
+	int	len_format;
+
+	while (ft_isdigit(*format) == 1)
+	{
+		num[i] = *format;
+		format++;
+		i++;
+	}
+	num[i] = 'a';
+	nb_char = ft_atoi(num);
+	len_format = ft_strlen(format);
+	while (len_format < nb_char--)
+	{
+		ft_putchar(' ');
+		ret++;
+	}
+	ft_putchar('%');
+	ret++;
+	return (ret);
+}
+
 int	ft_printf(const char *format, ...)
 {
 	va_list	pa;
@@ -83,10 +98,6 @@ int	ft_printf(const char *format, ...)
 	char	*s;
 	char	c;
 	int ret = 0;
-	char num[10];
-	int i = 0;
-	int j = 0;
-	int nb_char = 0;
 
 	n = 0;
 	va_start(pa, format);
@@ -94,45 +105,12 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
-			++format;
-			if (*format == '%')
+			format++;
+			if (*format == '%' /*|| *format == '-' */|| ft_isdigit(*format) == 1)
 			{
-				ft_putchar('%');
-				ret++;
-			}
-			else if (ft_isdigit(*format) == 1 || *format == '-')
-			{
+				ret += percent_percent(format, ret);
 				while (ft_isdigit(*format) == 1)
-				{
-					num[i] = *format;
 					format++;
-					i++;
-				}
-				num[i] = 'a';
-					/*ft_putnbr(ft_strlen(format));*/
-				if ((ft_strlen(format) + i) < (nb_char = ft_atoi(num)))
-				{
-					/*printf("nb_char = %d", nb_char);*/
-					ret += nb_char;
-					if (format[1] != '-')
-					{
-						while ((nb_char - 1) > 0)
-						{
-							ft_putchar(' ');
-							nb_char--;
-						}
-					}
-				}
-				ft_putchar('%');
-			if (format[0] == '-')
-				{
-					while ((nb_char - 1) > 0)
-					{
-						ft_putchar(' ');
-						nb_char--;
-					}
-				}
-				/*ret ++;*/
 			}
 			/*else if (*++format == 's')*/
 				/*ret += percent_s(pa, ret);*/

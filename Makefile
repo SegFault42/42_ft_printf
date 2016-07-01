@@ -51,7 +51,9 @@ fclean:
 	@echo "\033[32mThe folder is clean\033[0m"
 
 bin:
+	@make all
 	@clang main.c libftprintf.a
+	@echo main.c ok
 
 re: fclean all
 
