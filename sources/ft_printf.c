@@ -65,65 +65,9 @@ int	percent_d(va_list pa, int ret)
 	return (ret);
 }
 
-int	percent_percent(const char *format, int ret)
-{
-	char num[10];
-	int i = 0;
-	int nb_char = 0;
-	int	len_format;
-
-	while (ft_isdigit(*format) == 1)
-	{
-		num[i] = *format;
-		format++;
-		i++;
-	}
-	num[i] = 'a';
-	nb_char = ft_atoi(num);
-	len_format = ft_strclen(format, '%') + 1;
-	while (len_format < nb_char--)
-	{
-		ft_putchar(' ');
-		ret++;
-	}
-	if (format[0] != '-')
-	{
-		ft_putchar('%');
-		ret++;
-	}
-	return (ret);
-}
-
-int	percent_percent_neg(const char *format, int ret)
-{
-	char num[10];
-	int i = 0;
-	int nb_char = 0;
-	int	len_format;
-
-	while (ft_isdigit(*format) == 1)
-	{
-		num[i] = *format;
-		format++;
-		i++;
-	}
-	num[i] = 'a';
-	nb_char = ft_atoi(num);
-	len_format = ft_strclen(format, '%') + 1;
-	ft_putchar('%');
-	format++;
-	ret++;
-	while (len_format < nb_char--)
-	{
-		ft_putchar(' ');
-		ret++;
-	}
-
-	return (ret);
-}
-
 int	ft_printf(const char *format, ...)
 {
+	t_printf	printf;
 	va_list	pa;
 	int		n;
 	char	*s;
@@ -131,6 +75,9 @@ int	ft_printf(const char *format, ...)
 	int ret = 0;
 
 	n = 0;
+	printf.cp_format = ft_memalloc(ft_strlen(format));
+	ft_strcpy(printf.cp_format, format);
+	ft_putstr(printf.cp_format);
 	va_start(pa, format);
 	while (*format != '\0')
 	{
@@ -141,19 +88,20 @@ int	ft_printf(const char *format, ...)
 				format++;
 			if (*format == '%' || *format == '-' || ft_isdigit(*format) == 1)
 			{
-				if (*format == '-')
-				{
-					format++;
-					ret += percent_percent_neg(format, ret);
-					while (ft_isdigit(*format) == 1)
-						format++;
-				}
-				else
-				{
-					ret += percent_percent(format, ret);
-					while (ft_isdigit(*format) == 1)
-						format++;
-				}
+				ret += if_percent(format, ret);
+				/*if (*format == '-')*/
+				/*{*/
+					/*format++;*/
+					/*ret += percent_percent_neg(format, ret);*/
+					/*while (ft_isdigit(*format) == 1)*/
+						/*format++;*/
+				/*}*/
+				/*else*/
+				/*{*/
+					/*ret += percent_percent(format, ret);*/
+					/*while (ft_isdigit(*format) == 1)*/
+						/*format++;*/
+				/*}*/
 			}
 			/*else if (*++format == 's')*/
 				/*ret += percent_s(pa, ret);*/

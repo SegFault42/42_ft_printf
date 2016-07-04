@@ -12,7 +12,7 @@
 
 NAME = libftprintf.a
 
-SRCS = ./sources/ft_printf.c
+SRCS = ./sources/ft_printf.c ./sources/percent_percent.c
 
 OBJS = $(SRCS:.c=.o)
 
