@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/01 06:08:58 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/05 01:14:36 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,10 @@ int	ft_printf(const char *format, ...)
 {
 	t_printf	printf;
 	va_list	pa;
-	int		n;
 	char	*s;
 	char	c;
-	int ret = 0;
+	printf.ret = 0;
 
-	n = 0;
-	printf.cp_format = ft_memalloc(ft_strlen(format));
-	ft_strcpy(printf.cp_format, format);
-	ft_putstr(printf.cp_format);
 	va_start(pa, format);
 	while (*format != '\0')
 	{
@@ -88,7 +83,7 @@ int	ft_printf(const char *format, ...)
 				format++;
 			if (*format == '%' || *format == '-' || ft_isdigit(*format) == 1)
 			{
-				ret += if_percent(format, ret);
+				format = if_percent(format, &printf);
 				/*if (*format == '-')*/
 				/*{*/
 					/*format++;*/
@@ -115,10 +110,10 @@ int	ft_printf(const char *format, ...)
 		else
 		{
 			ft_putchar(*format);
-			ret ++;
+			printf.ret++;
 		}
 		format++;
 	}
 	va_end(pa);
-	return (ret);
+	return (printf.ret);
 }

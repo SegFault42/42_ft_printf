@@ -1,27 +1,25 @@
 #include "./includes/ft_printf.h"
 #include <stdio.h>
 
-int	if_percent(const char *format, int ret)
+const char	*if_percent(const char *format, t_printf *printf)
 {
-	/*if (*format == '%' || *format == '-' || ft_isdigit(*format) == 1)*/
-	/*{*/
-		if (*format == '-')
-		{
+	if (*format == '-')
+	{
+		format++;
+		percent_percent_neg(format, printf);
+		while (ft_isdigit(*format) == 1)
 			format++;
-			ret += percent_percent_neg(format, ret);
-			while (ft_isdigit(*format) == 1)
-				format++;
-		}
-		else
-		{
-			ret += percent_percent(format, ret);
-			while (ft_isdigit(*format) == 1)
-				format++;
-		}
-	return (ret);
+	}
+	else
+	{
+		percent_percent(format, printf);
+		while (ft_isdigit(*format) == 1)
+			format++;
+	}
+	return (format);
 }
 
-int	percent_percent(const char *format, int ret)
+const char	*percent_percent(const char *format, t_printf *printf)
 {
 	char num[10];
 	int i = 0;
@@ -40,17 +38,17 @@ int	percent_percent(const char *format, int ret)
 	while (len_format < nb_char--)
 	{
 		ft_putchar(' ');
-		ret++;
+		printf->ret++;
 	}
 	if (format[0] != '-')
 	{
 		ft_putchar('%');
-		ret++;
+		printf->ret++;
 	}
-	return (ret);
+	return (format);
 }
 
-int	percent_percent_neg(const char *format, int ret)
+const char	*percent_percent_neg(const char *format, t_printf *printf)
 {
 	char num[10];
 	int i = 0;
@@ -67,12 +65,12 @@ int	percent_percent_neg(const char *format, int ret)
 	nb_char = ft_atoi(num);
 	len_format = ft_strclen(format, '%') + 1;
 	ft_putchar('%');
-	ret++;
+	printf->ret++;
 	format++;
 	while (len_format < nb_char--)
 	{
 		ft_putchar(' ');
-		ret++;
+		printf->ret++;
 	}
-	return (ret);
+	return (format);
 }
