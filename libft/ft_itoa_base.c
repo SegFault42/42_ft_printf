@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 05:35:23 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/05 05:36:34 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/05 05:42:41 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ char	*ft_itoa_base(int value, int base)
 	if (nb < 0)
 	{
 		nb = -nb;
-		if (base == 10)
-			neg = 1;
+		neg = 1;
 	}
 	len = ft_len(nb, base) + neg;
 	str = (char*)malloc(sizeof(char) * (len + 1));

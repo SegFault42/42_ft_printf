@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/05 05:33:50 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/05 06:34:09 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,11 @@ const char	*percent_x(va_list pa, t_printf *printf, const char *format)
 	int	x;
 
 	x = va_arg(pa, int);
-	ft_putstr(ft_itoa_base(x, 16));
-	printf->ret = ft_strlen(ft_itoa_base(x, 16));
+	if (*format == 'x')
+		ft_putstr(ft_hexa_itoa(x, 0));
+	else if (*format == 'X')
+		ft_putstr(ft_hexa_itoa(x, 1));
+	printf->ret = ft_strlen(ft_hexa_itoa(x, 0));
 	return (format);
 }
 
@@ -70,7 +73,7 @@ int	ft_printf(const char *format, ...)
 				format++;
 			if (*format == '%' || *format == '-' || ft_isdigit(*format) == 1)
 				format = if_percent(format, &printf);
-			else if(*format == 'x')
+			else if(*format == 'x' || *format == 'X')
 				format = percent_x(pa, &printf, format);
 			/*else if (*++format == 's')*/
 				/*printf.ret += percent_s(pa, printf.ret);*/
