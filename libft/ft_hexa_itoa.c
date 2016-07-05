@@ -41,7 +41,7 @@ char		*ft_hexa_itoa(unsigned long long n, int up)
 		size++;
 	}
 	str = (char *)malloc(sizeof(str) * (size + 1));
-	if (str)
+  if (str)
 	{
 		str[size + 1] = '\0';
 		while (size >= 0)

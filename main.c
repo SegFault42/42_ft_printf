@@ -137,6 +137,16 @@ int main ()
 	printf("| ret = %d", ret);
 	printf("\n");
 
+	printf("\n------------------------------13--------------------------------\n");
+	ft_putstr("ft_printf(\"%10x\", 42) |");
+	ret = ft_printf("%10x", 42);
+	printf("| ret = %d", ret);
+	printf("\n");
+
+	ft_putstr("   printf(\"%10x\", 42) |");
+	ret = printf("%10x", 42);
+	printf("| ret = %d", ret);
+	printf("\n");
 
 return (0);
 }
