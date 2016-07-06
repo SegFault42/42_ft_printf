@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/06 09:45:59 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/06 10:54:31 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,6 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			while (*format == ' ')
-				format++;
 			if (*format == 's')
 				percent_s(pa, &print);
 			else if (*format == 'd')
