@@ -6,11 +6,11 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/05 07:39:29 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/06 08:22:00 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/ft_printf.h"
+#include "../includes/ft_printf.h"
 #include <stdio.h>
 
 const char	*percent_c(va_list pa, t_printf *printf, const char *format)
@@ -21,15 +21,6 @@ const char	*percent_c(va_list pa, t_printf *printf, const char *format)
 	ft_putchar(c);
 	printf->ret = 1;
 	return (format);
-}
-
-int	percent_s(va_list pa, int ret)
-{
-	char	*s;
-
-	s = va_arg(pa, char*);
-	ret = ft_strlen(s);
-	return (ret);
 }
 
 const char	*percent_x(va_list pa, t_printf *printf, const char *format)
@@ -48,14 +39,28 @@ const char	*percent_x(va_list pa, t_printf *printf, const char *format)
 	return (format);
 }
 
-int	percent_d(va_list pa, int ret)
+void	percent_d(va_list pa, t_printf *print)
 {
 	int	d;
 
 	d = va_arg(pa, int);
 	ft_putnbr(d);
-	ret = ft_strlen(ft_itoa(d));
-	return (ret);
+	print->ret += ft_strlen(ft_itoa(d));
+}
+
+void	percent_p(va_list pa, t_printf *print)
+{
+	char *p;
+
+	p = va_arg(pa, char*);
+	ft_putstr("0x");
+	ft_putstr(ft_hexa_itoa((unsigned long long)p, 0));
+	print->ret += ft_strlen(ft_hexa_itoa((unsigned long long)p, 0)) + 2;
+}
+
+void	init_struct(t_printf *printf)
+{
+	printf->ret = 0;
 }
 
 int	ft_printf(const char *format, ...)
@@ -64,22 +69,28 @@ int	ft_printf(const char *format, ...)
 	va_list		pa;
 	char		*s;
 	char		c;
-	printf.ret = 0;
 
+	init_struct(&printf);
 	va_start(pa, format);
 	while (*format != '\0')
 	{
 		if (*format == '%')
 		{
 			format++;
-			while (*format == ' ')
-				format++;
-			if (*format == '%' || *format == '-' || ft_isdigit(*format) == 1)
-				format = if_percent(format, &printf);
-			else if(*format == 'x' || *format == 'X')
-				format = percent_x(pa, &printf, format);
-			/*else if (*++format == 's')*/
-				/*printf.ret += percent_s(pa, printf.ret);*/
+			/*while (*format == ' ')*/
+				/*format++;*/
+			/*if (*format == '%' || *format == '-' || ft_isdigit(*format) == 1)*/
+				/*format = if_percent(format, &printf);*/
+			/*else if(*format == 'x' || *format == 'X')*/
+				/*format = percent_x(pa, &printf, format);*/
+			if (*format == 's')
+				percent_s(pa, &printf);
+			else if (*format == 'd')
+				percent_d(pa, &printf);
+			else if (*format == 'p')
+			{
+				percent_p(pa, &printf);
+			}
 			else if (*format == 'c')
 				format = percent_c(pa, &printf, format);
 			/*else if (*++format == 'd')*/

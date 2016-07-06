@@ -6,11 +6,11 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 03:40:46 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/05 04:14:06 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/06 07:20:26 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/ft_printf.h"
+#include "../includes/ft_printf.h"
 #include <stdio.h>
 
 const char	*if_percent(const char *format, t_printf *printf)

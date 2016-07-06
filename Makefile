@@ -6,13 +6,14 @@
 #    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
-#    Updated: 2016/06/30 02:00:09 by rabougue         ###   ########.fr        #
+#    Updated: 2016/07/06 07:42:05 by rabougue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
-SRCS = ./sources/ft_printf.c ./sources/percent_percent.c
+SRCS = ./sources/ft_printf.c ./sources/percent_percent.c ./sources/percent_s.c\
+	   ./sources/padding.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -20,7 +21,7 @@ FLAGS = # -Wall -Wextra -Werror
 
 CC = clang
 
-HEADS = ./sources/includes/ft_printf.h
+HEADS = ./includes/ft_printf.h
 
 all: $(NAME)
 
