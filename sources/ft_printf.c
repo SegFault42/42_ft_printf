@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/06 08:22:00 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/06 09:45:59 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,44 +65,45 @@ void	init_struct(t_printf *printf)
 
 int	ft_printf(const char *format, ...)
 {
-	t_printf	printf;
+	t_printf	print;
 	va_list		pa;
-	char		*s;
-	char		c;
 
-	init_struct(&printf);
+	init_struct(&print);
 	va_start(pa, format);
+	if (*format == '%' && ft_strlen(format) == 1)
+	{
+		print.ret = 0;
+		return (0);
+	}
 	while (*format != '\0')
 	{
 		if (*format == '%')
 		{
 			format++;
-			/*while (*format == ' ')*/
-				/*format++;*/
-			/*if (*format == '%' || *format == '-' || ft_isdigit(*format) == 1)*/
-				/*format = if_percent(format, &printf);*/
+			while (*format == ' ')
+				format++;
+			if (*format == 's')
+				percent_s(pa, &print);
+			else if (*format == 'd')
+				percent_d(pa, &print);
+			else if (*format == 'p')
+				percent_p(pa, &print);
+			else if (*format == 'c')
+				format = percent_c(pa, &print, format);
+			else if (*format == '%' || *format == '-' || ft_isdigit(*format) == 1)
+				format = if_percent(format, &print);
 			/*else if(*format == 'x' || *format == 'X')*/
 				/*format = percent_x(pa, &printf, format);*/
-			if (*format == 's')
-				percent_s(pa, &printf);
-			else if (*format == 'd')
-				percent_d(pa, &printf);
-			else if (*format == 'p')
-			{
-				percent_p(pa, &printf);
-			}
-			else if (*format == 'c')
-				format = percent_c(pa, &printf, format);
 			/*else if (*++format == 'd')*/
 				/*printf.ret += percent_d(pa, printf.ret);*/
 		}
 		else
 		{
 			ft_putchar(*format);
-			printf.ret++;
+			print.ret++;
 		}
 		format++;
 	}
 	va_end(pa);
-	return (printf.ret);
+	return (print.ret);
 }
