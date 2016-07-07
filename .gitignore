@@ -11,6 +11,6 @@
 ._DS_Store
 a.out
 libftprintf.a
-
+*._*
 # Clion files
 CMakeLists.txt

@@ -150,13 +150,13 @@ int main ()
 
 	printf("--------------------------------1------------------------------\n");
 
-	ft_putstr("ft_printf(\"{%}\") |");
-	ret = ft_printf("% Zoooo");
+	ft_putstr("ft_printf(\"{% %}\") |");
+	ret = ft_printf("{% %}");
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"{%}\") |");
-	ret = printf("% Zoooo");
+	ft_putstr("   printf(\"{% %}\") |");
+	ret = printf("{% %}");
 	printf("| ret = %d", ret);
 	printf("\n");
 
