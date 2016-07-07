@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/27 21:24:52 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/06 07:24:17 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/07 05:52:49 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 typedef struct	s_printf
 {
 	int			ret;
+	int			valid;
 }				t_printf;
 /*
 ** percent_percent.c

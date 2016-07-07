@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/06 10:54:31 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/07 06:09:20 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	percent_d(va_list pa, t_printf *print)
 
 void	percent_p(va_list pa, t_printf *print)
 {
-	char *p;
+	char	*p;
 
 	p = va_arg(pa, char*);
 	ft_putstr("0x");
@@ -61,6 +61,32 @@ void	percent_p(va_list pa, t_printf *print)
 void	init_struct(t_printf *printf)
 {
 	printf->ret = 0;
+	printf->valid = 0;
+}
+
+const char	*check_valid_specifier(const char *format, t_printf *print)
+{
+	if (*format != 's' && *format != 'S' && *format != 'p' && *format != 'd'
+		&& *format != 'D' && *format != 'i' && *format != 'o' && *format != 'O'
+		&& *format != 'u' && *format != 'U' && *format != 'x' && *format != 'X'
+		&& *format != 'c' && *format != 'C' && *format != '%')
+	{
+		if (*format != ' ')
+		{
+			ft_putchar(*format);
+			++print->ret;
+		}
+		++format;
+		print->valid = 1;
+		return (format);
+	}
+	else if (*format == ' ')
+	{
+		while(*format == ' ')
+			++format;
+		return (format);
+	}
+	return (0);
 }
 
 int	ft_printf(const char *format, ...)
@@ -80,9 +106,10 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
+			check_valid_specifier(format, &print);
 			if (*format == 's')
 				percent_s(pa, &print);
-			else if (*format == 'd')
+			else if (*format == 'd' || *format == 'i')
 				percent_d(pa, &print);
 			else if (*format == 'p')
 				percent_p(pa, &print);

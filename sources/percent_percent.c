@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 03:40:46 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/06 07:20:26 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/07 03:09:30 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ const char	*percent_percent(const char *format, t_printf *printf)
 	while (len_format < nb_char--)
 	{
 		ft_putchar(' ');
-		printf->ret++;
+		++printf->ret;
 	}
 	if (format[0] != '-')
 	{
 		ft_putchar('%');
-		printf->ret++;
+		++printf->ret;
 	}
 	return (format);
 }
