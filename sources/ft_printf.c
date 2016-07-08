@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/08 03:56:57 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/08 08:58:14 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ int	ft_printf(const char *format, ...)
 				percent_s(pa, &print);
 			else if (*format == 'd' || *format == 'i')
 				percent_d(pa, &print);
-			else if (*format == 'D')
+			else if (*format == 'D' || *format == 'u' || *format == 'U')
 				percent_D(pa, &print);
 			else if (*format == 'p')
 				percent_p(pa, &print);
@@ -152,8 +152,8 @@ int	ft_printf(const char *format, ...)
 				format = percent_c(pa, &print, format);
 			else if (*format == '%' || *format == '-' || ft_isdigit(*format) == 1)
 				format = if_percent(format, &print);
-			/*else if(*format == 'x' || *format == 'X')*/
-				/*format = percent_x(pa, &printf, format);*/
+			else if(*format == 'x' || *format == 'X')
+				format = percent_x(pa, &print, format);
 			/*else if (*++format == 'd')*/
 				/*printf.ret += percent_d(pa, printf.ret);*/
 		}

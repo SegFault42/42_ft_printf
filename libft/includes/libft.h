@@ -6,7 +6,7 @@
 /*   By: rabougue <rabougue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 18:34:24 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/08 03:55:05 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/08 08:53:56 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,6 @@ void				print_memory(const void *addr, size_t size);
 void				ft_put_long(long n);
 char				*ft_ltoa(long n);
 char				*ft_ltoa_base(long value, int base);
+void				ft_put_ulong(unsigned long n);
 
 #endif

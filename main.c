@@ -149,17 +149,15 @@ int main ()
 	// printf("| ret = %d", ret);
 	// printf("\n");
 
-	printf("--------------------------------1------------------------------\n");
-
-	ft_putstr("ft_printf(\"before %O after\", 42) |");
-	ret = ft_printf("before %O after", 42);
+	ft_putstr("ft_printf(\"%U\", ULONG_MAX) |");
+	ret = ft_printf("%U", ULONG_MAX);
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"before %O after\", 42) |");
-	ret = printf("before %O after", 42);
+	ft_putstr("   printf(\"%U\", ULONG_MAX) |");
+	ret = printf("%U", ULONG_MAX);
 	printf("| ret = %d", ret);
 	printf("\n");
 
-return (0);
+	return (0);
 }
