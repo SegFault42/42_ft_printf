@@ -6,12 +6,13 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/08 08:58:14 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/09 01:22:46 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 #include <stdio.h>
+#include <limits.h>
 
 const char	*percent_c(va_list pa, t_printf *print, const char *format)
 {
@@ -55,6 +56,18 @@ void	percent_D(va_list pa, t_printf *print)
 	d = va_arg(pa, long);
 	ft_put_long(d);
 	print->ret += ft_strlen(ft_ltoa(d));
+}
+
+void	percent_U(va_list pa, t_printf *print)
+{
+	unsigned long	u;
+
+	u = va_arg(pa, unsigned long);
+	ft_put_ulong(u);
+	if (ft_strlen(ft_ultoa(u)) == 20)
+		print->ret += 20;
+	else
+		print->ret += ft_strlen(ft_ultoa(u));
 }
 
 void	percent_p(va_list pa, t_printf *print)
@@ -140,8 +153,10 @@ int	ft_printf(const char *format, ...)
 				percent_s(pa, &print);
 			else if (*format == 'd' || *format == 'i')
 				percent_d(pa, &print);
-			else if (*format == 'D' || *format == 'u' || *format == 'U')
+			else if (*format == 'D' || *format == 'u')
 				percent_D(pa, &print);
+			else if (*format == 'U')
+				percent_U(pa, &print);
 			else if (*format == 'p')
 				percent_p(pa, &print);
 			else if (*format == 'o')

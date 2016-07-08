@@ -1,29 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_put_ulong.c                                     :+:      :+:    :+:   */
+/*   ft_ltoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/07/08 06:43:21 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/09 00:58:32 by rabougue         ###   ########.fr       */
+/*   Created: 2016/07/07 23:35:22 by rabougue          #+#    #+#             */
+/*   Updated: 2016/07/09 00:51:26 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/libft.h"
 
-void	ft_put_ulong(unsigned long n)
+static void	incr(unsigned long *i, unsigned long *res)
 {
-	if (n == 18446744073709551615UL)
+	while (*res != 0)
 	{
-		ft_putstr("1");
-		n = 8446744073709551615;
+		*res = *res / 10;
+		*i = *i + 1;
 	}
-	if (n > 9)
+}
+
+char		*ft_ultoa(unsigned long n)
+{
+	unsigned long	i;
+	unsigned long	res;
+	char			*str;
+
+	i = 0;
+	res = n;
+	if (res == 0)
+		i = 1;
+	incr(&i, &res);
+	if (!(str = (char *)malloc(sizeof(char) * (i + 1))))
+		return (NULL);
+	while (i--)
 	{
-		ft_put_ulong(n / 10);
-		ft_put_ulong(n % 10);
+		str[i] = (n % 10) + '0';
+		n /= 10;
 	}
-	else
-		ft_putchar('0' + n);
+	return (str);
 }

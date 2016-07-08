@@ -117,40 +117,40 @@ int main ()
 	// printf("\n");
 	//
 	// printf("\n------------------------------11--------------------------------\n");
-	// ft_putstr("ft_printf(\"%x\", 42) |");
-	// ret = ft_printf("%x", 42);
+	// ft_putstr("ft_printf(\"%x\", ULONG_MAX) |");
+	// ret = ft_printf("%x", ULONG_MAX);
 	// printf("| ret = %d", ret);
 	// printf("\n");
 	//
-	// ft_putstr("   printf(\"%x\", 42) |");
-	// ret = printf("%x", 42);
+	// ft_putstr("   printf(\"%x\", ULONG_MAX) |");
+	// ret = printf("%x", ULONG_MAX);
 	// printf("| ret = %d", ret);
 	// printf("\n");
 	//
 	// printf("\n------------------------------12--------------------------------\n");
-	// ft_putstr("ft_printf(\"%x\", -42) |");
-	// ret = ft_printf("%x", -42);
+	// ft_putstr("ft_printf(\"%x\", -ULONG_MAX) |");
+	// ret = ft_printf("%x", -ULONG_MAX);
 	// printf("| ret = %d", ret);
 	// printf("\n");
 	//
-	// ft_putstr("   printf(\"%x\", -42) |");
-	// ret = printf("%x", -42);
+	// ft_putstr("   printf(\"%x\", -ULONG_MAX) |");
+	// ret = printf("%x", -ULONG_MAX);
 	// printf("| ret = %d", ret);
 	// printf("\n");
 	//
 	// printf("\n------------------------------13--------------------------------\n");
-	// ft_putstr("ft_printf(\"%10x\", 42) |");
-	// ret = ft_printf("%10x", 42);
+	// ft_putstr("ft_printf(\"%10x\", ULONG_MAX) |");
+	// ret = ft_printf("%10x", ULONG_MAX);
 	// printf("| ret = %d", ret);
 	// printf("\n");
 	//
-	// ft_putstr("   printf(\"%10x\", 42) |");
-	// ret = printf("%10x", 42);
+	// ft_putstr("   printf(\"%10x\", ULONG_MAX) |");
+	// ret = printf("%10x", ULONG_MAX);
 	// printf("| ret = %d", ret);
 	// printf("\n");
 
 	ft_putstr("ft_printf(\"%U\", ULONG_MAX) |");
-	ret = ft_printf("%U", ULONG_MAX);
+	ret = ft_printf("%U", ULONG_MAX -1);
 	printf("| ret = %d", ret);
 	printf("\n");
 
