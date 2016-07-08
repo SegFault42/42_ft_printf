@@ -1,5 +1,6 @@
 #include "./includes/ft_printf.h"
 #include <stdio.h>
+#include <limits.h>
 
 int main ()
 {
@@ -150,13 +151,13 @@ int main ()
 
 	printf("--------------------------------1------------------------------\n");
 
-	ft_putstr("ft_printf(\"{% %}\") |");
-	ret = ft_printf("{% %}");
+	ft_putstr("ft_printf(\"before %O after\", 42) |");
+	ret = ft_printf("before %O after", 42);
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"{% %}\") |");
-	ret = printf("{% %}");
+	ft_putstr("   printf(\"before %O after\", 42) |");
+	ret = printf("before %O after", 42);
 	printf("| ret = %d", ret);
 	printf("\n");
 

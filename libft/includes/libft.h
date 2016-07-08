@@ -6,7 +6,7 @@
 /*   By: rabougue <rabougue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 18:34:24 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/06 08:07:35 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/08 03:55:05 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ char				*ft_itoa_base(int value, int base);
 size_t				ft_strclen(const char *s, char c);
 char				*ft_hexa_itoa(unsigned long long int n, int up);
 void				print_memory(const void *addr, size_t size);
-
+void				ft_put_long(long n);
+char				*ft_ltoa(long n);
+char				*ft_ltoa_base(long value, int base);
 
 #endif

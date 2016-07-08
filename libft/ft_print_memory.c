@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/06 07:59:12 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/06 08:11:34 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/08 01:30:29 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	print_hex_mem(unsigned char *addr, size_t size)
 {
-	size_t	i;
-	char	hex[] = "0123456789abcdef";
+	size_t		i;
+	static char	hex[] = "0123456789abcdef";
 
 	i = -1;
 	while (++i < 16)

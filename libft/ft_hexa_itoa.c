@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 05:59:12 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/05 06:04:30 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/08 01:28:57 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static	int	switch_hexa(int x, int up)
 	if (x >= 10 && x <= 15)
 	{
 		x = x - 10;
-    if (up == 0)
-		  return ('a' + x);
-    else if (up == 1)
-      return ('A' + x);
+		if (up == 0)
+			return ('a' + x);
+		else if (up == 1)
+			return ('A' + x);
 	}
 	return (0);
 }
@@ -41,7 +41,7 @@ char		*ft_hexa_itoa(unsigned long long n, int up)
 		size++;
 	}
 	str = (char *)malloc(sizeof(str) * (size + 1));
-  if (str)
+	if (str)
 	{
 		str[size + 1] = '\0';
 		while (size >= 0)
