@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/09 04:27:43 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/09 05:05:11 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ const char	*percent_c(va_list pa, t_printf *print, const char *format)
 
 	c = va_arg(pa, int);
 	ft_putchar(c);
-	print->ret = 1;
+	++print->ret;
 	return (format);
 }
 

@@ -151,13 +151,13 @@ int main ()
 
 	int i;
 
-	ft_putstr("ft_printf(\"%p\", &i) |");
-	ret = ft_printf("%p", &i);
+	ft_putstr("ft_printf(\"%c%c\", '4', '2') |");
+	ret = ft_printf("%c%c", '4', '2');
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"%p\", &i) |");
-	ret = printf("%p", &i);
+	ft_putstr("   printf(\"%c%c\", '4', '2') |");
+	ret = printf("%c%c", '4', '2');
 	printf("| ret = %d", ret);
 	printf("\n");
 
