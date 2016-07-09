@@ -149,13 +149,15 @@ int main ()
 	// printf("| ret = %d", ret);
 	// printf("\n");
 
-	ft_putstr("ft_printf(\"%x, %x\", 0, UINT_MAX) |");
-	ret = ft_printf("%x, %x", 0, UINT_MAX);
+	int i;
+
+	ft_putstr("ft_printf(\"%p\", &i) |");
+	ret = ft_printf("%p", &i);
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"%x, %x\", 0, UINT_MAX) |");
-	ret = printf("%x, %x", 0, UINT_MAX);
+	ft_putstr("   printf(\"%p\", &i) |");
+	ret = printf("%p", &i);
 	printf("| ret = %d", ret);
 	printf("\n");
 

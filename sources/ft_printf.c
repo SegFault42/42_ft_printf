@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/09 03:40:13 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/09 04:27:43 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ void	percent_p(va_list pa, t_printf *print)
 
 	p = va_arg(pa, char*);
 	ft_putstr("0x");
-	ft_putstr(ft_hexa_itoa((unsigned long long)p, 0));
-	print->ret += ft_strlen(ft_hexa_itoa((unsigned long long)p, 0)) + 2;
+	ft_putstr(ft_hexa_ltoa((unsigned long long)p, 0));
+	print->ret += ft_strlen(ft_hexa_ltoa((unsigned long long)p, 0)) + 2;
 }
 
 void	percent_o(va_list pa, t_printf *print)
