@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/10 07:21:59 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/10 07:53:47 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,30 @@ const char	*percent_c(va_list pa, t_printf *print, const char *format)
 
 const char	*percent_x(va_list pa, t_printf *print, const char *format)
 {
-	int		x;
+	int				x;
+	unsigned long	lx;
 	char	num[10];
-	int		i;
 
-	i = 0;
-	x = va_arg(pa, int);
-	if (*format == 'x')
-		ft_putstr(ft_hexa_itoa(x, 0));
-	else if (*format == 'X')
-		ft_putstr(ft_hexa_itoa(x, 1));
-	print->ret += ft_strlen(ft_hexa_itoa(x, 0));
+	if (*--format == 'l')
+	{
+		++format;
+		x = va_arg(pa, unsigned long);
+		if (*format == 'x')
+			ft_putstr(ft_hexa_ltoa(x, 0));
+		else if (*format == 'X')
+			ft_putstr(ft_hexa_ltoa(x, 1));
+		print->ret += ft_strlen(ft_hexa_ltoa(x, 0));
+	}
+	else
+	{
+		++format;
+		x = va_arg(pa, int);
+		if (*format == 'x')
+			ft_putstr(ft_hexa_itoa(x, 0));
+		else if (*format == 'X')
+			ft_putstr(ft_hexa_itoa(x, 1));
+		print->ret += ft_strlen(ft_hexa_itoa(x, 0));
+	}
 	return (format);
 }
 
