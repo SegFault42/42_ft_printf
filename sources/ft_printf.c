@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/10 05:36:44 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/10 07:21:59 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,26 @@ const char	*percent_d(va_list pa, t_printf *print, const char *format)
 	return (format);
 }
 
-void	percent_D(va_list pa, t_printf *print)
+const char	*percent_D(va_list pa, t_printf *print, char const *format)
 {
-	long	d;
+	long			d;
+	unsigned long	lu;
 
-	d = va_arg(pa, long);
-	ft_put_long(d);
-	print->ret += ft_strlen(ft_ltoa(d));
+	if (*--format == 'l')
+	{
+		++format;
+		lu = va_arg(pa, unsigned long);
+		ft_put_ulong(lu);
+		print->ret += ft_strlen(ft_ultoa(lu));
+	}
+	else
+	{
+		++format;
+		d = va_arg(pa, long);
+		ft_put_long(d);
+		print->ret += ft_strlen(ft_ltoa(d));
+	}
+	return (format);
 }
 
 void	percent_U(va_list pa, t_printf *print)
@@ -93,13 +106,26 @@ void	percent_p(va_list pa, t_printf *print)
 	print->ret += ft_strlen(ft_hexa_ltoa((unsigned long long)p, 0)) + 2;
 }
 
-void	percent_o(va_list pa, t_printf *print)
+const char	*percent_o(va_list pa, t_printf *print, const char *format)
 {
-	int	o;
+	int				o;
+	unsigned long	lo;
 
-	o = va_arg(pa, int);
-	ft_putstr(ft_itoa_base(o, 8));
-	print->ret += ft_strlen(ft_itoa_base(o, 8));
+	if (*--format == 'l')
+	{
+		++format;
+		lo = va_arg(pa, unsigned long);
+		ft_putstr(ft_ultoa_base(lo, 8));
+		print->ret += ft_strlen(ft_ultoa_base(lo, 8));
+	}
+	else
+	{
+		++format;
+		o = va_arg(pa, int);
+		ft_putstr(ft_itoa_base(o, 8));
+		print->ret += ft_strlen(ft_itoa_base(o, 8));
+	}
+	return (format);
 }
 
 void	percent_O(va_list pa, t_printf *print)
@@ -191,13 +217,13 @@ int	ft_printf(const char *format, ...)
 				else if (*format == 'd' || *format == 'i')
 					percent_d(pa, &print, format);
 				else if (*format == 'D' || *format == 'u')
-					percent_D(pa, &print);
+					percent_D(pa, &print, format);
 				else if (*format == 'U')
 					percent_U(pa, &print);
 				else if (*format == 'p')
 					percent_p(pa, &print);
 				else if (*format == 'o')
-					percent_o(pa, &print);
+					percent_o(pa, &print, format);
 				else if (*format == 'O')
 					percent_O(pa, &print);
 				else if (*format == 'c')

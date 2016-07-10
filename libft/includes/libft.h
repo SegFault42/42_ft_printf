@@ -6,7 +6,7 @@
 /*   By: rabougue <rabougue@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 18:34:24 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/09 03:56:56 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/10 05:58:50 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,13 @@ void				ft_count_2d_tab(char **tab);
 char				*ft_itoa_base(int value, int base);
 size_t				ft_strclen(const char *s, char c);
 char				*ft_hexa_itoa(unsigned int n, int up);
-char		*ft_hexa_ltoa(unsigned long long n, int up);
+char				*ft_hexa_ltoa(unsigned long long n, int up);
 void				print_memory(const void *addr, size_t size);
 void				ft_put_long(long n);
 char				*ft_ltoa(long n);
 char				*ft_ltoa_base(long value, int base);
 void				ft_put_ulong(unsigned long n);
 char				*ft_ultoa(unsigned long n);
+char				*ft_ultoa_base(unsigned long value, int base);
 
 #endif
