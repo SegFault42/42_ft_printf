@@ -6,13 +6,12 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/09 05:05:11 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/10 05:36:44 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 #include <stdio.h>
-#include <limits.h>
 
 const char	*percent_c(va_list pa, t_printf *print, const char *format)
 {
@@ -40,13 +39,27 @@ const char	*percent_x(va_list pa, t_printf *print, const char *format)
 	return (format);
 }
 
-void	percent_d(va_list pa, t_printf *print)
+const char	*percent_d(va_list pa, t_printf *print, const char *format)
 {
-	int	d;
+	int		d;
+	long	ld;
 
-	d = va_arg(pa, int);
-	ft_putnbr(d);
-	print->ret += ft_strlen(ft_itoa(d));
+	/*printf("<%c>", *format);*/
+	if (*--format == 'l')
+	{
+		++format;
+		ld = va_arg(pa, long);
+		ft_put_long(ld);
+		print->ret += ft_strlen(ft_ltoa(ld));
+	}
+	else
+	{
+		++format;
+		d = va_arg(pa, int);
+		ft_putnbr(d);
+		print->ret += ft_strlen(ft_itoa(d));
+	}
+	return (format);
 }
 
 void	percent_D(va_list pa, t_printf *print)
@@ -109,7 +122,7 @@ const char	*check_valid_specifier(const char *format, t_printf *print)
 	if (*format != 's' && *format != 'S' && *format != 'p' && *format != 'd'
 		&& *format != 'D' && *format != 'i' && *format != 'o' && *format != 'O'
 		&& *format != 'u' && *format != 'U' && *format != 'x' && *format != 'X'
-		&& *format != 'c' && *format != 'C' && *format != '%')
+		&& *format != 'c' && *format != 'C' && *format != '%' && *format != 'l')
 	{
 		if (*format != ' ')
 		{
@@ -126,6 +139,24 @@ const char	*check_valid_specifier(const char *format, t_printf *print)
 			++format;
 		return (format);
 	}
+	return (0);
+}
+
+const char	*check_length(const char *format, va_list pa, t_printf *print)
+{
+	if (*format == 'l' && *++format == 'd')
+	{
+		percent_d(pa, print, format);
+		++format;
+		if (*format == '%')
+		{
+			++format;
+			check_length(format, pa, print);
+		}
+		return(format);
+	}
+	else
+		--format;
 	return (0);
 }
 
@@ -149,35 +180,40 @@ int	ft_printf(const char *format, ...)
 			while(*format == ' ')
 				++format;
 			check_valid_specifier(format, &print);
-			if (*format == 's')
-				percent_s(pa, &print);
-			else if (*format == 'd' || *format == 'i')
-				percent_d(pa, &print);
-			else if (*format == 'D' || *format == 'u')
-				percent_D(pa, &print);
-			else if (*format == 'U')
-				percent_U(pa, &print);
-			else if (*format == 'p')
-				percent_p(pa, &print);
-			else if (*format == 'o')
-				percent_o(pa, &print);
-			else if (*format == 'O')
-				percent_O(pa, &print);
-			else if (*format == 'c')
-				format = percent_c(pa, &print, format);
-			else if (*format == '%' || *format == '-' || ft_isdigit(*format) == 1)
-				format = if_percent(format, &print);
-			else if(*format == 'x' || *format == 'X')
-				format = percent_x(pa, &print, format);
-			/*else if (*++format == 'd')*/
-				/*printf.ret += percent_d(pa, printf.ret);*/
+			/*check_length(format, pa, &print);*/
+			/*printf("<%c>\n", *format);*/
+			if (*format != '%')
+			{
+				if (*format == 'l')
+					++format;
+				if (*format == 's')
+					percent_s(pa, &print);
+				else if (*format == 'd' || *format == 'i')
+					percent_d(pa, &print, format);
+				else if (*format == 'D' || *format == 'u')
+					percent_D(pa, &print);
+				else if (*format == 'U')
+					percent_U(pa, &print);
+				else if (*format == 'p')
+					percent_p(pa, &print);
+				else if (*format == 'o')
+					percent_o(pa, &print);
+				else if (*format == 'O')
+					percent_O(pa, &print);
+				else if (*format == 'c')
+					format = percent_c(pa, &print, format);
+				else if (*format == '%' || *format == '-' || ft_isdigit(*format) == 1)
+					format = if_percent(format, &print);
+				else if(*format == 'x' || *format == 'X')
+					format = percent_x(pa, &print, format);
+			}
 		}
 		else
 		{
 			ft_putchar(*format);
-			print.ret++;
+			++print.ret;
 		}
-		format++;
+		++format;
 	}
 	va_end(pa);
 	return (print.ret);

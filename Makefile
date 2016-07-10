@@ -6,7 +6,7 @@
 #    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
-#    Updated: 2016/07/08 08:52:20 by rabougue         ###   ########.fr        #
+#    Updated: 2016/07/10 00:07:15 by rabougue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ fclean:
 bin: re
 	@clang main.c libftprintf.a
 	@echo main.c ok
+	@./a.out
 
 re: fclean all
 
