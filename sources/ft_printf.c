@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/10 07:53:47 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/11 01:12:30 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,6 +221,8 @@ int	ft_printf(const char *format, ...)
 			check_valid_specifier(format, &print);
 			/*check_length(format, pa, &print);*/
 			/*printf("<%c>\n", *format);*/
+			if (*format == '%' || *format == '-' || ft_isdigit(*format) == 1)
+				format = if_percent(format, &print);
 			if (*format != '%')
 			{
 				if (*format == 'l')
@@ -241,8 +243,6 @@ int	ft_printf(const char *format, ...)
 					percent_O(pa, &print);
 				else if (*format == 'c')
 					format = percent_c(pa, &print, format);
-				else if (*format == '%' || *format == '-' || ft_isdigit(*format) == 1)
-					format = if_percent(format, &print);
 				else if(*format == 'x' || *format == 'X')
 					format = percent_x(pa, &print, format);
 			}

@@ -151,13 +151,13 @@ int main ()
 
 	int i;
 
-	ft_putstr("ft_printf(\"%lo%lo\", 0, ULONG_MAX) |");
-	ret = ft_printf("%lo%lo", 0, ULONG_MAX);
+	ft_putstr("ft_printf(\"%%\") |");
+	ret = ft_printf("%%");
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"%lo%lo\", 0, ULONG_MAX) |");
-	ret = printf("%lo%lo", 0, ULONG_MAX);
+	ft_putstr("   printf(\"%%\") |");
+	ret = printf("%%");
 	printf("| ret = %d", ret);
 	printf("\n");
 
