@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/11 01:12:30 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/11 02:13:27 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,19 @@ const char	*percent_x(va_list pa, t_printf *print, const char *format)
 
 const char	*percent_d(va_list pa, t_printf *print, const char *format)
 {
-	int		d;
-	long	ld;
+	int				d;
+	long			ld;
+	long long int	lld;
 
-	/*printf("<%c>", *format);*/
-	if (*--format == 'l')
+	if (*--format == 'l' && *--format == 'l')
+	{
+		++format;
+		++format;
+		lld = va_arg(pa, long long int);
+		ft_put_long(lld);
+		print->ret += ft_strlen(ft_ltoa(lld));
+	}
+	else if (*--format == 'l')
 	{
 		++format;
 		ld = va_arg(pa, long);
@@ -181,23 +189,23 @@ const char	*check_valid_specifier(const char *format, t_printf *print)
 	return (0);
 }
 
-const char	*check_length(const char *format, va_list pa, t_printf *print)
-{
-	if (*format == 'l' && *++format == 'd')
-	{
-		percent_d(pa, print, format);
-		++format;
-		if (*format == '%')
-		{
-			++format;
-			check_length(format, pa, print);
-		}
-		return(format);
-	}
-	else
-		--format;
-	return (0);
-}
+/*const char	*check_length(const char *format, va_list pa, t_printf *print)*/
+/*{*/
+	/*if (*format == 'l' && *++format == 'd')*/
+	/*{*/
+		/*percent_d(pa, print, format);*/
+		/*++format;*/
+		/*if (*format == '%')*/
+		/*{*/
+			/*++format;*/
+			/*check_length(format, pa, print);*/
+		/*}*/
+		/*return(format);*/
+	/*}*/
+	/*else*/
+		/*--format;*/
+	/*return (0);*/
+/*}*/
 
 int	ft_printf(const char *format, ...)
 {
@@ -225,7 +233,7 @@ int	ft_printf(const char *format, ...)
 				format = if_percent(format, &print);
 			if (*format != '%')
 			{
-				if (*format == 'l')
+				while (*format == 'l')
 					++format;
 				if (*format == 's')
 					percent_s(pa, &print);

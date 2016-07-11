@@ -151,15 +151,18 @@ int main ()
 
 	int i;
 
-	ft_putstr("ft_printf(\"%%\") |");
-	ret = ft_printf("%%");
+	ft_putstr("ft_printf(\"%lld\", LLONG_MAX) |");
+	ret = ft_printf("%lld", LLONG_MAX);
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"%%\") |");
-	ret = printf("%%");
+	ft_putstr("   printf(\"%lld\", LLONG_MAX) |");
+	ret = printf("%lld", LLONG_MAX);
 	printf("| ret = %d", ret);
 	printf("\n");
+
+	ret = printf("%ld\n", LONG_MAX);
+	ret = printf("%lld\n", LLONG_MAX);
 
 	return (0);
 }
