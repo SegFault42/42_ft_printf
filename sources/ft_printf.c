@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/11 02:13:27 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/11 06:21:46 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,9 @@ const char	*percent_d(va_list pa, t_printf *print, const char *format)
 		ft_put_long(lld);
 		print->ret += ft_strlen(ft_ltoa(lld));
 	}
-	else if (*--format == 'l')
+	else if (*format == '%')
+		++format;
+	if (*format == 'l' && (*++format == 'd' || *format == 'i'))
 	{
 		++format;
 		ld = va_arg(pa, long);
@@ -82,6 +84,40 @@ const char	*percent_d(va_list pa, t_printf *print, const char *format)
 	}
 	return (format);
 }
+
+// const char	*percent_d(va_list pa, t_printf *print, const char *format)
+// {
+// 	int				d;
+// 	long			ld;
+// 	long long int	lld;
+
+// 	if (*format == 'd' && *--format == 'l' && *--format == 'l' )
+// 	{
+// 		++format;
+// 		++format;
+// 		lld = va_arg(pa, long long int);
+// 		ft_put_long(lld);
+// 		print->ret += ft_strlen(ft_ltoa(lld));
+// 	}
+// 	++format;
+// 	++format;
+// 	printf("<%c>", *format);
+// 	if (*format == 'l' && (*--format == 'd' || *--format == 'i') )
+// 	{
+// 		++format;
+// 		ld = va_arg(pa, long);
+// 		ft_put_long(ld);
+// 		print->ret += ft_strlen(ft_ltoa(ld));
+// 	}
+// 	else
+// 	{
+// 		++format;
+// 		d = va_arg(pa, int);
+// 		ft_putnbr(d);
+// 		print->ret += ft_strlen(ft_itoa(d));
+// 	}
+// 	return (format);
+// }
 
 const char	*percent_D(va_list pa, t_printf *print, char const *format)
 {
