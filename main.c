@@ -151,13 +151,13 @@ int main ()
 
 	int i;
 
-	ft_putstr("ft_printf(\"%li\", (long)INT_MAX + 1) |");
-	ret = ft_printf("%li", (long)INT_MAX + 1);
+	ft_putstr("ft_printf(\"%ld\", (long)INT_MAX + 1) |");
+	ret = ft_printf("%ld", (long)INT_MAX + 1);
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"%li\", (long)INT_MAX + 1) |");
-	ret = printf("%li", (long)INT_MAX + 1);
+	ft_putstr("   printf(\"%ld\", (long)INT_MAX + 1) |");
+	ret = printf("%ld", (long)INT_MAX + 1);
 	printf("| ret = %d", ret);
 	printf("\n");
 

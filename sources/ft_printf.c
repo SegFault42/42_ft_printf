@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/11 06:21:46 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/11 07:26:04 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,15 @@ const char	*percent_d(va_list pa, t_printf *print, const char *format)
 	long			ld;
 	long long int	lld;
 
-	if (*--format == 'l' && *--format == 'l')
+	if ((*format == 'd' || *format == 'i') && *--format == 'l' && *--format == '%')
+	{
+		format += 2;
+		ld = va_arg(pa, long);
+		ft_put_long(ld);
+		print->ret += ft_strlen(ft_ltoa(ld));
+		return (format);
+	}
+	if (*format == 'd' && *--format == 'l' && *--format == 'l')
 	{
 		++format;
 		++format;
@@ -66,15 +74,13 @@ const char	*percent_d(va_list pa, t_printf *print, const char *format)
 		ft_put_long(lld);
 		print->ret += ft_strlen(ft_ltoa(lld));
 	}
-	else if (*format == '%')
-		++format;
-	if (*format == 'l' && (*++format == 'd' || *format == 'i'))
-	{
-		++format;
-		ld = va_arg(pa, long);
-		ft_put_long(ld);
-		print->ret += ft_strlen(ft_ltoa(ld));
-	}
+	/*if ((*format == 'i' || *format == 'd') && *--format == 'l')*/
+	/*{*/
+		/*++format;*/
+		/*ld = va_arg(pa, long);*/
+		/*ft_put_long(ld);*/
+		/*print->ret += ft_strlen(ft_ltoa(ld));*/
+	/*}*/
 	else
 	{
 		++format;
