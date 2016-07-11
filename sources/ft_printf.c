@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/11 08:58:27 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/11 09:15:00 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ const char	*percent_d(va_list pa, t_printf *print, const char *format)
 	long			ld;
 	long long int	lld;
 
-	if ((*format == 'd' || *format == 'i') && *--format == 'l' && *--format == '%')
+	if ((*format == 'd' || *format == 'i') && (*--format == 'l' || *format == 'h') && *--format == '%')
 	{
 		format += 2;
 		ld = va_arg(pa, long);
@@ -85,40 +85,6 @@ const char	*percent_d(va_list pa, t_printf *print, const char *format)
 	}
 	return (format);
 }
-
-// const char	*percent_d(va_list pa, t_printf *print, const char *format)
-// {
-// 	int				d;
-// 	long			ld;
-// 	long long int	lld;
-
-// 	if (*format == 'd' && *--format == 'l' && *--format == 'l' )
-// 	{
-// 		++format;
-// 		++format;
-// 		lld = va_arg(pa, long long int);
-// 		ft_put_long(lld);
-// 		print->ret += ft_strlen(ft_ltoa(lld));
-// 	}
-// 	++format;
-// 	++format;
-// 	printf("<%c>", *format);
-// 	if (*format == 'l' && (*--format == 'd' || *--format == 'i') )
-// 	{
-// 		++format;
-// 		ld = va_arg(pa, long);
-// 		ft_put_long(ld);
-// 		print->ret += ft_strlen(ft_ltoa(ld));
-// 	}
-// 	else
-// 	{
-// 		++format;
-// 		d = va_arg(pa, int);
-// 		ft_putnbr(d);
-// 		print->ret += ft_strlen(ft_itoa(d));
-// 	}
-// 	return (format);
-// }
 
 const char	*percent_D(va_list pa, t_printf *print, char const *format)
 {
@@ -206,7 +172,8 @@ const char	*check_valid_specifier(const char *format, t_printf *print)
 	if (*format != 's' && *format != 'S' && *format != 'p' && *format != 'd'
 		&& *format != 'D' && *format != 'i' && *format != 'o' && *format != 'O'
 		&& *format != 'u' && *format != 'U' && *format != 'x' && *format != 'X'
-		&& *format != 'c' && *format != 'C' && *format != '%' && *format != 'l')
+		&& *format != 'c' && *format != 'C' && *format != '%' && *format != 'l'
+		&& *format != 'h')
 	{
 		if (*format != ' ')
 		{
@@ -270,7 +237,7 @@ int	ft_printf(const char *format, ...)
 				format = if_percent(format, &print);
 			if (*format != '%')
 			{
-				while (*format == 'l')
+				while (*format == 'l' || *format == 'h')
 					++format;
 				if (*format == 's')
 					percent_s(pa, &print);
