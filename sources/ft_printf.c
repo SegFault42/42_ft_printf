@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/12 08:36:36 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/12 10:22:36 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,12 +123,48 @@ const char	*percent_h(va_list pa, t_printf *print, const char *format)
 {
 	short int			hdi;
 	unsigned short int	h;
+	char				hh;
+	unsigned char		hhu;
 
-	++format;
-	/*if (*++format == 'h' && *++format == 'd')*/
-	/*{*/
-	/*}*/
-	if (*format == 'd' || *format == 'i')
+	if (*++format == 'h' && (*++format == 'd' || *format == 'i' || *format == 'u' || *format == 'o' || *format == 'x' || *format == 'X'))
+	{
+		if (*format == 'u')
+		{
+			hhu = va_arg(pa, int);
+			ft_putnbr(hhu);
+			print->ret += ft_strlen(ft_itoa(hhu));
+		}
+		else if (*format == 'o')
+		{
+			hhu = va_arg(pa, int);
+			ft_putstr(ft_itoa_base(hhu, 8));
+			print->ret += ft_strlen(ft_itoa_base(hhu, 8));
+		}
+		else if (*format == 'x' || *format == 'X')
+		{
+		hhu = va_arg(pa, int);
+		if (*format == 'x')
+			ft_putstr(ft_hexa_itoa(hhu, 0));
+		else if (*format == 'X')
+			ft_putstr(ft_hexa_ltoa(hhu, 1));
+		print->ret += ft_strlen(ft_hexa_itoa(hhu, 0));
+		}
+		else
+		{
+			hh = va_arg(pa, int);
+			ft_putnbr(hh);
+			print->ret += ft_strlen(ft_itoa(hh));
+		}
+		return (format);
+	}
+	else if (*format == 'u')
+	{
+		h = va_arg(pa, int);
+		ft_putnbr(h);
+		print->ret += ft_strlen(ft_itoa(h));
+		return (format);
+	}
+	else if (*format == 'd' || *format == 'i')
 	{
 		hdi = va_arg(pa, int);
 		ft_putnbr(hdi);

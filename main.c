@@ -176,13 +176,13 @@ int main ()
 
 	int i;
 
-	ft_putstr("ft_printf(\"%hhd%hhd\", 0, USHRT_MAX) |");
-	ret = ft_printf("%hhd%hhd", 0, USHRT_MAX);
+	ft_putstr("ft_printf(\"%hho%hho\", 0, UCHAR_MAX + 42) |");
+	ret = ft_printf("%hho%hho", 0, UCHAR_MAX + 42);
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"%hhd%hhd\", 0, USHRT_MAX) |");
-	ret = printf("%hhd%hhd", 0, USHRT_MAX);
+	ft_putstr("   printf(\"%hho%hho\", 0, UCHAR_MAX + 42) |");
+	ret = printf("%hho%hho", 0, UCHAR_MAX + 42);
 	printf("| ret = %d", ret);
 	printf("\n");
 	
