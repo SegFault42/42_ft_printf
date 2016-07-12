@@ -176,13 +176,13 @@ int main ()
 
 	int i;
 
-	ft_putstr("ft_printf(\"%lU%lU\", 0, USHRT_MAX) |");
-	ret = ft_printf("%lU%lU", 0, USHRT_MAX);
+	ft_putstr("ft_printf(\"%hd%hd\", (short int)0, (short int)42) |");
+	ret = ft_printf("%hd%hd", (short int)0, (short int)42);
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"%lU%lU\", 0, USHRT_MAX) |");
-	ret = printf("%lU%lU", 0, USHRT_MAX);
+	ft_putstr("   printf(\"%hd%hd\", (short int)0, (short int)42) |");
+	ret = printf("%hd%hd", (short int)0, (short int)42);
 	printf("| ret = %d", ret);
 	printf("\n");
 	
