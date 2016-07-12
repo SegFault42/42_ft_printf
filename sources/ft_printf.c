@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/12 08:19:16 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/12 08:36:36 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,14 +121,56 @@ const char	*percent_l(va_list pa, t_printf *print, const char *format)
 
 const char	*percent_h(va_list pa, t_printf *print, const char *format)
 {
-	short int	h;
+	short int			hdi;
+	unsigned short int	h;
 
 	++format;
-	if (*format == 'd')
+	/*if (*++format == 'h' && *++format == 'd')*/
+	/*{*/
+	/*}*/
+	if (*format == 'd' || *format == 'i')
+	{
+		hdi = va_arg(pa, int);
+		ft_putnbr(hdi);
+		print->ret += ft_strlen(ft_itoa(hdi));
+		return (format);
+	}
+	else if (*format == 'u' || *format == 'D')
 	{
 		h = va_arg(pa, int);
 		ft_putnbr(h);
 		print->ret += ft_strlen(ft_itoa(h));
+		return (format);
+	}
+	else if (*format == 'o')
+	{
+		h = va_arg(pa, int);
+		ft_putstr(ft_ultoa_base(h, 8));
+		print->ret += ft_strlen(ft_ultoa_base(h, 8));
+		return (format);
+	}
+	else if (*format == 'x' || *format == 'X')
+	{
+		h = va_arg(pa, unsigned long);
+		if (*format == 'x')
+			ft_putstr(ft_hexa_ltoa(h, 0));
+		else if (*format == 'X')
+			ft_putstr(ft_hexa_ltoa(h, 1));
+		print->ret += ft_strlen(ft_hexa_ltoa(h, 0));
+		return (format);
+	}
+	else if (*format == 'O')
+	{
+		h = va_arg(pa, unsigned long);
+		ft_putstr(ft_ultoa_base(h, 8));
+		print->ret += ft_strlen(ft_ltoa_base(h, 8));
+		return (format);
+	}
+	else if (*format == 'U')
+	{
+		h = va_arg(pa, unsigned long);
+		ft_putstr(ft_ultoa(h));
+		print->ret += ft_strlen(ft_ultoa(h));
 		return (format);
 	}
 	return(format);
