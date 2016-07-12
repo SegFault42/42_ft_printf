@@ -176,13 +176,13 @@ int main ()
 
 	int i;
 
-	ft_putstr("ft_printf(\"%hd%hd\", (short int)0, (short int)42) |");
-	ret = ft_printf("%hd%hd", (short int)0, (short int)42);
+	ft_putstr("ft_printf(\"%ld%ld\", 0, 42) |");
+	ret = ft_printf("%ld%ld", 0, 42);
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"%hd%hd\", (short int)0, (short int)42) |");
-	ret = printf("%hd%hd", (short int)0, (short int)42);
+	ft_putstr("   printf(\"%ld%ld\", 0, 42) |");
+	ret = printf("%ld%ld", 0, 42);
 	printf("| ret = %d", ret);
 	printf("\n");
 	

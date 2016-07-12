@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/11 09:15:00 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/12 05:29:47 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,38 +52,58 @@ const char	*percent_x(va_list pa, t_printf *print, const char *format)
 	return (format);
 }
 
-const char	*percent_d(va_list pa, t_printf *print, const char *format)
+const char	*percent_l(va_list pa, t_printf *print, const char *format)
 {
-	int				d;
 	long			ld;
 	long long int	lld;
 
-	if ((*format == 'd' || *format == 'i') && (*--format == 'l' || *format == 'h') && *--format == '%')
+	if (*++format == 'l' && (*++format == 'd' || *format == 'i'))
 	{
-		format += 2;
-		ld = va_arg(pa, long);
-		ft_put_long(ld);
-		print->ret += ft_strlen(ft_ltoa(ld));
-		return (format);
-	}
-	else if (*format == 'l')
-		format += 2;
-	if ((*format == 'd' || *format == 'i') && *--format == 'l' && *--format == 'l' && *--format == '%')
-	{
-		format += 3;
 		lld = va_arg(pa, long long int);
 		ft_put_long(lld);
 		print->ret += ft_strlen(ft_ltoa(lld));
 		return (format);
 	}
-	else
+	if (*format == 'd' || *format == 'i')
 	{
+		ld = va_arg(pa, long);
+		ft_put_long(ld);
+		print->ret += ft_strlen(ft_ltoa(ld));
+		return (format);
+	}
+	return (format);
+}
+
+const char	*percent_d(va_list pa, t_printf *print, const char *format)
+{
+	int				d;
+	/*long			ld;*/
+	/*long long int	lld;*/
+
+	/*if ((*format == 'd' || *format == 'i') && (*--format == 'l' || *format == 'h') && *--format == '%')*/
+	/*{*/
+		/*format += 2;*/
+		/*ld = va_arg(pa, long);*/
+		/*ft_put_long(ld);*/
+		/*print->ret += ft_strlen(ft_ltoa(ld));*/
+		/*return (format);*/
+	/*}*/
+	/*else if (*format == 'l')*/
+		/*format += 2;*/
+	/*if ((*format == 'd' || *format == 'i') && *--format == 'l' && *--format == 'l' && *--format == '%')*/
+	/*{*/
+		/*format += 3;*/
+		/*lld = va_arg(pa, long long int);*/
+		/*ft_put_long(lld);*/
+		/*print->ret += ft_strlen(ft_ltoa(lld));*/
+		/*return (format);*/
+	/*}*/
+	
 		++format;
 		d = va_arg(pa, int);
 		ft_putnbr(d);
 		print->ret += ft_strlen(ft_itoa(d));
-	}
-	return (format);
+		return (format);
 }
 
 const char	*percent_D(va_list pa, t_printf *print, char const *format)
@@ -237,9 +257,11 @@ int	ft_printf(const char *format, ...)
 				format = if_percent(format, &print);
 			if (*format != '%')
 			{
-				while (*format == 'l' || *format == 'h')
-					++format;
-				if (*format == 's')
+				/*while (*format == 'l' || *format == 'h')*/
+					/*++format;*/
+				if (*format == 'l')
+					format = percent_l(pa, &print, format);
+				else if (*format == 's')
 					percent_s(pa, &print);
 				else if (*format == 'd' || *format == 'i')
 					percent_d(pa, &print, format);
