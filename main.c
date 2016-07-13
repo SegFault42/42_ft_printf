@@ -176,15 +176,14 @@ int main ()
 
 	int i;
 
-	ft_putstr("ft_printf(\"%hho%hho\", 0, UCHAR_MAX + 42) |");
-	ret = ft_printf("%hho%hho", 0, UCHAR_MAX + 42);
+	ft_putstr("ft_printf(\"%zu%zu\", 0, ULLONG_MAX) |");
+	ret = ft_printf("%zu%zu", 0, ULLONG_MAX);
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"%hho%hho\", 0, UCHAR_MAX + 42) |");
-	ret = printf("%hho%hho", 0, UCHAR_MAX + 42);
+	ft_putstr("   printf(\"%zu%zu\", 0, ULLONG_MAX) |");
+	ret = printf("%zu%zu", 0, ULLONG_MAX);
 	printf("| ret = %d", ret);
 	printf("\n");
-	
 	return (0);
 }

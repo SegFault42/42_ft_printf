@@ -57,14 +57,82 @@ const char	*percent_l(va_list pa, t_printf *print, const char *format)
 	unsigned long	l;
 	long long int	lld;
 
-	if (*++format == 'l' && (*++format == 'd' || *format == 'i'))
+	if ((*++format == 'l') && (*++format == 'd' || *format == 'i'))
 	{
 		lld = va_arg(pa, long long int);
 		ft_put_long(lld);
 		print->ret += ft_strlen(ft_ltoa(lld));
 		return (format);
 	}
-	else if (*format == 'l' && *++format == 'u')
+	else if ((*format == 'l') && *++format == 'u')
+	{
+		l = va_arg(pa, unsigned long);
+		ft_put_ulong(l);
+		print->ret += ft_strlen(ft_ultoa(l));
+		return (format);
+	}
+	else if (*format == 'd' || *format == 'i')
+	{
+		ld = va_arg(pa, long);
+		ft_put_long(ld);
+		print->ret += ft_strlen(ft_ltoa(ld));
+		return (format);
+	}
+	else if (*format == 'u' || *format == 'D')
+	{
+		l = va_arg(pa, unsigned long);
+		ft_put_ulong(l);
+		print->ret += ft_strlen(ft_ultoa(l));
+		return (format);
+	}
+	else if (*format == 'o')
+	{
+		l = va_arg(pa, unsigned long);
+		ft_putstr(ft_ultoa_base(l, 8));
+		print->ret += ft_strlen(ft_ultoa_base(l, 8));
+		return (format);
+	}
+	else if (*format == 'x' || *format == 'X')
+	{
+		l = va_arg(pa, unsigned long);
+		if (*format == 'x')
+			ft_putstr(ft_hexa_ltoa(l, 0));
+		else if (*format == 'X')
+			ft_putstr(ft_hexa_ltoa(l, 1));
+		print->ret += ft_strlen(ft_hexa_ltoa(l, 0));
+		return (format);
+	}
+	else if (*format == 'O')
+	{
+		l = va_arg(pa, unsigned long);
+		ft_putstr(ft_ultoa_base(l, 8));
+		print->ret += ft_strlen(ft_ltoa_base(l, 8));
+		return (format);
+	}
+	else if (*format == 'U')
+	{
+		l = va_arg(pa, unsigned long);
+		ft_putstr(ft_ultoa(l));
+		print->ret += ft_strlen(ft_ultoa(l));
+		return (format);
+	}
+	return (format);
+}
+
+const char	*percent_j(va_list pa, t_printf *print, const char *format)
+{
+	long			ld;
+	unsigned long	l;
+	long long int	lld;
+
+	if ((*++format == 'j') && (*++format == 'd' || *format == 'i'))
+	{
+		lld = va_arg(pa, long long int);
+		ft_put_long(lld);
+		print->ret += ft_strlen(ft_ltoa(lld));
+		return (format);
+	}
+	else if ((*format == 'j') && *++format == 'u')
 	{
 		l = va_arg(pa, unsigned long);
 		ft_put_ulong(l);
@@ -212,6 +280,72 @@ const char	*percent_h(va_list pa, t_printf *print, const char *format)
 	return(format);
 }
 
+const char	*percent_z(va_list pa, t_printf *print, const char *format)
+{
+	size_t	z;
+
+	/*if ((*++format == 'z') && (*++format == 'd' || *format == 'i'))*/
+	/*{*/
+		/*lld = va_arg(pa, long long int);*/
+		/*ft_put_long(lld);*/
+		/*print->ret += ft_strlen(ft_ltoa(lld));*/
+		/*return (format);*/
+	/*}*/
+	/*if ((*format == 'z') && *++format == 'u')*/
+	/*{*/
+		/*z = va_arg(pa, size_t);*/
+		/*ft_put_ulong(z);*/
+		/*print->ret += ft_strlen(ft_ultoa(z));*/
+		/*return (format);*/
+	/*}*/
+	if (*++format == 'd' || *format == 'i')
+	{
+		z = va_arg(pa, size_t);
+		ft_put_long(z);
+		print->ret += ft_strlen(ft_ltoa(z));
+		return (format);
+	}
+	else if (*format == 'u' || *format == 'D')
+	{
+		z = va_arg(pa, size_t);
+		ft_put_ulong(z);
+		print->ret += ft_strlen(ft_ultoa(z));
+		return (format);
+	}
+	else if (*format == 'o')
+	{
+		z = va_arg(pa, size_t);
+		ft_putstr(ft_ultoa_base(z, 8));
+		print->ret += ft_strlen(ft_ultoa_base(z, 8));
+		return (format);
+	}
+	else if (*format == 'x' || *format == 'X')
+	{
+		z = va_arg(pa, size_t);
+		if (*format == 'x')
+			ft_putstr(ft_hexa_ltoa(z, 0));
+		else if (*format == 'X')
+			ft_putstr(ft_hexa_ltoa(z, 1));
+		print->ret += ft_strlen(ft_hexa_ltoa(z, 0));
+		return (format);
+	}
+	else if (*format == 'O')
+	{
+		z = va_arg(pa, size_t);
+		ft_putstr(ft_ultoa_base(z, 8));
+		print->ret += ft_strlen(ft_ltoa_base(z, 8));
+		return (format);
+	}
+	else if (*format == 'U')
+	{
+		z = va_arg(pa, size_t);
+		ft_putstr(ft_ultoa(z));
+		print->ret += ft_strlen(ft_ultoa(z));
+		return (format);
+	}
+	return (format);
+}
+
 const char	*percent_d(va_list pa, t_printf *print, const char *format)
 {
 	int				d;
@@ -338,7 +472,7 @@ const char	*check_valid_specifier(const char *format, t_printf *print)
 		&& *format != 'D' && *format != 'i' && *format != 'o' && *format != 'O'
 		&& *format != 'u' && *format != 'U' && *format != 'x' && *format != 'X'
 		&& *format != 'c' && *format != 'C' && *format != '%' && *format != 'l'
-		&& *format != 'h')
+		&& *format != 'h' && *format != 'j' && *format != 'z')
 	{
 		if (*format != ' ')
 		{
@@ -408,6 +542,10 @@ int	ft_printf(const char *format, ...)
 					format = percent_l(pa, &print, format);
 				else if (*format == 'h')
 					format = percent_h(pa, &print, format);
+				else if (*format == 'j')
+					format = percent_j(pa, &print, format);
+				else if (*format == 'z')
+					format = percent_z(pa, &print, format);
 				else if (*format == 's')
 					percent_s(pa, &print);
 				else if (*format == 'd' || *format == 'i')
@@ -434,6 +572,7 @@ int	ft_printf(const char *format, ...)
 			++print.ret;
 		}
 		++format;
+		printf("<%c>", *format);
 	}
 	va_end(pa);
 	return (print.ret);
