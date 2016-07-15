@@ -116,6 +116,7 @@ const char	*percent_l(va_list pa, t_printf *print, const char *format)
 		print->ret += ft_strlen(ft_ultoa(l));
 		return (format);
 	}
+	--format;
 	return (format);
 }
 
@@ -194,7 +195,8 @@ const char	*percent_h(va_list pa, t_printf *print, const char *format)
 	char				hh;
 	unsigned char		hhu;
 
-	if (*++format == 'h' && (*++format == 'd' || *format == 'i' || *format == 'u' || *format == 'o' || *format == 'x' || *format == 'X'))
+	if (*++format == 'h' && (*++format == 'd' || *format == 'i' ||
+		  *format == 'u' || *format == 'o' || *format == 'x' || *format == 'X'))
 	{
 		if (*format == 'u')
 		{
@@ -282,7 +284,7 @@ const char	*percent_h(va_list pa, t_printf *print, const char *format)
 
 const char	*percent_z(va_list pa, t_printf *print, const char *format)
 {
-	size_t	z;
+	unsigned long	z;
 
 	/*if ((*++format == 'z') && (*++format == 'd' || *format == 'i'))*/
 	/*{*/
@@ -309,7 +311,7 @@ const char	*percent_z(va_list pa, t_printf *print, const char *format)
 	{
 		z = va_arg(pa, size_t);
 		ft_put_ulong(z);
-		print->ret += ft_strlen(ft_ultoa(z));
+		print->ret += ft_size_ttoa(z);
 		return (format);
 	}
 	else if (*format == 'o')
@@ -472,7 +474,7 @@ const char	*check_valid_specifier(const char *format, t_printf *print)
 		&& *format != 'D' && *format != 'i' && *format != 'o' && *format != 'O'
 		&& *format != 'u' && *format != 'U' && *format != 'x' && *format != 'X'
 		&& *format != 'c' && *format != 'C' && *format != '%' && *format != 'l'
-		&& *format != 'h' && *format != 'j' && *format != 'z')
+		&& *format != 'h' && *format != 'j' && *format != 'z' && ft_isdigit(*format) == 0)
 	{
 		if (*format != ' ')
 		{
@@ -509,19 +511,42 @@ const char	*check_valid_specifier(const char *format, t_printf *print)
 		/*--format;*/
 	/*return (0);*/
 /*}*/
+char *countSpace(const char *format)
+{
+	char *nb_space;
+	int i = 0;
+	int j = 0;
+
+	if (ft_isdigit(*format) == TRUE)
+	{
+		while (ft_isdigit(*format) == TRUE)
+		{
+			i++;
+			++format;
+		}
+			printf("<%d>", i);
+		format -= i;
+		nb_space = (char *)malloc(sizeof(char) * (i + 1));
+		while (i--)
+		{
+			nb_space[j] = format[j];
+			j++;
+		}
+		nb_space[j] = '\0';
+	}
+	return (nb_space);
+}
 
 int	ft_printf(const char *format, ...)
 {
 	t_printf	print;
 	va_list		pa;
+	int			space;
 
 	init_struct(&print);
 	va_start(pa, format);
 	if (*format == '%' && ft_strlen(format) == 1)
-	{
-		print.ret = 0;
 		return (0);
-	}
 	while (*format != '\0')
 	{
 		if (*format == '%')
@@ -532,6 +557,12 @@ int	ft_printf(const char *format, ...)
 			check_valid_specifier(format, &print);
 			/*check_length(format, pa, &print);*/
 			/*printf("<%c>\n", *format);*/
+			space = ft_atoi(countSpace(format));
+			//soustraire nombre de caractere au espace
+			while (space--)
+			{
+				ft_putchar(' ');
+			}
 			if (*format == '%' || *format == '-' || ft_isdigit(*format) == 1)
 				format = if_percent(format, &print);
 			if (*format != '%')
@@ -572,7 +603,6 @@ int	ft_printf(const char *format, ...)
 			++print.ret;
 		}
 		++format;
-		printf("<%c>", *format);
 	}
 	va_end(pa);
 	return (print.ret);

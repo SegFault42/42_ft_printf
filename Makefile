@@ -17,7 +17,7 @@ SRCS = ./sources/ft_printf.c ./sources/percent_percent.c ./sources/percent_s.c\
 
 OBJS = $(SRCS:.c=.o)
 
-FLAGS = # -Wall -Wextra -Werror
+FLAGS = -g  -Wall #-Wextra -Werror
 
 CC = clang
 
@@ -51,7 +51,7 @@ fclean:
 	@make -s fclean -C ./libft/
 	@echo "\033[32mThe folder is clean\033[0m"
 
-bin: re
+bin:
 	@clang main.c libftprintf.a
 	@echo main.c ok
 	@./a.out

@@ -19,6 +19,8 @@
 # include <fcntl.h>
 
 # define BUFF_SIZE 10
+# define TRUE 1
+# define FALSE 0
 # define RC ft_putchar('\n');
 
 typedef struct		s_list
@@ -109,5 +111,6 @@ char				*ft_ltoa_base(long value, int base);
 void				ft_put_ulong(unsigned long n);
 char				*ft_ultoa(unsigned long n);
 char				*ft_ultoa_base(unsigned long value, int base);
+size_t				ft_size_ttoa(size_t n);
 
 #endif

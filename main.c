@@ -176,13 +176,22 @@ int main ()
 
 	int i;
 
-	ft_putstr("ft_printf(\"%zu%zu\", 0, ULLONG_MAX) |");
-	ret = ft_printf("%zu%zu", 0, ULLONG_MAX);
+	/*ft_putstr("ft_printf(\"%lp\", 42) |");*/
+	/*ret = ft_printf("%lp", 42);*/
+	/*printf("| ret = %d", ret);*/
+	/*printf("\n");*/
+
+	/*ft_putstr("   printf(\"%lp\", 42) |");*/
+	/*ret = printf("%lp", 42);*/
+	/*printf("| ret = %d", ret);*/
+	/*printf("\n");*/
+	ft_putstr("ft_printf(\"{%10d}\", 42) |");
+	ret = ft_printf("{%10d}", 42);
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"%zu%zu\", 0, ULLONG_MAX) |");
-	ret = printf("%zu%zu", 0, ULLONG_MAX);
+	ft_putstr("   printf(\"e{%10d}\", 42) |");
+	ret = printf("{e%10d}", 42);
 	printf("| ret = %d", ret);
 	printf("\n");
 	return (0);
