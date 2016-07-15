@@ -176,23 +176,23 @@ int main ()
 
 	int i;
 
-	/*ft_putstr("ft_printf(\"%lp\", 42) |");*/
-	/*ret = ft_printf("%lp", 42);*/
-	/*printf("| ret = %d", ret);*/
-	/*printf("\n");*/
-
-	/*ft_putstr("   printf(\"%lp\", 42) |");*/
-	/*ret = printf("%lp", 42);*/
-	/*printf("| ret = %d", ret);*/
-	/*printf("\n");*/
-	ft_putstr("ft_printf(\"{%10d}\", 42) |");
-	ret = ft_printf("{%10d}", 42);
+	ft_putstr("ft_printf(\"{%5p}\", 0) |");
+	ret = ft_printf("{%5p}", 0);
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"{%10d}\", 42) |");
-	ret = printf("{%10d}", 42);
+	ft_putstr("   printf(\"{%5p}\", 0) |");
+	ret = printf("{%5p}", 0);
 	printf("| ret = %d", ret);
 	printf("\n");
+	/*ft_putstr("ft_printf(\"{%10d}\", 42) |");*/
+	/*ret = ft_printf("{%10d}", 42);*/
+	/*printf("| ret = %d", ret);*/
+	/*printf("\n");*/
+
+	/*ft_putstr("   printf(\"{%10d}\", 42) |");*/
+	/*ret = printf("{%10d}", 42);*/
+	/*printf("| ret = %d", ret);*/
+	/*printf("\n");*/
 	return (0);
 }

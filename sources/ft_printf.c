@@ -18,6 +18,7 @@ const char	*percent_c(va_list pa, t_printf *print, const char *format)
 	char	c;
 
 	c = va_arg(pa, int);
+	write_space_int(c, print);
 	ft_putchar(c);
 	++print->ret;
 	return (format);
@@ -147,7 +148,14 @@ const char	*percent_j(va_list pa, t_printf *print, const char *format)
 		print->ret += ft_strlen(ft_ltoa(ld));
 		return (format);
 	}
-	else if (*format == 'u' || *format == 'D')
+	else if (*format == 'D')
+	{
+		l = va_arg(pa, unsigned long);
+		ft_put_ulong(l);
+		print->ret += ft_strlen(ft_ltoa(l));
+		return (format);
+	}
+	else if (*format == 'u')
 	{
 		l = va_arg(pa, unsigned long);
 		ft_put_ulong(l);
@@ -351,64 +359,23 @@ const char	*percent_z(va_list pa, t_printf *print, const char *format)
 const char	*percent_d(va_list pa, t_printf *print, const char *format)
 {
 	int				d;
-	/*long			ld;*/
-	/*long long int	lld;*/
-
-	/*if ((*format == 'd' || *format == 'i') && (*--format == 'l' || *format == 'h') && *--format == '%')*/
-	/*{*/
-		/*format += 2;*/
-		/*ld = va_arg(pa, long);*/
-		/*ft_put_long(ld);*/
-		/*print->ret += ft_strlen(ft_ltoa(ld));*/
-		/*return (format);*/
-	/*}*/
-	/*else if (*format == 'l')*/
-		/*format += 2;*/
-	/*if ((*format == 'd' || *format == 'i') && *--format == 'l' && *--format == 'l' && *--format == '%')*/
-	/*{*/
-		/*format += 3;*/
-		/*lld = va_arg(pa, long long int);*/
-		/*ft_put_long(lld);*/
-		/*print->ret += ft_strlen(ft_ltoa(lld));*/
-		/*return (format);*/
-	/*}*/
 	
-		++format;
-		d = va_arg(pa, int);
-		char *string = ft_itoa(d);
-		print->space_number -= ft_strlen(string);
-		if (print->space_number > 0)
-		{
-			while (print->space_number--)
-			{
-				ft_putchar(' ');
-				print->ret++;
-			}
-		}
-		ft_putnbr(d);
-		print->ret += ft_strlen(ft_itoa(d));
-		return (format);
+	++format;
+	d = va_arg(pa, int);
+	write_space_int(d, print);
+	ft_putnbr(d);
+	print->ret += ft_strlen(ft_itoa(d));
+	return (format);
 }
 
 const char	*percent_D(va_list pa, t_printf *print, char const *format)
 {
 	long			d;
-	/*unsigned long	lu;*/
 
-	/*if (*--format == 'l')*/
-	/*{*/
-		/*++format;*/
-		/*lu = va_arg(pa, unsigned long);*/
-		/*ft_put_ulong(lu);*/
-		/*print->ret += ft_strlen(ft_ultoa(lu));*/
-	/*}*/
-	/*else*/
-	/*{*/
-		++format;
-		d = va_arg(pa, long);
-		ft_put_long(d);
-		print->ret += ft_strlen(ft_ltoa(d));
-	/*}*/
+	++format;
+	d = va_arg(pa, long);
+	ft_put_long(d);
+	print->ret += ft_strlen(ft_ltoa(d));
 	return (format);
 }
 
@@ -429,6 +396,7 @@ void	percent_p(va_list pa, t_printf *print)
 	char	*p;
 
 	p = va_arg(pa, char*);
+	write_space_char(p, print);
 	ft_putstr("0x");
 	ft_putstr(ft_hexa_ltoa((unsigned long long)p, 0));
 	print->ret += ft_strlen(ft_hexa_ltoa((unsigned long long)p, 0)) + 2;
@@ -437,14 +405,7 @@ void	percent_p(va_list pa, t_printf *print)
 const char	*percent_o(va_list pa, t_printf *print, const char *format)
 {
 	int				o;
-	/*unsigned long	lo;*/
 
-	/*if (*--format == 'l')*/
-	/*{*/
-		/*++format;*/
-		/*lo = va_arg(pa, unsigned long);*/
-		/*ft_putstr(ft_ultoa_base(lo, 8));*/
-		/*print->ret += ft_strlen(ft_ultoa_base(lo, 8));*/
 	if (*format == 'O')
 	{
 		o = va_arg(pa, long);
@@ -452,14 +413,10 @@ const char	*percent_o(va_list pa, t_printf *print, const char *format)
 		print->ret += ft_strlen(ft_ltoa_base(o, 8));
 		return (format);
 	}
-	/*}*/
-	/*else*/
-	/*{*/
-		++format;
-		o = va_arg(pa, int);
-		ft_putstr(ft_itoa_base(o, 8));
-		print->ret += ft_strlen(ft_itoa_base(o, 8));
-	/*}*/
+	++format;
+	o = va_arg(pa, int);
+	ft_putstr(ft_itoa_base(o, 8));
+	print->ret += ft_strlen(ft_itoa_base(o, 8));
 	return (format);
 }
 
@@ -551,16 +508,6 @@ const char *countSpace(const char *format, t_printf *print)
 	return (format);
 }
 
-void	write_space(int space, t_printf *print)
-{
-	while (space--)
-	{
-		ft_putchar(' ');
-		print->ret++;
-	}
-
-}
-
 int	ft_printf(const char *format, ...)
 {
 	t_printf	print;
@@ -598,9 +545,7 @@ int	ft_printf(const char *format, ...)
 				else if (*format == 's')
 					percent_s(pa, &print);
 				else if (*format == 'd' || *format == 'i')
-				{
 					percent_d(pa, &print, format);
-					}
 				else if (*format == 'D' || *format == 'u')
 					percent_D(pa, &print, format);
 				else if (*format == 'U')
