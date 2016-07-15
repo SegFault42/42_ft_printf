@@ -190,8 +190,8 @@ int main ()
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"e{%10d}\", 42) |");
-	ret = printf("{e%10d}", 42);
+	ft_putstr("   printf(\"{%10d}\", 42) |");
+	ret = printf("{%10d}", 42);
 	printf("| ret = %d", ret);
 	printf("\n");
 	return (0);

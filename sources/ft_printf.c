@@ -375,6 +375,16 @@ const char	*percent_d(va_list pa, t_printf *print, const char *format)
 	
 		++format;
 		d = va_arg(pa, int);
+		char *string = ft_itoa(d);
+		print->space_number -= ft_strlen(string);
+		if (print->space_number > 0)
+		{
+			while (print->space_number--)
+			{
+				ft_putchar(' ');
+				print->ret++;
+			}
+		}
 		ft_putnbr(d);
 		print->ret += ft_strlen(ft_itoa(d));
 		return (format);
@@ -466,6 +476,7 @@ void	init_struct(t_printf *printf)
 {
 	printf->ret = 0;
 	printf->valid = 0;
+	printf->space_number = 0;
 }
 
 const char	*check_valid_specifier(const char *format, t_printf *print)
@@ -511,9 +522,9 @@ const char	*check_valid_specifier(const char *format, t_printf *print)
 		/*--format;*/
 	/*return (0);*/
 /*}*/
-char *countSpace(const char *format)
+const char *countSpace(const char *format, t_printf *print)
 {
-	char *nb_space;
+	char *string;
 	int i = 0;
 	int j = 0;
 
@@ -524,24 +535,36 @@ char *countSpace(const char *format)
 			i++;
 			++format;
 		}
-			printf("<%d>", i);
 		format -= i;
-		nb_space = (char *)malloc(sizeof(char) * (i + 1));
+		string = (char *)malloc(sizeof(char) * (i + 1));
 		while (i--)
 		{
-			nb_space[j] = format[j];
+			string[j] = format[j];
 			j++;
 		}
-		nb_space[j] = '\0';
+		string[j] = '\0';
 	}
-	return (nb_space);
+	print->space_number = ft_atoi(string);
+	format += ft_strlen(string);
+	/*free(string);*/
+	/*return (nb_space);*/
+	return (format);
+}
+
+void	write_space(int space, t_printf *print)
+{
+	while (space--)
+	{
+		ft_putchar(' ');
+		print->ret++;
+	}
+
 }
 
 int	ft_printf(const char *format, ...)
 {
 	t_printf	print;
 	va_list		pa;
-	int			space;
 
 	init_struct(&print);
 	va_start(pa, format);
@@ -556,17 +579,12 @@ int	ft_printf(const char *format, ...)
 				++format;
 			check_valid_specifier(format, &print);
 			/*check_length(format, pa, &print);*/
-			/*printf("<%c>\n", *format);*/
-			space = ft_atoi(countSpace(format));
-			//soustraire nombre de caractere au espace
-			while (space--)
-			{
-				ft_putchar(' ');
-			}
-			if (*format == '%' || *format == '-' || ft_isdigit(*format) == 1)
+			if (*format == '%' || *format == '-')
 				format = if_percent(format, &print);
 			if (*format != '%')
 			{
+				if (ft_isdigit(*format) == TRUE)
+					format = countSpace(format, &print);
 				/*while (*format == 'l' || *format == 'h')*/
 					/*++format;*/
 				if (*format == 'l')
@@ -580,7 +598,9 @@ int	ft_printf(const char *format, ...)
 				else if (*format == 's')
 					percent_s(pa, &print);
 				else if (*format == 'd' || *format == 'i')
+				{
 					percent_d(pa, &print, format);
+					}
 				else if (*format == 'D' || *format == 'u')
 					percent_D(pa, &print, format);
 				else if (*format == 'U')

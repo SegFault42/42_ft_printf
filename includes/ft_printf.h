@@ -19,6 +19,7 @@
 typedef struct	s_printf
 {
 	int			ret;
+	int			space_number;
 	int			valid;
 }				t_printf;
 /*
