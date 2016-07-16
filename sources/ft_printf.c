@@ -414,6 +414,7 @@ const char	*percent_d(va_list pa, t_printf *print, const char *format)
 	d = va_arg(pa, int);
 	write_space_int(d, print);
 	ft_putnbr(d);
+	write_space_int(d, print);
 	print->ret += ft_strlen(ft_itoa(d));
 	return (format);
 }
@@ -480,6 +481,40 @@ void	percent_O(va_list pa, t_printf *print)
 	print->ret += ft_strlen(ft_ltoa_base(o, 8));
 }
 
+const char *percent_C(va_list pa, t_printf *print, const char *format)
+{
+	unsigned int	C;
+
+	C = va_arg(pa, unsigned int);
+	if (C < 128)
+	{
+		putchar(C);
+		print->ret++;
+	}
+	else if (C < 2048)
+	{
+		putchar(192 | (C >> 6));
+		putchar(128 | (C & 63));
+		print->ret+=2;
+	}
+	else if (C < 65536)
+	{
+		putchar(224 | (C >> 12));
+		putchar(128 | ((C >> 6) & 63));
+		putchar(128 | (C & 63));
+		print->ret+=3;
+	}
+	else if (C < 1114112)
+	{
+		putchar(240 | (C >> 18));
+		putchar(128 | ((C >> 12) & 63));
+		putchar(128 | ((C >> 6) & 63));
+		putchar(128 | (C & 63));
+		print->ret+=4;
+	}
+	return (format);
+}
+
 void	init_struct(t_printf *printf)
 {
 	printf->ret = 0;
@@ -493,7 +528,8 @@ const char	*check_valid_specifier(const char *format, t_printf *print)
 		&& *format != 'D' && *format != 'i' && *format != 'o' && *format != 'O'
 		&& *format != 'u' && *format != 'U' && *format != 'x' && *format != 'X'
 		&& *format != 'c' && *format != 'C' && *format != '%' && *format != 'l'
-		&& *format != 'h' && *format != 'j' && *format != 'z' && ft_isdigit(*format) == 0)
+		&& *format != 'h' && *format != 'j' && *format != 'z' && *format != 'C'
+		&& ft_isdigit(*format) == 0)
 	{
 		if (*format != ' ')
 		{
@@ -620,8 +656,10 @@ int	ft_printf(const char *format, ...)
 					percent_O(pa, &print);
 				else if (*format == 'c')
 					format = percent_c(pa, &print, format);
-				else if(*format == 'x' || *format == 'X')
+				else if (*format == 'x' || *format == 'X')
 					format = percent_x(pa, &print, format);
+				else if (*format == 'C')
+					format = percent_C(pa, &print, format);
 			}
 		}
 		else

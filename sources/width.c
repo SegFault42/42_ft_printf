@@ -3,14 +3,19 @@
 
 void	write_space_int(int space, t_printf *print)
 {
-	char *string = ft_itoa(space);
-	print->space_number -= ft_strlen(string);
-	if (print->space_number > 0)
+	if (print->negatif == 1)
+		print->negatif = 0;
+	else
 	{
-		while (print->space_number--)
+		char *string = ft_itoa(space);
+		print->space_number -= ft_strlen(string);
+		if (print->space_number > 0)
 		{
-			ft_putchar(' ');
-			print->ret++;
+			while (print->space_number--)
+			{
+				ft_putchar(' ');
+				print->ret++;
+			}
 		}
 	}
 }

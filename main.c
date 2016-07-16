@@ -174,13 +174,13 @@ int main ()
 	// printf("| ret = %d", ret);
 	// printf("\n");
 
-	ft_putstr("ft_printf(\"{%-15p}\", 0) |");
-	ret = ft_printf("{%-15p}", 0);
+	ft_putstr("ft_printf(\"%C\", 'c') |");
+	ret = ft_printf("%C", 'c');
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"{%-15p}\", 0) |");
-	ret = printf("{%-15p}", 0);
+	ft_putstr("   printf(\"%C\", 'c') |");
+	ret = printf("%C", 'c');
 	printf("| ret = %d", ret);
 	printf("\n");
 	return (0);
