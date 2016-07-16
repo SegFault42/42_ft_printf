@@ -21,6 +21,7 @@ typedef struct	s_printf
 	int			ret;
 	int			space_number;
 	int			valid;
+	int			negatif;
 }				t_printf;
 /*
 ** percent_percent.c

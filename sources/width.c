@@ -17,14 +17,19 @@ void	write_space_int(int space, t_printf *print)
 
 void	write_space_char(char *p, t_printf *print)
 {
-	char *test = ft_hexa_ltoa((unsigned long long)p, 0);
-	print->space_number -= ft_strlen(test) + 2;
-	if (print->space_number > 0)
+	if (print->negatif == 1)
+		print->negatif = 0;
+	else
 	{
-		while (print->space_number--)
+		char *test = ft_hexa_ltoa((unsigned long long)p, 0);
+		print->space_number -= ft_strlen(test) + 2;
+		if (print->space_number > 0)
 		{
-			ft_putchar(' ');
-			print->ret++;
+			while (print->space_number--)
+			{
+				ft_putchar(' ');
+				print->ret++;
+			}
 		}
 	}
 }

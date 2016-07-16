@@ -449,6 +449,7 @@ void	percent_p(va_list pa, t_printf *print)
 	write_space_char(p, print);
 	ft_putstr("0x");
 	ft_putstr(ft_hexa_ltoa((unsigned long long)p, 0));
+	write_space_char(p, print);
 	print->ret += ft_strlen(ft_hexa_ltoa((unsigned long long)p, 0)) + 2;
 }
 
@@ -558,6 +559,16 @@ const char *countSpace(const char *format, t_printf *print)
 	return (format);
 }
 
+const char	*check_neg_sign(t_printf *print, const char *format)
+{
+	if (*format == '-')
+	{
+		print->negatif = 1;
+		++format;
+	}
+	return (format);
+}
+
 int	ft_printf(const char *format, ...)
 {
 	t_printf	print;
@@ -574,9 +585,10 @@ int	ft_printf(const char *format, ...)
 			format++;
 			while(*format == ' ')
 				++format;
+			format = check_neg_sign(&print, format);
 			check_valid_specifier(format, &print);
 			/*check_length(format, pa, &print);*/
-			if (*format == '%' || *format == '-')
+			if (*format == '%')
 				format = if_percent(format, &print);
 			if (*format != '%')
 			{
