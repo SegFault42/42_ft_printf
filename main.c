@@ -176,13 +176,33 @@ int main ()
 
 	int i;
 
-	ft_putstr("ft_printf(\"{%5p}\", 0) |");
-	ret = ft_printf("{%5p}", 0);
+	ft_putstr("ft_printf(\"%lu, %lu\", 0, ULONG_MAX) |");
+	ret = ft_printf("%lu, %lu", 0, ULONG_MAX);
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"{%5p}\", 0) |");
-	ret = printf("{%5p}", 0);
+	ft_putstr("   printf(\"%lu, %lu\", 0, ULONG_MAX) |");
+	ret = printf("%lu, %lu", 0, ULONG_MAX);
+	printf("| ret = %d", ret);
+	printf("\n");
+
+	ft_putstr("ft_printf(\"%llu, %llu\", 0, ULONG_MAX) |");
+	ret = ft_printf("%llu, %llu", 0, ULONG_MAX);
+	printf("| ret = %d", ret);
+	printf("\n");
+
+	ft_putstr("   printf(\"%llu, %llu\", 0, ULONG_MAX) |");
+	ret = printf("%llu, %llu", 0, ULONG_MAX);
+	printf("| ret = %d", ret);
+	printf("\n");
+
+	ft_putstr("ft_printf(\"%ju, %ju\", 0, ULONG_MAX) |");
+	ret = ft_printf("%ju, %ju", 0, ULONG_MAX);
+	printf("| ret = %d", ret);
+	printf("\n");
+
+	ft_putstr("   printf(\"%ju, %ju\", 0, ULONG_MAX) |");
+	ret = printf("%ju, %ju", 0, ULONG_MAX);
 	printf("| ret = %d", ret);
 	printf("\n");
 	/*ft_putstr("ft_printf(\"{%10d}\", 42) |");*/
