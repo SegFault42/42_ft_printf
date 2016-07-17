@@ -505,9 +505,9 @@ void	percent_O(va_list pa, t_printf *print)
 
 void	percent_C(va_list pa, t_printf *print)
 {
-	unsigned int	C;
+	wint_t	C;
 
-	C = va_arg(pa, unsigned int);
+	C = va_arg(pa, wint_t);
 	if (C < 128)
 	{
 		ft_putchar(C);

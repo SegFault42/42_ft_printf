@@ -22,6 +22,12 @@ const char	*if_percent(const char *format, t_printf *printf)
 		while (ft_isdigit(*format) == 1)
 			format++;
 	}
+	else if (*format == '%')
+	{
+		ft_putchar('%');
+		++printf->ret;
+		return(format);
+	}
 	else
 	{
 		percent_percent(format, printf);

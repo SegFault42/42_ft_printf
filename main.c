@@ -1,5 +1,6 @@
 #include "./includes/ft_printf.h"
 #include <stdio.h>
+#include <wchar.h>
 #include <limits.h>
 
 int main ()
@@ -138,24 +139,39 @@ int main ()
 	// printf("| ret = %d", ret);
 	// printf("\n");
 	//
-	// printf("\n------------------------------13--------------------------------\n");
-	// ft_putstr("ft_printf(\"%10x\", ULONG_MAX) |");
-	// ret = ft_printf("%10x", ULONG_MAX);
-	// printf("| ret = %d", ret);
-	// printf("\n");
+	// printf("\n------------------------
 	//
 	// ft_putstr("   printf(\"%10x\", ULONG_MAX) |");
 	// ret = printf("%10x", ULONG_MAX);
 	// printf("| ret = %d", ret);
 	// printf("\n");
-
-	ft_putstr("ft_printf(\"{%S}\", NULL) |");
-	ret = ft_printf("{%S}", NULL);
+	int c;
+	ft_putstr("ft_printf(\"%s%d%p%%%D%i%o%O%u%U%x%X%c\", \"bonjour\", 42, &c, LONG_MAX, 42, 42, 42, 100000, ULONG_MAX, 42, 42, 'c') | ");
+	ret = ft_printf("%s%d%p%%%D%i%o%O%u%U%x%X%c","bonjour", 42, &c, LONG_MAX, 42, 42, 42, 100000, ULONG_MAX, 42, 42, 'c');
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"{%S}\", NULL) |");
-	ret = printf("{%S}", NULL);
+	ft_putstr("   printf(\"%s%d%p%%%D%i%o%O%u%U%x%X%c%C\", \"bonjour\", 42, &c, LONG_MAX, 42, 42, 42, 100000, ULONG_MAX, 42, 42, 'c', L'플') | ");
+	ret = printf("%s%d%p%%%D%i%o%O%u%U%x%X%c%C" ,"bonjour", 42, &c, LONG_MAX, 42, 42, 42, 100000, ULONG_MAX, 42, 42, 'c', L'플');
+	printf("| ret = %d", ret);
+	printf("\n");
+	ft_putstr("ft_printf(\"%s%d%p%%%D%i%o%O%u%U%x%X%c%C\", \"bonjour\", 42, &c, LONG_MAX, 42, 42, 42, 100000, ULONG_MAX, 42, 42, 'c', L'플') | ");
+	ret = ft_printf("%s%d%p%%%D%i%o%O%u%U%x%X%c%C" ,"bonjour", 42, &c, LONG_MAX, 42, 42, 42, 100000, ULONG_MAX, 42, 42, 'c', L'플');
+	printf("| ret = %d", ret);
+	printf("\n");
+
+	ft_putstr("   printf(\"%s%d%p%%%D%i%o%O%u%U%x%X%c\", \"bonjour\", 42, &c, LONG_MAX, 42, 42, 42, 100000, ULONG_MAX, 42, 42, 'c') | ");
+	ret = printf("%s%d%p%%%D%i%o%O%u%U%x%X%c" ,"bonjour", 42, &c, LONG_MAX, 42, 42, 42, 100000, ULONG_MAX, 42, 42, 'c');
+	printf("| ret = %d", ret);
+	printf("\n");
+	
+	ft_putstr("ft_printf(\"%s%d%p%D%i%o%O%u%U%x%X%c\", \"bonjour\", 42, &c, LONG_MAX, 42, 42, 42, 100000, ULONG_MAX, 42, 42, 'c') | ");
+	ret = ft_printf("%s%d%p%D%i%o%O%u%U%x%X%c" ,"bonjour", 42, &c, LONG_MAX, 42, 42, 42, 100000, ULONG_MAX, 42, 42, 'c');
+	printf("| ret = %d", ret);
+	printf("\n");
+
+	ft_putstr("   printf(\"%s%d%p%D%i%o%O%u%U%x%X%c\", \"bonjour\", 42, &c, LONG_MAX, 42, 42, 42, 100000, ULONG_MAX, 42, 42, 'c') | ");
+	ret = printf("%s%d%p%D%i%o%O%u%U%x%X%c" ,"bonjour", 42, &c, LONG_MAX, 42, 42, 42, 100000, ULONG_MAX, 42, 42, 'c');
 	printf("| ret = %d", ret);
 	printf("\n");
 	return (0);
