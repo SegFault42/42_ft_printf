@@ -13,41 +13,6 @@
 #include "../includes/ft_printf.h"
 #include <stdio.h>
 
-const char *percent_lc(va_list pa, t_printf *print, const char *format)
-{
-	wint_t	C;
-
-	C = va_arg(pa, wint_t);
-	if (C < 128)
-	{
-		ft_putchar(C);
-		print->ret++;
-	}
-	else if (C < 2048)
-	{
-		ft_putchar(192 | (C >> 6));
-		ft_putchar(128 | (C & 63));
-		print->ret+=2;
-	}
-	else if (C < 65536)
-	{
-		ft_putchar(224 | (C >> 12));
-		ft_putchar(128 | ((C >> 6) & 63));
-		ft_putchar(128 | (C & 63));
-		print->ret+=3;
-	}
-	else if (C < 1114112)
-	{
-		ft_putchar(240 | (C >> 18));
-		ft_putchar(128 | ((C >> 12) & 63));
-		ft_putchar(128 | ((C >> 6) & 63));
-		ft_putchar(128 | (C & 63));
-		print->ret+=4;
-	}
-	return (format);
-}
-
-
 const char	*percent_c(va_list pa, t_printf *print, const char *format)
 {
 	char	c;
@@ -198,7 +163,12 @@ const char	*percent_l(va_list pa, t_printf *print, const char *format)
 	}
 	else if (*format == 'c')
 	{
-		format = percent_C(pa, print, format);
+		percent_C(pa, print);
+		return (format);
+	}
+	else if (*format == 's')
+	{
+		percent_S(pa, print);
 		return (format);
 	}
 	/*else if ((*++format == 'l') && (*++format == 'd' || *format == 'i'))*/
@@ -296,7 +266,7 @@ const char	*percent_h(va_list pa, t_printf *print, const char *format)
 
 	if (*++format == 'h' && (*++format == 'd' || *format == 'i' ||
 		  *format == 'u' || *format == 'o' || *format == 'x' || *format == 'X'
-		  || *format == 'C'))
+		  || *format == 'C' || *format == 'S'))
 	{
 		if (*format == 'u')
 		{
@@ -321,7 +291,12 @@ const char	*percent_h(va_list pa, t_printf *print, const char *format)
 		}
 		else if (*format == 'C')
 		{
-			format = percent_C(pa, print, format);
+			percent_C(pa, print);
+			return (format);
+		}
+		else if (*format == 'S')
+		{
+			percent_S(pa, print);
 			return (format);
 		}
 		else
@@ -528,7 +503,7 @@ void	percent_O(va_list pa, t_printf *print)
 	print->ret += ft_strlen(ft_ltoa_base(o, 8));
 }
 
-const char *percent_C(va_list pa, t_printf *print, const char *format)
+void	percent_C(va_list pa, t_printf *print)
 {
 	unsigned int	C;
 
@@ -559,48 +534,54 @@ const char *percent_C(va_list pa, t_printf *print, const char *format)
 		ft_putchar(128 | (C & 63));
 		print->ret+=4;
 	}
-	return (format);
 }
 
-const char *percent_S(va_list pa, t_printf *print, const char *format)
+void	percent_S(va_list pa, t_printf *print)
 {
-	char	*s;
-	unsigned int i = 0;
-	unsigned int j = 0;
+	wchar_t			*s;
+	int				i;
 
-	s = va_arg(pa, char*);
-	while (s[i])
+	i = 0;
+	
+	s = va_arg(pa, wchar_t*);
+	if (s != NULL)
 	{
-		j = s[i];
-		if (j < 128)
+		while (s[i])
 		{
-			ft_putchar(j);
-			print->ret++;
+			if (s[i] > 0 && s[i] < 128)
+			{
+				ft_putchar(s[i]);
+				print->ret++;
+			}
+			else if (s[i] < 2048)
+			{
+				ft_putchar(192 | (s[i] >> 6));
+				ft_putchar(128 | (s[i] & 63));
+				print->ret+=2;
+			}
+			else if (s[i] < 65536)
+			{
+				ft_putchar(224 | (s[i] >> 12));
+				ft_putchar(128 | ((s[i] >> 6) & 63));
+				ft_putchar(128 | (s[i] & 63));
+				print->ret+=3;
+			}
+			else if (s[i] < 1114112)
+			{
+				ft_putchar(240 | (s[i] >> 18));
+				ft_putchar(128 | ((s[i] >> 12) & 63));
+				ft_putchar(128 | ((s[i] >> 6) & 63));
+				ft_putchar(128 | (s[i] & 63));
+				print->ret+=4;
+			}
+			i++;
 		}
-		else if (i < 2048)
-		{
-			ft_putchar(192 | (i >> 6));
-			ft_putchar(128 | (i & 63));
-			print->ret+=2;
-		}
-		else if (j < 65536)
-		{
-			ft_putchar(224 | (s[i] >> 12));
-			ft_putchar(128 | ((s[i] >> 6) & 63));
-			ft_putchar(128 | (s[i] & 63));
-			print->ret+=3;
-		}
-		else if (j < 1114112)
-		{
-			ft_putchar(240 | (s[i] >> 18));
-			ft_putchar(128 | ((s[i] >> 12) & 63));
-			ft_putchar(128 | ((s[i] >> 6) & 63));
-			ft_putchar(128 | (s[i] & 63));
-			print->ret+=4;
-		}
-		i++;
 	}
-	return (format);
+	else
+	{
+		ft_putstr("(null)");
+		print->ret += 6;
+	}
 }
 
 void	init_struct(t_printf *printf)
@@ -747,9 +728,9 @@ int	ft_printf(const char *format, ...)
 				else if (*format == 'x' || *format == 'X')
 					format = percent_x(pa, &print, format);
 				else if (*format == 'C')
-					format = percent_C(pa, &print, format);
+					percent_C(pa, &print);
 				else if (*format == 'S')
-					format = percent_S(pa, &print, format);
+					percent_S(pa, &print);
 			}
 		}
 		else

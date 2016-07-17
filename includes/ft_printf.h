@@ -37,6 +37,7 @@ void			percent_s(va_list pa, t_printf *print);
 
 void			write_space_int(int space, t_printf *print);
 void			write_space_char(char *p, t_printf *print);
-const char		*percent_C(va_list pa, t_printf *print, const char *format);
+void			percent_C(va_list pa, t_printf *print);
+void			percent_S(va_list pa, t_printf *print);
 
 #endif

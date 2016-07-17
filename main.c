@@ -149,13 +149,13 @@ int main ()
 	// printf("| ret = %d", ret);
 	// printf("\n");
 
-	ft_putstr("ft_printf(\"%lc, %lc\", '米', '米') |");
-	ret = ft_printf("%lc, %lc", L"米", L"米");
+	ft_putstr("ft_printf(\"{%S}\", NULL) |");
+	ret = ft_printf("{%S}", NULL);
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"%lc, %lc\", '米', '米') |");
-	ret = printf("%lc, %lc", L"米", L"米");
+	ft_putstr("   printf(\"{%S}\", NULL) |");
+	ret = printf("{%S}", NULL);
 	printf("| ret = %d", ret);
 	printf("\n");
 	return (0);
