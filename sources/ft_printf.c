@@ -179,6 +179,11 @@ const char	*percent_l(va_list pa, t_printf *print, const char *format)
 		/*print->ret += ft_strlen(ft_ltoa(lld));*/
 		/*return (format);*/
 	/*}*/
+	else if (*format == 'p')
+	{
+		percent_p(pa, print);
+		return (format);
+	}
 	--format;
 	return (format);
 }

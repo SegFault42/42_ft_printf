@@ -145,33 +145,14 @@ int main ()
 	// ret = printf("%10x", ULONG_MAX);
 	// printf("| ret = %d", ret);
 	// printf("\n");
-	int c;
-	ft_putstr("ft_printf(\"%s%d%p%%%D%i%o%O%u%U%x%X%c\", \"bonjour\", 42, &c, LONG_MAX, 42, 42, 42, 100000, ULONG_MAX, 42, 42, 'c') | ");
-	ret = ft_printf("%s%d%p%%%D%i%o%O%u%U%x%X%c","bonjour", 42, &c, LONG_MAX, 42, 42, 42, 100000, ULONG_MAX, 42, 42, 'c');
-	printf("| ret = %d", ret);
-	printf("\n");
 
-	ft_putstr("   printf(\"%s%d%p%%%D%i%o%O%u%U%x%X%c%C\", \"bonjour\", 42, &c, LONG_MAX, 42, 42, 42, 100000, ULONG_MAX, 42, 42, 'c', L'플') | ");
-	ret = printf("%s%d%p%%%D%i%o%O%u%U%x%X%c%C" ,"bonjour", 42, &c, LONG_MAX, 42, 42, 42, 100000, ULONG_MAX, 42, 42, 'c', L'플');
-	printf("| ret = %d", ret);
-	printf("\n");
-	ft_putstr("ft_printf(\"%s%d%p%%%D%i%o%O%u%U%x%X%c%C\", \"bonjour\", 42, &c, LONG_MAX, 42, 42, 42, 100000, ULONG_MAX, 42, 42, 'c', L'플') | ");
-	ret = ft_printf("%s%d%p%%%D%i%o%O%u%U%x%X%c%C" ,"bonjour", 42, &c, LONG_MAX, 42, 42, 42, 100000, ULONG_MAX, 42, 42, 'c', L'플');
-	printf("| ret = %d", ret);
-	printf("\n");
-
-	ft_putstr("   printf(\"%s%d%p%%%D%i%o%O%u%U%x%X%c\", \"bonjour\", 42, &c, LONG_MAX, 42, 42, 42, 100000, ULONG_MAX, 42, 42, 'c') | ");
-	ret = printf("%s%d%p%%%D%i%o%O%u%U%x%X%c" ,"bonjour", 42, &c, LONG_MAX, 42, 42, 42, 100000, ULONG_MAX, 42, 42, 'c');
+	ft_putstr("ft_printf(\"%lp\", 42) |");
+	ret = ft_printf("%lp", 42);
 	printf("| ret = %d", ret);
 	printf("\n");
 	
-	ft_putstr("ft_printf(\"%s%d%p%D%i%o%O%u%U%x%X%c\", \"bonjour\", 42, &c, LONG_MAX, 42, 42, 42, 100000, ULONG_MAX, 42, 42, 'c') | ");
-	ret = ft_printf("%s%d%p%D%i%o%O%u%U%x%X%c" ,"bonjour", 42, &c, LONG_MAX, 42, 42, 42, 100000, ULONG_MAX, 42, 42, 'c');
-	printf("| ret = %d", ret);
-	printf("\n");
-
-	ft_putstr("   printf(\"%s%d%p%D%i%o%O%u%U%x%X%c\", \"bonjour\", 42, &c, LONG_MAX, 42, 42, 42, 100000, ULONG_MAX, 42, 42, 'c') | ");
-	ret = printf("%s%d%p%D%i%o%O%u%U%x%X%c" ,"bonjour", 42, &c, LONG_MAX, 42, 42, 42, 100000, ULONG_MAX, 42, 42, 'c');
+	ft_putstr("   printf(\"%lp\", 42) |");
+	ret = printf("%lp", 42);
 	printf("| ret = %d", ret);
 	printf("\n");
 	return (0);
