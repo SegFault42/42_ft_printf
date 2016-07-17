@@ -20,6 +20,7 @@ const char	*percent_c(va_list pa, t_printf *print, const char *format)
 	c = va_arg(pa, int);
 	write_space_int(c, print);
 	ft_putchar(c);
+	write_space_int(c, print);
 	++print->ret;
 	return (format);
 }
@@ -432,7 +433,7 @@ const char	*percent_d(va_list pa, t_printf *print, const char *format)
 {
 	int				d;
 	
-	++format;
+	/*++format;*/
 	d = va_arg(pa, int);
 	write_space_int(d, print);
 	ft_putnbr(d);
@@ -444,12 +445,24 @@ const char	*percent_d(va_list pa, t_printf *print, const char *format)
 const char	*percent_D(va_list pa, t_printf *print, char const *format)
 {
 	long			d;
+	unsigned int	u;
 
-	++format;
-	d = va_arg(pa, long);
-	ft_put_long(d);
-	print->ret += ft_strlen(ft_ltoa(d));
-	return (format);
+	/*++format;*/
+	if (*format == 'D')
+	{
+		d = va_arg(pa, long);
+		ft_put_long(d);
+		print->ret += ft_strlen(ft_ltoa(d));
+		return (format);
+	}
+	else if (*format == 'u')
+	{
+		u = va_arg(pa, unsigned int);
+		ft_put_long(u);
+		print->ret += ft_strlen(ft_ltoa(u));
+		return (format);
+	}
+		return (format);
 }
 
 void	percent_U(va_list pa, t_printf *print)
