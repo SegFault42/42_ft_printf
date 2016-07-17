@@ -13,6 +13,41 @@
 #include "../includes/ft_printf.h"
 #include <stdio.h>
 
+const char *percent_lc(va_list pa, t_printf *print, const char *format)
+{
+	wint_t	C;
+
+	C = va_arg(pa, wint_t);
+	if (C < 128)
+	{
+		ft_putchar(C);
+		print->ret++;
+	}
+	else if (C < 2048)
+	{
+		ft_putchar(192 | (C >> 6));
+		ft_putchar(128 | (C & 63));
+		print->ret+=2;
+	}
+	else if (C < 65536)
+	{
+		ft_putchar(224 | (C >> 12));
+		ft_putchar(128 | ((C >> 6) & 63));
+		ft_putchar(128 | (C & 63));
+		print->ret+=3;
+	}
+	else if (C < 1114112)
+	{
+		ft_putchar(240 | (C >> 18));
+		ft_putchar(128 | ((C >> 12) & 63));
+		ft_putchar(128 | ((C >> 6) & 63));
+		ft_putchar(128 | (C & 63));
+		print->ret+=4;
+	}
+	return (format);
+}
+
+
 const char	*percent_c(va_list pa, t_printf *print, const char *format)
 {
 	char	c;
@@ -58,6 +93,7 @@ const char	*percent_l(va_list pa, t_printf *print, const char *format)
 	unsigned long int	l;
 	unsigned long int	ull;
 	long long int	lld;
+	wint_t	c;
 
 	if (*++format == 'l' && (*++format == 'd' || *format == 'i' ||
 		  *format == 'u' || *format == 'o' || *format == 'x' || *format == 'X'))
@@ -160,6 +196,11 @@ const char	*percent_l(va_list pa, t_printf *print, const char *format)
 		print->ret += ft_strlen(ft_ultoa(l));
 		return (format);
 	}
+	else if (*format == 'c')
+	{
+		format = percent_C(pa, print, format);
+		return (format);
+	}
 	/*else if ((*++format == 'l') && (*++format == 'd' || *format == 'i'))*/
 	/*{*/
 		/*lld = va_arg(pa, long long int);*/
@@ -254,7 +295,8 @@ const char	*percent_h(va_list pa, t_printf *print, const char *format)
 	unsigned char		hhu;
 
 	if (*++format == 'h' && (*++format == 'd' || *format == 'i' ||
-		  *format == 'u' || *format == 'o' || *format == 'x' || *format == 'X'))
+		  *format == 'u' || *format == 'o' || *format == 'x' || *format == 'X'
+		  || *format == 'C'))
 	{
 		if (*format == 'u')
 		{
@@ -270,12 +312,17 @@ const char	*percent_h(va_list pa, t_printf *print, const char *format)
 		}
 		else if (*format == 'x' || *format == 'X')
 		{
-		hhu = va_arg(pa, int);
-		if (*format == 'x')
-			ft_putstr(ft_hexa_itoa(hhu, 0));
-		else if (*format == 'X')
-			ft_putstr(ft_hexa_ltoa(hhu, 1));
-		print->ret += ft_strlen(ft_hexa_itoa(hhu, 0));
+			hhu = va_arg(pa, int);
+			if (*format == 'x')
+				ft_putstr(ft_hexa_itoa(hhu, 0));
+			else if (*format == 'X')
+				ft_putstr(ft_hexa_ltoa(hhu, 1));
+			print->ret += ft_strlen(ft_hexa_itoa(hhu, 0));
+		}
+		else if (*format == 'C')
+		{
+			format = percent_C(pa, print, format);
+			return (format);
 		}
 		else
 		{
@@ -488,29 +535,70 @@ const char *percent_C(va_list pa, t_printf *print, const char *format)
 	C = va_arg(pa, unsigned int);
 	if (C < 128)
 	{
-		putchar(C);
+		ft_putchar(C);
 		print->ret++;
 	}
 	else if (C < 2048)
 	{
-		putchar(192 | (C >> 6));
-		putchar(128 | (C & 63));
+		ft_putchar(192 | (C >> 6));
+		ft_putchar(128 | (C & 63));
 		print->ret+=2;
 	}
 	else if (C < 65536)
 	{
-		putchar(224 | (C >> 12));
-		putchar(128 | ((C >> 6) & 63));
-		putchar(128 | (C & 63));
+		ft_putchar(224 | (C >> 12));
+		ft_putchar(128 | ((C >> 6) & 63));
+		ft_putchar(128 | (C & 63));
 		print->ret+=3;
 	}
 	else if (C < 1114112)
 	{
-		putchar(240 | (C >> 18));
-		putchar(128 | ((C >> 12) & 63));
-		putchar(128 | ((C >> 6) & 63));
-		putchar(128 | (C & 63));
+		ft_putchar(240 | (C >> 18));
+		ft_putchar(128 | ((C >> 12) & 63));
+		ft_putchar(128 | ((C >> 6) & 63));
+		ft_putchar(128 | (C & 63));
 		print->ret+=4;
+	}
+	return (format);
+}
+
+const char *percent_S(va_list pa, t_printf *print, const char *format)
+{
+	char	*s;
+	unsigned int i = 0;
+	unsigned int j = 0;
+
+	s = va_arg(pa, char*);
+	while (s[i])
+	{
+		j = s[i];
+		if (j < 128)
+		{
+			ft_putchar(j);
+			print->ret++;
+		}
+		else if (i < 2048)
+		{
+			ft_putchar(192 | (i >> 6));
+			ft_putchar(128 | (i & 63));
+			print->ret+=2;
+		}
+		else if (j < 65536)
+		{
+			ft_putchar(224 | (s[i] >> 12));
+			ft_putchar(128 | ((s[i] >> 6) & 63));
+			ft_putchar(128 | (s[i] & 63));
+			print->ret+=3;
+		}
+		else if (j < 1114112)
+		{
+			ft_putchar(240 | (s[i] >> 18));
+			ft_putchar(128 | ((s[i] >> 12) & 63));
+			ft_putchar(128 | ((s[i] >> 6) & 63));
+			ft_putchar(128 | (s[i] & 63));
+			print->ret+=4;
+		}
+		i++;
 	}
 	return (format);
 }
@@ -529,7 +617,7 @@ const char	*check_valid_specifier(const char *format, t_printf *print)
 		&& *format != 'u' && *format != 'U' && *format != 'x' && *format != 'X'
 		&& *format != 'c' && *format != 'C' && *format != '%' && *format != 'l'
 		&& *format != 'h' && *format != 'j' && *format != 'z' && *format != 'C'
-		&& ft_isdigit(*format) == 0)
+		&& *format != 'S' && ft_isdigit(*format) == 0)
 	{
 		if (*format != ' ')
 		{
@@ -660,6 +748,8 @@ int	ft_printf(const char *format, ...)
 					format = percent_x(pa, &print, format);
 				else if (*format == 'C')
 					format = percent_C(pa, &print, format);
+				else if (*format == 'S')
+					format = percent_S(pa, &print, format);
 			}
 		}
 		else

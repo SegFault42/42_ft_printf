@@ -14,6 +14,7 @@
 # define FT_PRINTF_H
 
 # include <stdarg.h>
+# include <wchar.h>
 # include "../libft/includes/libft.h"
 
 typedef struct	s_printf
@@ -34,7 +35,8 @@ int				ft_printf(const char *format, ...);
 int				count_space(const char *format);
 void			percent_s(va_list pa, t_printf *print);
 
-void	write_space_int(int space, t_printf *print);
-void	write_space_char(char *p, t_printf *print);
+void			write_space_int(int space, t_printf *print);
+void			write_space_char(char *p, t_printf *print);
+const char		*percent_C(va_list pa, t_printf *print, const char *format);
 
 #endif

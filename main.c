@@ -2,31 +2,6 @@
 #include <stdio.h>
 #include <limits.h>
 
-static void print_code_point_as_utf8(const unsigned int cp)
-{
-  if (cp < 128)
-	putchar(cp);
-  else if (cp < 2048)
-  {
-	putchar(192 | (cp >> 6));
-	putchar(128 | (cp & 63));
-	ft_putchar('\n');
-  }
-  else if (cp < 65536)
-  {
-	putchar(224 | (cp >> 12));
-	putchar(128 | ((cp >> 6) & 63));
-	putchar(128 | (cp & 63));
-  }
-  else if (cp < 1114112)
-  {
-	putchar(240 | (cp >> 18));
-	putchar(128 | ((cp >> 12) & 63));
-	putchar(128 | ((cp >> 6) & 63));
-	putchar(128 | (cp & 63));
-  }
-}
-
 int main ()
 {
 	int ret = 0;
@@ -174,13 +149,13 @@ int main ()
 	// printf("| ret = %d", ret);
 	// printf("\n");
 
-	ft_putstr("ft_printf(\"%C\", 'c') |");
-	ret = ft_printf("%C", 'c');
+	ft_putstr("ft_printf(\"%lc, %lc\", '米', '米') |");
+	ret = ft_printf("%lc, %lc", L"米", L"米");
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"%C\", 'c') |");
-	ret = printf("%C", 'c');
+	ft_putstr("   printf(\"%lc, %lc\", '米', '米') |");
+	ret = printf("%lc, %lc", L"米", L"米");
 	printf("| ret = %d", ret);
 	printf("\n");
 	return (0);
