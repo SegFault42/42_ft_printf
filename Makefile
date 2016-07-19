@@ -12,8 +12,14 @@
 
 NAME = libftprintf.a
 
-SRCS = ./sources/ft_printf.c ./sources/percent_percent.c ./sources/percent_s.c\
-	   ./sources/padding.c ./sources/width.c
+SRCS = ./sources/ft_printf.c ./sources/padding.c ./sources/percent_percent.c \
+		./sources/percent_s.c ./sources/width.c ./sources/percent_c.c \
+		./sources/percent_x.c ./sources/percent_l.c ./sources/percent_j.c \
+		./sources/percent_h.c ./sources/percent_z.c ./sources/percent_d.c \
+		./sources/percent_d_up.c ./sources/percent_p.c ./sources/percent_o.c \
+		./sources/percent_o_up.c ./sources/percent_c_up.c \
+		./sources/percent_s_up.c ./sources/percent_u_up.c ./sources/init.c \
+		./sources/check.c
 
 OBJS = $(SRCS:.c=.o)
 
