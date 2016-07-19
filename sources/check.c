@@ -35,6 +35,8 @@ const char *countSpace(const char *format, t_printf *print)
 
 	if (ft_isdigit(*format) == TRUE)
 	{
+		if (*format == '0')
+			print->zero = 1;
 		while (ft_isdigit(*format) == TRUE)
 		{
 			i++;
