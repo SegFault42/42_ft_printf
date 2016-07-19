@@ -146,13 +146,13 @@ int main ()
 	// printf("| ret = %d", ret);
 	// printf("\n");
 
-	ft_putstr("ft_printf(\"% Zoooo\") |");
-	ret = ft_printf("% Zoooo");
+	ft_putstr("ft_printf(\"{%030x}\", 0xFFFF) |");
+	ret = ft_printf("{%030x}", 0xFFFFFF);
 	printf("| ret = %d", ret);
 	printf("\n");
 	
-	ft_putstr("   printf(\"% Zoooo\") |");
-	ret = printf("% Zoooo");
+	ft_putstr("   printf(\"{%030x}\", 0xFFFF) |");
+	ret = printf("{%030x}", 0xFFFFFF);
 	printf("| ret = %d", ret);
 	printf("\n");
 	return (0);

@@ -8,4 +8,5 @@ void	init_struct(t_printf *printf)
 	printf->space_number = 0;
 	printf->negatif = 0;
 	printf->zero = 0;
+	printf->d = 0;
 }

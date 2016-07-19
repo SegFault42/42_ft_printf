@@ -11,6 +11,8 @@ void	write_space_int(int space, t_printf *print)
 		print->space_number -= ft_strlen(string);
 		if (print->space_number > 0)
 		{
+			if (print->zero == 1 && print->d < 0)
+				ft_putchar('-');
 			while (print->space_number--)
 			{
 				if (print->zero == 1)
