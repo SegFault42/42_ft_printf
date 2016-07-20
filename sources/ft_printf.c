@@ -67,7 +67,7 @@ int	ft_printf(const char *format, ...)
 				else if (*format == 'U')
 					percent_U(pa, &print);
 				else if (*format == 'p')
-					percent_p(pa, &print);
+					percent_p(pa, &print, format);
 				else if (*format == 'o')
 					percent_o(pa, &print, format);
 				else if (*format == 'O')

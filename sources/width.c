@@ -126,7 +126,10 @@ void	write_space_char(char *p, t_printf *print)
 		{
 			while (print->space_number--)
 			{
-				ft_putchar(' ');
+				if (print->zero == 1)
+					ft_putchar('0');
+				else
+					ft_putchar(' ');
 				print->ret++;
 			}
 		}

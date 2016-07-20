@@ -128,7 +128,7 @@ const char	*percent_l(va_list pa, t_printf *print, const char *format)
 	/*}*/
 	else if (*format == 'p')
 	{
-		percent_p(pa, print);
+		percent_p(pa, print, format);
 		return (format);
 	}
 	--format;

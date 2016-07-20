@@ -146,13 +146,13 @@ int main ()
 	// printf("| ret = %d", ret);
 	// printf("\n");
 
-	ft_putstr("ft_printf(\"{%05s}\", \"abc\") |");
-	ret = ft_printf("{%05s}", "abc");
+	ft_putstr("ft_printf(\"{%05p}\", 0) |");
+	ret = ft_printf("{%05p}", 1);
 	printf("| ret = %d", ret);
 	printf("\n");
 	
-	ft_putstr("   printf(\"{%05s}\", \"abc\") |");
-	ret = printf("{%05s}", "abc");
+	ft_putstr("   printf(\"{%05p}\", 0) |");
+	ret = printf("{%05p}", 1);
 	printf("| ret = %d", ret);
 	printf("\n");
 	return (0);
