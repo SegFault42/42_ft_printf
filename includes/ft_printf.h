@@ -61,5 +61,6 @@ void			init_struct(t_printf *printf);
 const char		*check_valid_specifier(const char *format, t_printf *print);
 const char		*countSpace(const char *format, t_printf *print);
 const char		*check_neg_sign(t_printf *print, const char *format);
+void			write_space_hex(int space, t_printf *print);
 
 #endif

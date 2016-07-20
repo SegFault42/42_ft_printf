@@ -1,6 +1,31 @@
 #include "../includes/ft_printf.h"
 #include <stdio.h>
 
+void	write_space_hex(int space, t_printf *print)
+{
+	if (print->negatif == 1)
+		print->negatif = 0;
+	else
+	{
+		char *string = ft_itoa(space);
+		print->space_number -= ft_strlen(string) - 1;
+		if (print->space_number > 0)
+		{
+			if (print->zero == 1 && print->d < 0)
+				ft_putchar('-');
+			while (print->space_number--)
+			{
+				if (print->zero == 1)
+					ft_putchar('0');
+				else
+					ft_putchar(' ');
+				print->ret++;
+			}
+		}
+	}
+}
+
+
 void	write_space_int(int space, t_printf *print)
 {
 	if (print->negatif == 1)
