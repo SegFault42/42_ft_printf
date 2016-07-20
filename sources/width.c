@@ -25,6 +25,30 @@ void	write_space_hex(int space, t_printf *print)
 	}
 }
 
+void	write_space_percent_s(int space, t_printf *print)
+{
+	if (print->negatif == 1)
+		print->negatif = 0;
+	else
+	{
+		char *string = ft_itoa(space);
+		print->space_number -= space;
+		if (print->space_number > 0)
+		{
+			if (print->zero == 1 && print->d < 0)
+				ft_putchar('-');
+			while (print->space_number--)
+			{
+				if (print->zero == 1)
+					ft_putchar('0');
+				else
+					ft_putchar(' ');
+				print->ret++;
+			}
+		}
+	}
+
+}
 
 void	write_space_int(int space, t_printf *print)
 {
@@ -61,7 +85,10 @@ void	write_space_wchar(t_printf *print)
 		{
 			while (print->ret_wchar--)
 			{
-				ft_putchar(' ');
+				if (print->zero == 1)
+					ft_putchar('0');
+				else
+					ft_putchar(' ');
 				print->ret++;
 			}
 		}

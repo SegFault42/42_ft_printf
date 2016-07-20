@@ -15,6 +15,7 @@
 void	percent_s(va_list pa, t_printf *print)
 {
 	char	*s;
+	int		space;
 
 	s = va_arg(pa, char*);
 	if (s == 0)
@@ -24,7 +25,10 @@ void	percent_s(va_list pa, t_printf *print)
 	}
 	else
 	{
+		space = ft_strlen(s);
+		write_space_percent_s(space, print);
 		ft_putstr(s);
+		write_space_percent_s(space, print);
 		print->ret += ft_strlen(s);
 	}
 }
