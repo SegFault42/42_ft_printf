@@ -3,7 +3,7 @@
 void	percent_p(va_list pa, t_printf *print, const char *format)
 {
 	char	*p;
-	int i;
+	int		i;
 
 	i = 0;
 	p = va_arg(pa, char*);

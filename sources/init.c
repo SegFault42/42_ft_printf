@@ -9,4 +9,5 @@ void	init_struct(t_printf *printf)
 	printf->negatif = 0;
 	printf->zero = 0;
 	printf->d = 0;
+	printf->sharp = 0;
 }
