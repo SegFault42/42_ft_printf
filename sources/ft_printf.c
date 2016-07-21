@@ -53,7 +53,10 @@ int	ft_printf(const char *format, ...)
 		{
 			format++;
 			while(*format == ' ')
+			{
 				++format;
+				++print.space;
+			}
 			format = check_flag(format, &print);
 			format = check_neg_sign(&print, format);
 			check_valid_specifier(format, &print);
