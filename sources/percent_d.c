@@ -8,7 +8,8 @@ const char	*percent_d(va_list pa, t_printf *print, const char *format)
 	i = 0;
 	d = va_arg(pa, int);
 	print->d = d;
-	write_space_int(d, print);
+	if (print->plus == 0)
+		write_space_int(d, print);
 	if (d >= 0 && print->plus == 0)
 	{
 		while (print->space)

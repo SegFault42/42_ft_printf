@@ -58,6 +58,8 @@ void	write_space_int(int space, t_printf *print)
 	{
 		char *string = ft_itoa(space);
 		print->space_number -= ft_strlen(string);
+		if (print->plus == 1)
+			print->space_number--;
 		if (print->space_number > 0)
 		{
 			if (print->zero == 1 && print->d < 0)
