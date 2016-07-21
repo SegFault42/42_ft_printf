@@ -23,11 +23,16 @@ void	percent_no_specifier(const char *format, t_printf *print)
 	++print->ret;
 }
 
-const char	*sharp(const char *format, t_printf *print)
+const char	*check_flag(const char *format, t_printf *print)
 {
 	if (*format == '#')
 	{
 		print->sharp = 1;
+		++format;
+	}
+	else if (*format == '+')
+	{
+		print->plus = 1;
 		++format;
 	}
 	return (format);
@@ -49,7 +54,7 @@ int	ft_printf(const char *format, ...)
 			format++;
 			while(*format == ' ')
 				++format;
-			format = sharp(format, &print);
+			format = check_flag(format, &print);
 			format = check_neg_sign(&print, format);
 			check_valid_specifier(format, &print);
 			/*check_length(format, pa, &print);*/

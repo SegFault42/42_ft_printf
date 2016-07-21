@@ -10,6 +10,11 @@ const char	*percent_d(va_list pa, t_printf *print, const char *format)
 	d = va_arg(pa, int);
 	print->d = d;
 	write_space_int(d, print);
+	if (print->plus == 1 && d >= 0)
+	{
+		ft_putchar('+');
+		++print->ret;
+	}
 	while (*format != '%')
 	{
 		--format;

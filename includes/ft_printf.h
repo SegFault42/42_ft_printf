@@ -27,6 +27,7 @@ typedef struct	s_printf
 	int			zero;
 	int			d;
 	int			sharp;
+	int			plus;
 }				t_printf;
 /*
 ** percent_percent.c
