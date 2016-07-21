@@ -25,6 +25,7 @@ void	percent_no_specifier(const char *format, t_printf *print)
 
 const char	*check_flag(const char *format, t_printf *print)
 {
+	format = check_space(format, print);
 	if (*format == '#')
 	{
 		print->sharp = 1;
@@ -35,6 +36,7 @@ const char	*check_flag(const char *format, t_printf *print)
 		print->plus = 1;
 		++format;
 	}
+	format = check_space(format, print);
 	return (format);
 }
 
@@ -52,11 +54,6 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			while(*format == ' ')
-			{
-				++format;
-				++print.space;
-			}
 			format = check_flag(format, &print);
 			format = check_neg_sign(&print, format);
 			check_valid_specifier(format, &print);

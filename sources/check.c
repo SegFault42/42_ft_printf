@@ -27,6 +27,16 @@ const char	*check_valid_specifier(const char *format, t_printf *print)
 	return (0);
 }
 
+const char	*check_space(const char *format, t_printf *print)
+{
+	while(*format == ' ')
+	{
+		++format;
+		++print->space;
+	}
+	return (format);
+}
+
 const char *countSpace(const char *format, t_printf *print)
 {
 	char	*string;

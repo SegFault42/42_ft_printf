@@ -7,13 +7,13 @@ int main ()
 {
 	int ret = 0;
 
-	ft_putstr("ft_printf(\"{% d}\", -9999) |");
-	ret = ft_printf("{% d}", -9999);
+	ft_putstr("ft_printf(\"{%+03d}\", 0) |");
+	ret = ft_printf("{%+03d}", 0);
 	printf("| ret = %d", ret);
 	printf("\n");
 	
-	ft_putstr("   printf(\"{% d}\", -9999) |");
-	ret = printf("{% d}", -9999);
+	ft_putstr("   printf(\"{%+03d}\", 0) |");
+	ret = printf("{%+03d}", 0);
 	printf("| ret = %d", ret);
 	printf("\n");
 	return (0);
