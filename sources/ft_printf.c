@@ -36,6 +36,12 @@ const char	*check_flag(const char *format, t_printf *print)
 		print->plus = 1;
 		++format;
 	}
+	else if (*format == '0')
+	{
+		++format;
+		if (*format != '-')
+			--format;
+	}
 	format = check_space(format, print);
 	return (format);
 }
