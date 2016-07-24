@@ -42,7 +42,32 @@ const char	*check_flag(const char *format, t_printf *print)
 		if (*format != '-')
 			--format;
 	}
+	else if (*format == '.')
+	{
+		print->point = 1;
+		++format;
+	}
 	format = check_space(format, print);
+	return (format);
+}
+
+const char	*precision(const char *format, va_list pa, t_printf *print)
+{
+	int	nb_zero;
+	int	d;
+
+	d = va_arg(pa, int);
+	if (*format == '.')
+	{
+		++format;
+		nb_zero = ft_atoi(format) - ft_strlen(ft_itoa(d));
+		while (nb_zero--)
+		{
+			ft_putchar('0');
+			++print->ret;
+		}
+		/*++format;*/
+	}
 	return (format);
 }
 

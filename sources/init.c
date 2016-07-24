@@ -12,4 +12,5 @@ void	init_struct(t_printf *printf)
 	printf->sharp = 0;
 	printf->plus = 0;
 	printf->space = 0;
+	printf->point = 0;
 }

@@ -44,8 +44,12 @@ const char	*percent_d(va_list pa, t_printf *print, const char *format)
 	print->d = d;
 	if (space_zero(print, format, d) == 1)
 		return (format);
-	if (print->plus == 0)
+	if (print->plus == 0 && print->point != 1)
 		write_space_int(d, print);
+	if (print->point == 1)
+	{
+		format = precision(format, pa, print);
+	}
 	if (d >= 0 && print->plus == 0)
 	{
 		while (print->space)
