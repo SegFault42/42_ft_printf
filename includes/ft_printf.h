@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/27 21:24:52 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/07 05:52:49 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/25 04:01:27 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct	s_printf
 	int			plus;
 	int			space;
 	int			point;
+	int			precision;
 }				t_printf;
 /*
 ** percent_percent.c
@@ -67,6 +68,6 @@ const char		*check_neg_sign(t_printf *print, const char *format);
 void			write_space_hex(int space, t_printf *print);
 void			write_space_percent_s(int space, t_printf *print);
 const char		*check_space(const char *format, t_printf *print);
-const char	*precision(const char *format, va_list pa, t_printf *print);
+const char		*precision(const char *format, int d, t_printf *print);
 
 #endif

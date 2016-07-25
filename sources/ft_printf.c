@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/12 10:22:36 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/25 04:08:10 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,28 +46,28 @@ const char	*check_flag(const char *format, t_printf *print)
 	{
 		print->point = 1;
 		++format;
+		print->precision = ft_atoi(format);
+		while (ft_isdigit(*format) == TRUE)
+			++format;
 	}
 	format = check_space(format, print);
 	return (format);
 }
 
-const char	*precision(const char *format, va_list pa, t_printf *print)
+const char	*precision(const char *format, int d, t_printf *print)
 {
 	int	nb_zero;
-	int	d;
 
-	d = va_arg(pa, int);
-	if (*format == '.')
-	{
-		++format;
-		nb_zero = ft_atoi(format) - ft_strlen(ft_itoa(d));
-		while (nb_zero--)
+	++format;
+	/*nb_zero = ft_atoi(format) - ft_strlen(ft_itoa(d));*/
+	print->precision -= ft_strlen(ft_itoa(d));
+	if (print->precision > 0)
+		while (print->precision--)
 		{
 			ft_putchar('0');
 			++print->ret;
 		}
-		/*++format;*/
-	}
+	/*++format;*/
 	return (format);
 }
 
@@ -88,15 +88,12 @@ int	ft_printf(const char *format, ...)
 			format = check_flag(format, &print);
 			format = check_neg_sign(&print, format);
 			check_valid_specifier(format, &print);
-			/*check_length(format, pa, &print);*/
 			if (*format == '%')
 				format = if_percent(format, &print);
 			if (*format != '%')
 			{
 				if (ft_isdigit(*format) == TRUE)
 					format = countSpace(format, &print);
-				/*while (*format == 'l' || *format == 'h')*/
-					/*++format;*/
 				if (*format == 'l')
 					format = percent_l(pa, &print, format);
 				else if (*format == 'h')

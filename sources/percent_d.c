@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   percent_d.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/07/25 00:56:11 by rabougue          #+#    #+#             */
+/*   Updated: 2016/07/25 04:01:31 by rabougue         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
 int			space_zero(t_printf *print, const char *format, int d)
@@ -47,9 +59,7 @@ const char	*percent_d(va_list pa, t_printf *print, const char *format)
 	if (print->plus == 0 && print->point != 1)
 		write_space_int(d, print);
 	if (print->point == 1)
-	{
-		format = precision(format, pa, print);
-	}
+		format = precision(format, d, print);
 	if (d >= 0 && print->plus == 0)
 	{
 		while (print->space)
