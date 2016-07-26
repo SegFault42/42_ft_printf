@@ -79,6 +79,8 @@ const char	*precision(const char *format, int d, t_printf *print)
 
 const char	*take_precision(const char *format, t_printf *print)
 {
+	if (*format == '-')
+		++format;
 	if (ft_isdigit(*format) == TRUE)
 		print->precision_space = ft_atoi(format);
 	while (*format != '.')

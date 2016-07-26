@@ -16,13 +16,13 @@ int main ()
 	/*ret = printf("{%15.4d}", 42);*/
 	/*printf("| ret = %d", ret);*/
 	/*printf("\n");*/
-	ft_putstr("ft_printf(\"{%10R}\") |");
-	ret = ft_printf("{%10R}");
+	ft_putstr("ft_printf(\"{%05p}\", 0) |");
+	ret = ft_printf("{%05p}", 0);
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"{%10R}\") |");
-	ret = printf("{%10R}");
+	ft_putstr("   printf(\"{%05p}\", 0) |");
+	ret = printf("{%05p}", 0);
 	printf("| ret = %d", ret);
 	printf("\n");
 	return (0);
