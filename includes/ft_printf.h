@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/27 21:24:52 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/25 04:01:27 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/26 01:14:34 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ typedef struct	s_printf
 	int			plus;
 	int			space;
 	int			point;
-	int			precision;
+	int			precision_zero;
+	int			precision_space;
 }				t_printf;
 /*
 ** percent_percent.c

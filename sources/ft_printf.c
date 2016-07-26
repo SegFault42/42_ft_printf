@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/25 04:08:10 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/26 02:02:13 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ const char	*check_flag(const char *format, t_printf *print)
 	{
 		print->point = 1;
 		++format;
-		print->precision = ft_atoi(format);
+		print->precision_zero = ft_atoi(format);
 		while (ft_isdigit(*format) == TRUE)
 			++format;
 	}
@@ -60,14 +60,26 @@ const char	*precision(const char *format, int d, t_printf *print)
 
 	++format;
 	/*nb_zero = ft_atoi(format) - ft_strlen(ft_itoa(d));*/
-	print->precision -= ft_strlen(ft_itoa(d));
-	if (print->precision > 0)
-		while (print->precision--)
+	print->precision_zero -= ft_strlen(ft_itoa(d));
+	if (print->precision_zero > 0)
+		while (print->precision_zero--)
 		{
 			ft_putchar('0');
 			++print->ret;
 		}
 	/*++format;*/
+	return (format);
+}
+
+const char	*take_precision(const char *format, t_printf *print)
+{
+	if (ft_isdigit(*format) == TRUE)
+		print->precision_space = ft_atoi(format);
+	while (*format != '.')
+		++format;
+	++format;
+	print->precision_zero = ft_atoi(format);
+	++format;
 	return (format);
 }
 
@@ -85,6 +97,8 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
+			if (ft_isdigit(*format) == TRUE && *format != '0')
+				format = take_precision(format, &print);
 			format = check_flag(format, &print);
 			format = check_neg_sign(&print, format);
 			check_valid_specifier(format, &print);
