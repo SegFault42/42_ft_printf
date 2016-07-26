@@ -123,10 +123,10 @@ void	write_space_char(char *p, t_printf *print)
 	else
 	{
 		char *test = ft_hexa_ltoa((unsigned long long)p, 0);
-		print->space_number -= ft_strlen(test) + 2;
-		if (print->space_number > 0)
+		print->precision_space -= ft_strlen(test) + 2;
+		if (print->precision_space > 0)
 		{
-			while (print->space_number--)
+			while (print->precision_space--)
 			{
 				if (print->zero == 1)
 					ft_putchar('0');

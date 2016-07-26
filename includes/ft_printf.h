@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/27 21:24:52 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/26 01:14:34 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/26 04:02:36 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,7 @@ void			write_space_hex(int space, t_printf *print);
 void			write_space_percent_s(int space, t_printf *print);
 const char		*check_space(const char *format, t_printf *print);
 const char		*precision(const char *format, int d, t_printf *print);
+int				space_zero(t_printf *print, const char *format, int d);
+void			put_space_or_zero(t_printf *print, int d);
 
 #endif
