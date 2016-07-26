@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/25 00:56:11 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/26 02:25:57 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/26 03:05:50 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,22 @@ int			space_zero(t_printf *print, const char *format, int d)
 void	put_space_or_zero(t_printf *print, int d)
 {
 	if (ft_strlen(ft_itoa(d)) > print->precision_zero)
+	{
 		print->precision_space -= ft_strlen(ft_itoa(d));
+		print->space = 1;
+	}
 	else if (ft_strlen(ft_itoa(d)) < print->precision_zero)
+	{
 		print->precision_space -= print->precision_zero;
+		print->zero = 1;
+	}
 	print->precision_zero -= ft_strlen(ft_itoa(d));
-	while (print->precision_space--)
+	while (print->precision_space-- > 0)
 	{
 		ft_putchar(' ');
 		++print->ret;
 	}
-	while (print->precision_zero--)
+	while (print->precision_zero-- > 0)
 	{
 		ft_putchar('0');
 		++print->ret;
@@ -73,12 +79,15 @@ const char	*percent_d(va_list pa, t_printf *print, const char *format)
 	i = 0;
 	d = va_arg(pa, int);
 	print->d = d;
+	if (print->precision_zero > 0 || print->precision_space > 0)
+	{
+		put_space_or_zero(print, d);
+		ft_putnbr(d);
+		print->ret += ft_strlen(ft_itoa(d));
+		return (format);
+	}
 	if (space_zero(print, format, d) == 1)
 		return (format);
-	/*if (print->precision_zero > 0 || print->precision_space > 0)*/
-	/*{*/
-		/*put_space_or_zero(print, d);*/
-	/*}*/
 	if (print->plus == 0 && print->point != 1)
 		write_space_int(d, print);
 	if (print->point == 1)

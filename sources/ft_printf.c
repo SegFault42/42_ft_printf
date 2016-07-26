@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/26 02:02:13 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/26 02:45:25 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,11 @@ const char	*take_precision(const char *format, t_printf *print)
 	if (ft_isdigit(*format) == TRUE)
 		print->precision_space = ft_atoi(format);
 	while (*format != '.')
+	{
+		if (ft_isalpha(*format) == TRUE)
+			return(format);
 		++format;
+	}
 	++format;
 	print->precision_zero = ft_atoi(format);
 	++format;
