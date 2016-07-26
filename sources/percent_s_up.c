@@ -33,6 +33,12 @@ void	percent_S(va_list pa, t_printf *print)
 
 	i = 0;
 	s = va_arg(pa, wchar_t*);
+	print->precision_space -= count_octet_wchar(s);
+	while (print->precision_space-- > 0)
+	{
+		ft_putchar(' ');
+		print->ret++;
+	}
 	if (print->negatif == 0)
 	{
 		print->ret_wchar = count_octet_wchar(s);
