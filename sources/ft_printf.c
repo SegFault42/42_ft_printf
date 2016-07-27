@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/26 06:00:42 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/27 02:51:00 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,28 @@ const char	*take_precision(const char *format, t_printf *print)
 	return (format);
 }
 
+const char	*is_precision_ok(const char *format)
+{
+	const char *save_format;
+
+	save_format = format;
+	/*printf("<%c>", *format);*/
+	if (*++format == '0' || ft_isalpha(*format) == TRUE)
+	{
+		if (*format == '0')
+			++format;
+		++format;
+		printf("<%c>", *format);
+		return (format);
+	}
+	return (save_format);
+}
+
 int	ft_printf(const char *format, ...)
 {
 	t_printf	print;
 	va_list		pa;
+	int i = 0;
 
 	init_struct(&print);
 	va_start(pa, format);
@@ -109,8 +127,32 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
+			if (*format == '.')
+				format = is_precision_ok(format);
 			if (ft_isdigit(*format) == TRUE && *format != '0')
 				format = take_precision(format, &print);
+			/*if (*format == '0')*/
+			/*{*/
+				/*if (ft_isdigit(*++format) == TRUE)*/
+				/*{*/
+					/*while (*format != '.')*/
+					/*{*/
+						/*format++;*/
+						/*i++;*/
+					/*}*/
+					/*if (*format == '.')*/
+					/*{*/
+						/*format -= i;*/
+						/*format = take_precision(format, &print);*/
+					/*}*/
+					/*else*/
+						/*format -= i;*/
+					/*--format;*/
+				/*}*/
+				/*while (*format != '%')*/
+					/*--format;*/
+				/*++format;*/
+			/*}*/
 			format = check_flag(format, &print);
 			format = check_neg_sign(&print, format);
 			check_valid_specifier(format, &print);
