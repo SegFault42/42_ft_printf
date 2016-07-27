@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/27 02:51:00 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/27 23:33:51 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ const char	*check_flag(const char *format, t_printf *print)
 		++format;
 	}
 	else if (*format == '0')
-	{
+	{	
 		++format;
 		if (*format != '-')
 			--format;
@@ -100,13 +100,11 @@ const char	*is_precision_ok(const char *format)
 	const char *save_format;
 
 	save_format = format;
-	/*printf("<%c>", *format);*/
 	if (*++format == '0' || ft_isalpha(*format) == TRUE)
 	{
 		if (*format == '0')
 			++format;
 		++format;
-		printf("<%c>", *format);
 		return (format);
 	}
 	return (save_format);
@@ -131,28 +129,6 @@ int	ft_printf(const char *format, ...)
 				format = is_precision_ok(format);
 			if (ft_isdigit(*format) == TRUE && *format != '0')
 				format = take_precision(format, &print);
-			/*if (*format == '0')*/
-			/*{*/
-				/*if (ft_isdigit(*++format) == TRUE)*/
-				/*{*/
-					/*while (*format != '.')*/
-					/*{*/
-						/*format++;*/
-						/*i++;*/
-					/*}*/
-					/*if (*format == '.')*/
-					/*{*/
-						/*format -= i;*/
-						/*format = take_precision(format, &print);*/
-					/*}*/
-					/*else*/
-						/*format -= i;*/
-					/*--format;*/
-				/*}*/
-				/*while (*format != '%')*/
-					/*--format;*/
-				/*++format;*/
-			/*}*/
 			format = check_flag(format, &print);
 			format = check_neg_sign(&print, format);
 			check_valid_specifier(format, &print);
@@ -201,6 +177,7 @@ int	ft_printf(const char *format, ...)
 			ft_putchar(*format);
 			++print.ret;
 		}
+	printf("<%d>", print.ret);
 		++format;
 	}
 	va_end(pa);
