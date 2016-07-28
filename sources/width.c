@@ -47,7 +47,6 @@ void	write_space_percent_s(int space, t_printf *print)
 			}
 		}
 	}
-
 }
 
 void	write_space_int(int space, t_printf *print)

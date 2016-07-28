@@ -41,3 +41,31 @@ int		count_space(const char *format)
 	return(nb_space);
 }
 
+void	put_space_or_zero_u(t_printf *print, unsigned int d)
+{
+	/*if (print->precision_space > 0)*/
+		/*print->precision_space -= print->precision_zero;*/
+	if (ft_strlen(ft_ltoa(d)) > print->precision_zero)
+	{
+		print->precision_zero -= ft_strlen(ft_ltoa(d));
+		print->precision_space -= ft_strlen(ft_ltoa(d));
+		print->zero = 1;
+	}
+	else if (ft_strlen(ft_ltoa(d)) < print->precision_zero)
+	{
+		print->precision_zero -= ft_strlen(ft_ltoa(d));
+		print->precision_space -= ft_strlen(ft_ltoa(d)) + print->precision_zero;
+		/*print->precision_space -= print->precision_zero;*/
+		print->zero = 1;
+	}
+	while (print->precision_space-- > 0)
+	{
+		ft_putchar(' ');
+		++print->ret;
+	}
+	while (print->precision_zero-- > 0)
+	{
+		ft_putchar('0');
+		++print->ret;
+	}
+}
