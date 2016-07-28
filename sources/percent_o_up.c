@@ -5,6 +5,8 @@ void	percent_O(va_list pa, t_printf *print)
 	long	o;
 
 	o = va_arg(pa, long);
+	if (print->precision_zero > 0 || print->precision_space > 0)
+		put_space_or_zero_o(print, o);
 	if (print->sharp == 1 && o != 0)
 	{
 		ft_putchar('0');
