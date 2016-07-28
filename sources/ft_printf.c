@@ -95,19 +95,23 @@ const char	*take_precision(const char *format, t_printf *print)
 	return (format);
 }
 
-const char	*is_precision_ok(const char *format)
+int	is_precision_ok(const char *format, t_printf *print)
 {
-	const char *save_format;
-
-	save_format = format;
-	if (*++format == '0' || ft_isalpha(*format) == TRUE)
+	if (*format == '.')
 	{
-		if (*format == '0')
+		format++;
+		if (*format == 'd' || *format == 'i')
+		{
 			++format;
-		++format;
-		return (format);
+			ft_putchar(*format);
+			print->ret++;
+			++format;
+			ft_putchar(*format);
+			print->ret++;
+			return (1);
+		}
 	}
-	return (save_format);
+	return (0);
 }
 
 int	ft_printf(const char *format, ...)
@@ -125,8 +129,8 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			if (*format == '.')
-				format = is_precision_ok(format);
+			if (is_precision_ok(format, &print) == 1)
+				return (print.ret);
 			if (ft_isdigit(*format) == TRUE && *format != '0')
 				format = take_precision(format, &print);
 			format = check_flag(format, &print);
@@ -177,7 +181,6 @@ int	ft_printf(const char *format, ...)
 			ft_putchar(*format);
 			++print.ret;
 		}
-	printf("<%d>", print.ret);
 		++format;
 	}
 	va_end(pa);

@@ -73,5 +73,6 @@ const char		*precision(const char *format, int d, t_printf *print);
 int				space_zero(t_printf *print, const char *format, int d);
 void			put_space_or_zero(t_printf *print, int d);
 const char		*take_precision(const char *format, t_printf *print);
+int	is_precision_ok(const char *format, t_printf *print);
 
 #endif
