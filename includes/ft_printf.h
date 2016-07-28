@@ -75,5 +75,6 @@ void			put_space_or_zero(t_printf *print, int d);
 const char		*take_precision(const char *format, t_printf *print);
 int				is_precision_ok(const char *format, t_printf *print);
 void			put_space_or_zero_u(t_printf *print, unsigned int d);
+void			put_space_or_zero_o(t_printf *print, int o);
 
 #endif
