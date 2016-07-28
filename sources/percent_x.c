@@ -7,6 +7,8 @@ const char	*percent_x(va_list pa, t_printf *print, const char *format)
 
 	write_space_hex(x, print);
 	x = va_arg(pa, int);
+	if (print->precision_zero > 0 || print->precision_space > 0)
+		put_space_or_zero_x(print, x);
 	if (print->sharp == 1 && x != 0)
 	{
 		ft_putchar('0');

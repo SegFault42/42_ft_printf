@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/27 21:24:52 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/26 04:02:36 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/29 00:16:01 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ const char		*take_precision(const char *format, t_printf *print);
 int				is_precision_ok(const char *format, t_printf *print);
 void			put_space_or_zero_u(t_printf *print, unsigned int d);
 void			put_space_or_zero_o(t_printf *print, int o);
+void			put_space_or_zero_x(t_printf *print, int x);
 
 #endif
