@@ -7,13 +7,13 @@ int main ()
 {
 	int ret = 0;
 
-	ft_putstr("ft_printf(\"%15.4x\", 42) |");
-	ret = ft_printf("%15.4x", 42);
+	ft_putstr("ft_printf(\"%4.15x\", 42) |");
+	ret = ft_printf("%4.15x", 42);
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"%15.4x\", 42) |");
-	ret = printf("%15.4x", 42);
+	ft_putstr("   printf(\"%4.15x\", 42) |");
+	ret = printf("%4.15x", 42);
 	printf("| ret = %d", ret);
 	printf("\n");
 	return (0);
