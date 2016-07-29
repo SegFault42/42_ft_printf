@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/27 23:33:51 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/29 02:24:16 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	is_precision_ok(const char *format, t_printf *print)
 	if (*format == '.')
 	{
 		format++;
-		if (*format == 'd' || *format == 'i' || *format == 'u' || *format == 'o')
+		if (*format == 'd' || *format == 'i' || *format == 'u' || *format == 'o' || *format == 'x' || *format == 'X')
 		{
 			++format;
 			ft_putchar(*format);
