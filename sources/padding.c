@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/06 05:51:51 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/29 01:46:04 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/07/29 02:50:45 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,32 @@ void	put_space_or_zero_x(t_printf *print, int x)
 	{
 		print->precision_zero -= ft_strlen(ft_hexa_itoa(x, 0));
 		print->precision_space -= ft_strlen(ft_hexa_itoa(x, 0)) + print->precision_zero;
+		print->zero = 1;
+	}
+	while (print->precision_space-- > 0)
+	{
+		ft_putchar(' ');
+		++print->ret;
+	}
+	while (print->precision_zero-- > 0)
+	{
+		ft_putchar('0');
+		++print->ret;
+	}
+}
+
+void	put_space_or_zero_s(t_printf *print, char *s)
+{
+	if (ft_strlen(s) > print->precision_zero)
+	{
+		print->precision_zero -= ft_strlen(s);
+		print->precision_space -= ft_strlen(s);
+		print->zero = 1;
+	}
+	else if (ft_strlen(s) < print->precision_zero)
+	{
+		print->precision_zero -= ft_strlen(s);
+		print->precision_space -= ft_strlen(s) + print->precision_zero;
 		print->zero = 1;
 	}
 	while (print->precision_space-- > 0)
