@@ -27,15 +27,38 @@ void	percent_s(va_list pa, t_printf *print)
 	}
 	else
 	{
-		if (print->precision_zero > 0 && print->precision_zero > 0)
+		space = ft_strlen(s);
+		if (print->precision_space > print->precision_zero)
+		{
+			if (space < print->precision_zero)
+				print->precision_space -= space;
+			else
+				print->precision_space -= print->precision_zero;
+			while (print->precision_space-- != 0)
+			{
+				ft_putchar(' ');
+				print->ret++;
+			}
+		}
+		else if (print->precision_space < print->precision_zero)
+		{
+			if (space < print->precision_space)
+			{
+				print->precision_space -= space;
+				while (print->precision_space-- != 0)
+				{
+					ft_putchar(' ');
+					print->ret++;
+				}
+			}
+		}
+		else if (print->precision_zero > 0 && print->precision_zero > 0)
 		{
 			if (print->precision_zero < ft_strlen(s))
 				print->precision_space -= print->precision_zero;
 			else if (print->precision_zero > ft_strlen(s))
 				print->precision_space -= ft_strlen(s);
-			put_space_or_zero_s(print, s);
 		}
-		space = ft_strlen(s);
 		write_space_percent_s(space, print);
 		if (print->precision_zero > 0 && space > print->precision_zero)
 			while (print->precision_zero != 0)
