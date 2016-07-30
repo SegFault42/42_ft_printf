@@ -90,6 +90,8 @@ const char	*take_precision(const char *format, t_printf *print)
 		++format;
 	}
 	++format;
+	if (ft_isalpha(*format) == 1)
+		return (format);
 	print->precision_zero = ft_atoi(format);
 	++format;
 	return (format);

@@ -7,24 +7,15 @@ int main ()
 {
 	int ret = 0;
 
-	/*ft_putstr("ft_printf(\"%4.15s\", \"42\") |");*/
-	/*ret = ft_printf("%4.15s", "42");*/
-	/*printf("| ret = %d", ret);*/
-	/*printf("\n");*/
-
-	/*ft_putstr("   printf(\"%4.15s\", \"42\") |");*/
-	/*ret = printf("%4.15s", "42");*/
-	/*printf("| ret = %d", ret);*/
-	/*printf("\n");*/
-
-	ft_putstr("ft_printf(\"%05s\", \"abc\") |");
-	ret = ft_printf("%05s", "abc");
+	ft_putstr("ft_printf(\"%4.s\", \"42\") |");
+	ret = ft_printf("%4.s", "42");
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"%05s\", \"abc\") |");
-	ret = printf("%05s", "abc");
+	ft_putstr("   printf(\"%4.s\", \"42\") |");
+	ret = printf("%4.s", "42");
 	printf("| ret = %d", ret);
 	printf("\n");
+
 	return (0);
 }
