@@ -17,13 +17,13 @@ int main ()
 	/*printf("| ret = %d", ret);*/
 	/*printf("\n");*/
 
-	ft_putstr("ft_printf(\"%#.o\", 42) |");
-	ret = ft_printf("%#.o", 42);
+	ft_putstr("ft_printf(\"%#.x %#.0x\", 0, 0) |");
+	ret = ft_printf("%#.x, %#.0x", 0, 0);
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"%#.o\", 42) |");
-	ret = printf("%#.o", 42);
+	ft_putstr("   printf(\"%#.x %#.0x\", 0, 0) |");
+	ret = printf("%#.x, %#.0x", 0, 0);
 	printf("| ret = %d", ret);
 	printf("\n");
 	return (0);

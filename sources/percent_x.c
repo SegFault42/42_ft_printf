@@ -6,6 +6,9 @@ const char	*percent_x(va_list pa, t_printf *print, const char *format)
 	char	num[10];
 
 	x = va_arg(pa, int);
+	if (print->precision_zero <= 0 && print->precision_space <= 0
+	&& print->sharp == 1 && print->point == 1)
+		return (format);
 	if (print->precision_zero <= 0 || print->precision_space <= 0)
 		write_space_hex(x, print);
 	if (print->precision_zero > 0 || print->precision_space > 0)
