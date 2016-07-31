@@ -17,13 +17,13 @@ int main ()
 	/*printf("| ret = %d", ret);*/
 	/*printf("\n");*/
 
-	ft_putstr("ft_printf(\"%.p, %.0p\", 0, 0) |");
-	ret = ft_printf("%.p, %.0p", 0, 0);
+	ft_putstr("ft_printf(\"%05.s\", 0) |");
+	ret = ft_printf("%05.s", 0);
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"%.p, %.0p\", 0, 0) |");
-	ret = printf("%.p, %.0p", 0, 0);
+	ft_putstr("   printf(\"%05.s\", 0) |");
+	ret = printf("%05.s", 0);
 	printf("| ret = %d", ret);
 	printf("\n");
 	return (0);

@@ -20,7 +20,7 @@ void	percent_s(va_list pa, t_printf *print)
 
 	i = 0;
 	s = va_arg(pa, char*);
-	if (s == 0)
+	if (s == '\0')
 	{
 		ft_putstr("(null)");
 		print->ret += 6;

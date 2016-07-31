@@ -164,6 +164,8 @@ int	ft_printf(const char *format, ...)
 			{
 				if (ft_isdigit(*format) == TRUE)
 					format = countSpace(format, &print);
+				if (*format == '.')
+					++format;
 				if (*format == 'l')
 					format = percent_l(pa, &print, format);
 				else if (*format == 'h')
