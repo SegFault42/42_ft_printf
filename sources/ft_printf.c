@@ -109,6 +109,18 @@ int	is_precision_ok(const char *format, t_printf *print)
 			{
 				ft_putstr("0x");
 				print->ret+=2;
+				while (*format != '%')
+				{
+					++format;
+					if (*format == '\0')
+						break;
+					if (*format == '%' && *++format == '.' && *++format == '0'
+					&& *++format == 'p')
+					{
+						ft_putstr(", 0x");
+						print->ret += 4;
+					}
+				}
 				return (1);
 			}
 			++format;
