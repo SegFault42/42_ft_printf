@@ -103,7 +103,7 @@ int	is_precision_ok(const char *format, t_printf *print)
 	{
 		format++;
 		if (*format == 'd' || *format == 'i' || *format == 'u' ||
-		*format == 'o' || *format == 'x' || *format == 'X')
+		*format == 'o' || *format == 'x' || *format == 'X' || *format == 'p')
 		{
 			++format;
 			ft_putchar(*format);
