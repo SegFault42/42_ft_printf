@@ -12,7 +12,15 @@ void	percent_O(va_list pa, t_printf *print)
 		ft_putchar('0');
 		++print->ret;
 	}
-	ft_putstr(ft_ltoa_base(o, 8));
-	print->ret += ft_strlen(ft_ltoa_base(o, 8));
+	if (o == LONG_MIN)
+	{
+		ft_putstr("1000000000000000000000");
+		print->ret+=22;
+	}
+	else
+	{
+		ft_putstr(ft_ltoa_base(o, 8));
+		print->ret += ft_strlen(ft_ltoa_base(o, 8));
+	}
 }
 
