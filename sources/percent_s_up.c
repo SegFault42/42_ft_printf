@@ -37,9 +37,9 @@ int		count_octet_wchar(wchar_t *s, t_printf *print, int zero_plus_wchar)
 
 void	percent_S_precision(t_printf *print, wchar_t *s, int zero_plus_wchar)
 {
-	int i;
+	int	i;
 
-	i= 0;
+	i = 0;
 	/*while (print->precision_space-- > 0)*/
 	/*{*/
 		/*ft_putchar(' ');*/
@@ -205,9 +205,16 @@ void	percent_S(va_list pa, t_printf *print)
 	{
 		if (print->precision_space > 0 && print->precision_zero > 0)
 		{
-			print->precision_space -= count_octet_wchar(s, print, zero_plus_wchar);
-			print->precision_space = cp_pre_space - 3;
-			print_space(print);
+			if (print->precision_space < print->precision_zero)
+			{
+			
+			}
+			else
+			{
+				print->precision_space -= count_octet_wchar(s, print, zero_plus_wchar);
+				print->precision_space = cp_pre_space - 3;
+				print_space(print);
+			}
 			percent_S_precision(print, s, zero_plus_wchar);
 		}
 		else

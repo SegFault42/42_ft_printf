@@ -22,6 +22,18 @@ void	percent_p(va_list pa, t_printf *print, const char *format)
 	ok = 0;
 	p = va_arg(pa, char*);
 	/*print->precision_space = print->space_number;*/
+	if (print->precision_zero <= 0 || print->precision_space <= 0)
+	{
+		/*printf("<%c>", *format);*/
+		if (*--format == '0')
+		{
+			ft_putstr("0x");
+			print->ret+=2;
+			return ;
+		}
+		else
+			++format;
+	}
 	while (*format != '%')
 	{
 		--format;
