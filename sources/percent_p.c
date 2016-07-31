@@ -24,7 +24,6 @@ void	percent_p(va_list pa, t_printf *print, const char *format)
 	/*print->precision_space = print->space_number;*/
 	if (print->precision_zero <= 0 || print->precision_space <= 0)
 	{
-		/*printf("<%c>", *format);*/
 		if (*--format == '0')
 		{
 			ft_putstr("0x");
@@ -54,6 +53,15 @@ void	percent_p(va_list pa, t_printf *print, const char *format)
 	}
 	if (*format != '0' && ok == 0)
 		ft_putstr("0x");
+	if (print->precision_zero > 0)
+	{
+		print->precision_zero -= ft_strlen(ft_hexa_ltoa((unsigned long long)p, 0));
+		while (print->precision_zero-- > 0)
+		{
+			ft_putchar('0');
+			++print->ret;
+		}
+	}
 	if (*format == '-')
 	{
 		while (print->precision_space-- > 0)
