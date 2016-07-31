@@ -143,6 +143,7 @@ int	ft_printf(const char *format, ...)
 			if (ft_isdigit(*format) == TRUE && *format != '0')
 				format = take_precision(format, &print);
 			format = check_flag(format, &print);
+			format = check_flag(format, &print);
 			format = check_neg_sign(&print, format);
 			check_valid_specifier(format, &print);
 			if (*format == '%')
