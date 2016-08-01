@@ -22,8 +22,19 @@ void	percent_s(va_list pa, t_printf *print)
 	s = va_arg(pa, char*);
 	if (s == '\0')
 	{
-		ft_putstr("(null)");
-		print->ret += 6;
+		if (print->space_number > 0)
+		{
+			while (print->space_number-- > 0)
+			{
+				ft_putchar('0');
+				++print->ret;
+			}
+		}
+		else
+		{
+			ft_putstr("(null)");
+			print->ret += 6;
+		}
 	}
 	else
 	{
