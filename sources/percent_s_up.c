@@ -196,6 +196,13 @@ void	percent_S(va_list pa, t_printf *print)
 	i = 0;
 	cp_pre_space = print->precision_space;
 	s = va_arg(pa, wchar_t*);
+	if (print->space_number > 0 && print->precision_space == 0 && print->negatif == 0 && print->point == 1)
+	{
+		print->ret += print->space_number;
+		while (print->space_number-- > 0)
+			ft_putchar('0');
+		return ;
+	}
 	if (print->zero == 1)
 	{
 		print->space_number -= count_octet_wchar(s, print, zero_plus_wchar);
@@ -207,7 +214,6 @@ void	percent_S(va_list pa, t_printf *print)
 		{
 			if (print->precision_space < print->precision_zero)
 			{
-			
 			}
 			else
 			{
