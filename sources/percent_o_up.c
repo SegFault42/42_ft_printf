@@ -12,7 +12,7 @@ void	percent_O(va_list pa, t_printf *print)
 		ft_putchar('0');
 		++print->ret;
 	}
-	if (o == LONG_MIN)
+	if (o == -9223372036854775807 -1)
 	{
 		ft_putstr("1000000000000000000000");
 		print->ret+=22;

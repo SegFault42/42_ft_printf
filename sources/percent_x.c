@@ -26,7 +26,6 @@ const char	*percent_x(va_list pa, t_printf *print, const char *format)
 		ft_putstr(ft_hexa_itoa(x, 0));
 	else if (*format == 'X')
 		ft_putstr(ft_hexa_itoa(x, 1));
-	/*printf("<%d>", print->precision_space);*/
 	if (print->precision_zero > 0 || print->precision_space > 0)
 		write_space_hex(x, print);
 	print->ret += ft_strlen(ft_hexa_itoa(x, 0));

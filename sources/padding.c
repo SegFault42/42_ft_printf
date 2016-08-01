@@ -112,6 +112,12 @@ void	put_space_or_zero_x(t_printf *print, int x)
 		ft_putchar(' ');
 		++print->ret;
 	}
+	if (print->sharp == 1)
+	{
+		ft_putstr("0x");
+		print->ret += 2;
+		print->sharp = 0;
+	}
 	while (print->precision_zero-- > 0)
 	{
 		ft_putchar('0');
