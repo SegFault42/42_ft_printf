@@ -17,13 +17,13 @@ int main ()
 	/*printf("| ret = %d", ret);*/
 	/*printf("\n");*/
 
-	ft_putstr("ft_printf(\"%#.5x\", 1) |");
-	ret = ft_printf("%#.5x", 1);
+	ft_putstr("ft_printf(\"%#.3o\", 1) |");
+	ret = ft_printf("%#.3o", 1);
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"%#.5x\", 1) |");
-	ret = printf("%#.5x", 1);
+	ft_putstr("   printf(\"%#.3o\", 1) |");
+	ret = printf("%#.3o", 1);
 	printf("| ret = %d", ret);
 	printf("\n");
 	return (0);
