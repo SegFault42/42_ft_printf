@@ -87,6 +87,15 @@ const char	*percent_d(va_list pa, t_printf *print, const char *format)
 	i = 0;
 	d = va_arg(pa, int);
 	print->d = d;
+	if (print->space_number > 0 && print->precision_zero > 0)
+	{
+		print->space_number -= print->precision_zero;
+		while (print->space_number-- > 0)
+		{
+			ft_putchar(' ');
+			++print->ret;
+		}
+	}
 	if (print->precision_zero > 0 || print->precision_space > 0)
 	{
 		put_space_or_zero(print, d);

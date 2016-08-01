@@ -169,6 +169,15 @@ int	ft_printf(const char *format, ...)
 					print.point = 1;
 					++format;
 				}
+				if (ft_isdigit(*format) == TRUE)
+				{
+					if (*--format == '.')
+					{
+						++format;
+						print.precision_zero = ft_atoi(format);
+					}
+						++format;
+				}
 				if (*format == 'l')
 					format = percent_l(pa, &print, format);
 				else if (*format == 'h')
