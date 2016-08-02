@@ -28,22 +28,36 @@ int		count_octet_wchar(wchar_t *s, t_printf *print, int zero_plus_wchar)
 			}
 			else if (s[i] < 1114112)
 				octet+=4;
-				i++;
+			i++;
 		}
 	}
 	return (octet);
 }
 
 
-void	percent_S_precision(t_printf *print, wchar_t *s, int zero_plus_wchar)
+void	percent_S_precision(t_printf *print, wchar_t *s, int zero_plus_wchar, int cp_pre_space)
 {
 	int	i;
+	/*int	cp;*/
 
+	/*cp = cp_pre_space;*/
 	i = 0;
-	/*while (print->precision_space-- > 0)*/
+	/*while (s[i])*/
+	/*{*/
+		/*if (s[i] > 0 && s[i] <= 128)*/
+			/*cp -= 1;*/
+		/*else if (s[i] > 128 && s[i] <= 2048)*/
+			/*cp -= 2;*/
+		/*else if (s[i] > 2048 && s[i] <= 65536)*/
+			/*cp -= 3;*/
+		/*else if (s[i] > 65536 && s[i] <= 114112)*/
+			/*cp -= 4;*/
+		/*i++;*/
+	/*}*/
+	/*while (cp_pre_space-- > 0)*/
 	/*{*/
 		/*ft_putchar(' ');*/
-		/*print->ret++;*/
+		/*++print->ret;*/
 	/*}*/
 	if (print->negatif == 0)
 	{
@@ -221,13 +235,13 @@ void	percent_S(va_list pa, t_printf *print)
 				print->precision_space = cp_pre_space - 3;
 				print_space(print);
 			}
-			percent_S_precision(print, s, zero_plus_wchar);
+			percent_S_precision(print, s, zero_plus_wchar, cp_pre_space);
 		}
 		else
 		{
 			print->precision_space -= count_octet_wchar(s, print, zero_plus_wchar);
 			print_space(print);
-			percent_S_precision(print, s, zero_plus_wchar);
+			percent_S_precision(print, s, zero_plus_wchar, cp_pre_space);
 		}
 	}
 	else

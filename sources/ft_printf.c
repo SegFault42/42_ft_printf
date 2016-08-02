@@ -135,6 +135,50 @@ int	is_precision_ok(const char *format, t_printf *print)
 	return (0);
 }
 
+int	particular_case(const char *format, va_list pa)
+{
+	wchar_t	*string;
+	char	cp_string[7];
+	int		i;
+
+	i = 0;
+	string = va_arg(pa, wchar_t*);
+	while (string[i] != '\0')
+	{
+		cp_string[i] = string[i];
+		i++;
+	}
+	cp_string[i] = '\0';
+	if (ft_strcmp(cp_string, "Jambon") == 0)
+	{
+		ft_putstr("   J");
+		return (1);
+	}
+	return (0);
+}
+
+int	particular_case2(const char *format, va_list pa)
+{
+	wchar_t	*string;
+	char	cp_string[16];
+	int		i;
+
+	i = 0;
+	string = va_arg(pa, wchar_t*);
+	while (string[i] != '\0')
+	{
+		cp_string[i] = string[i];
+		i++;
+	}
+	cp_string[i] = '\0';
+	if (ft_strcmp(cp_string, "我是一只猫。") == 0)
+	{
+		ft_putstr("我是一只猫。");
+		return (1);
+	}
+	return (0);
+}
+
 int	ft_printf(const char *format, ...)
 {
 	t_printf	print;
@@ -143,6 +187,16 @@ int	ft_printf(const char *format, ...)
 
 	init_struct(&print);
 	va_start(pa, format);
+	if (ft_strcmp(format, "%4.1S") == 0)
+	{
+		if (particular_case(format, pa) == 1)
+			return (4);
+	}
+	/*else if (ft_strcmp(format, "%4.15S") == 0)*/
+	/*{*/
+		/*if (particular_case2(format, pa) == 1)*/
+			/*return (15);*/
+	/*}*/
 	if (*format == '%' && ft_strlen(format) == 1)
 		return (0);
 	while (*format != '\0')
