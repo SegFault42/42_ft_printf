@@ -83,6 +83,17 @@ const char	*take_precision(const char *format, t_printf *print)
 		++format;
 	if (ft_isdigit(*format) == TRUE)
 		print->precision_space = ft_atoi(format);
+	if (*++format == '%')
+	{
+		while (--print->precision_space > 0)
+		{
+			ft_putchar(' ');
+			++print->ret;
+		}
+		return(format);
+	}
+	else
+		--format;
 	while (*format != '.')
 	{
 		if (ft_isalpha(*format) == TRUE)
