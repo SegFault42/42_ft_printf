@@ -15,6 +15,16 @@ const char	*percent_x(va_list pa, t_printf *print, const char *format)
 	int		x;
 	char	num[10];
 
+	if (print->sharp == 1 && print->zero == 1 && print->negatif == 1)
+	{
+		ft_putchar('0');
+		if (*format == 'x')
+			ft_putchar('x');
+		else if (*format == 'X')
+			ft_putchar('X');
+		print->ret+=2;
+		print->space_number -= 2;
+	}
 	x = va_arg(pa, int);
 	if (print->precision_zero <= 0 && print->precision_space <= 0
 	&& print->sharp == 1 && print->point == 1)

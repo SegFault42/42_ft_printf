@@ -18,13 +18,13 @@ int main ()
 	/*printf("| ret = %d", ret);*/
 	/*printf("\n");*/
 
-	ft_putstr("ft_printf(\"%#08x\", 42)|");
-	ret = ft_printf("%#08x", 42);
+	ft_putstr("ft_printf(\"%#-08x\", 42)|");
+	ret = ft_printf("%#-08x", 42);
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"%#08x\", 42)|");
-	ret = printf("%#08x", 42);
+	ft_putstr("   printf(\"%#-08x\", 42)|");
+	ret = printf("%#-08x", 42);
 	printf("| ret = %d", ret);
 	printf("\n");
 
