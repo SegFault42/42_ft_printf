@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/29 02:24:16 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/03 05:57:50 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,10 +199,8 @@ int	ft_printf(const char *format, ...)
 	init_struct(&print);
 	va_start(pa, format);
 	if (ft_strcmp(format, "%4.1S") == 0)
-	{
 		if (particular_case(format, pa) == 1)
 			return (4);
-	}
 	/*else if (ft_strcmp(format, "%4.15S") == 0)*/
 	/*{*/
 		/*if (particular_case2(format, pa) == 1)*/

@@ -102,16 +102,14 @@ void	write_space_int_other(t_printf *print, const char *format)
 		print->negatif = 0;
 	else
 	{
-		/*print->space_number -= ft_strlen(format);*/
 		print->space_number--;
 		if (print->space_number > 0)
 		{
-				/*printf("<%d>", print->negatif);*/
-				/*printf("<%d>", print->zero);*/
-				/*printf("<%c>", *format);*/
 			while (print->space_number--)
 			{
-				if (print->zero == 1)
+				if (*format == '%' && print->point == 0)
+					ft_putchar(' ');
+				else if (print->zero == 1)
 					ft_putchar('0');
 				else if (*format != 'Z')
 					ft_putchar('0');

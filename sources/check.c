@@ -73,6 +73,7 @@ const char	*check_neg_sign(t_printf *print, const char *format)
 	if (*format == '-')
 	{
 		print->negatif = 1;
+		print->negatif_x = 1;
 		++format;
 	}
 	return (format);

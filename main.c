@@ -18,13 +18,13 @@ int main ()
 	/*printf("| ret = %d", ret);*/
 	/*printf("\n");*/
 
-	ft_putstr("ft_printf(\"%5%\")|");
-	ret = ft_printf("%5%");
+	ft_putstr("ft_printf(\"%05.%\")|");
+	ret = ft_printf("%05.%");
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"%5%\")|");
-	ret = printf("%5%");
+	ft_putstr("   printf(\"%05.%\")|");
+	ret = printf("%05.%");
 	printf("| ret = %d", ret);
 	printf("\n");
 

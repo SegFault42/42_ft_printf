@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/27 21:24:52 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/29 02:51:25 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/03 01:36:25 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct	s_printf
 	int			space_number;
 	int			valid;
 	int			negatif;
+	int			negatif_x;
 	int			zero;
 	int			d;
 	int			sharp;

@@ -1,5 +1,15 @@
 #include "../includes/ft_printf.h"
 
+void	precision_space_x(t_printf * print, int x)
+{
+	print->space_number -= ft_strlen(ft_hexa_itoa(x, 0));
+	while (print->space_number-- > 0)
+	{
+		ft_putchar(' ');
+		++print->ret;
+	}
+}
+
 const char	*percent_x(va_list pa, t_printf *print, const char *format)
 {
 	int		x;
@@ -28,6 +38,10 @@ const char	*percent_x(va_list pa, t_printf *print, const char *format)
 		ft_putstr(ft_hexa_itoa(x, 1));
 	if (print->precision_zero > 0 || print->precision_space > 0)
 		write_space_hex(x, print);
+	if (print->negatif_x == 1)
+		precision_space_x(print, x);
+	if (print->negatif == 1)
+		precision_space_x(print, x);
 	print->ret += ft_strlen(ft_hexa_itoa(x, 0));
 	return (format);
 }
