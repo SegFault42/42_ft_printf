@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/03 05:57:50 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/03 07:22:38 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	percent_no_specifier(const char *format, t_printf *print)
 {
-	char *string;
+	char	*string;
 
 	if (print->precision_space - 1 > 0)
 		while (--print->precision_space > 0)

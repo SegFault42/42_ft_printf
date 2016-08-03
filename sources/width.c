@@ -9,6 +9,8 @@ void	write_space_hex(long space, t_printf *print)
 	{
 		char *string = ft_hexa_ltoa(space, 0);
 		print->space_number -= ft_strlen(string);
+		if (print->sharp == 1)
+			print->space_number -= 2;
 		/*ft_putnbr(print->space_number);*/
 		if (print->space_number > 0)
 		{
