@@ -1,14 +1,15 @@
 #include "../includes/ft_printf.h"
 #include <stdio.h>
 
-void	write_space_hex(int space, t_printf *print)
+void	write_space_hex(long space, t_printf *print)
 {
 	if (print->negatif == 1)
 		print->negatif = 0;
 	else
 	{
-		char *string = ft_itoa(space);
-		print->space_number -= ft_strlen(string) - 1;
+		char *string = ft_hexa_ltoa(space, 0);
+		print->space_number -= ft_strlen(string);
+		/*ft_putnbr(print->space_number);*/
 		if (print->space_number > 0)
 		{
 			if (print->zero == 1 && print->d < 0)
