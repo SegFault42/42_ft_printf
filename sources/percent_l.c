@@ -34,6 +34,11 @@ const char	*percent_l(va_list pa, t_printf *print, const char *format)
 		}
 		else if (*format == 'x' || *format == 'X')
 		{
+			if (print->sharp == 1)
+			{
+				ft_putstr("0x");
+				print->ret += 2;
+			}
 			ull = va_arg(pa, unsigned long long int);
 			if (*format == 'x')
 				ft_putstr(ft_hexa_ltoa(ull, 0));
@@ -64,20 +69,6 @@ const char	*percent_l(va_list pa, t_printf *print, const char *format)
 		print->ret += ft_strlen(ft_ltoa(l));
 		return (format);
 	}
-	/*else if (*format == 'u')*/
-	/*{*/
-		/*l = va_arg(pa, unsigned long int);*/
-		/*ft_put_ulong(l);*/
-		/*print->ret += ft_strlen(ft_ltoa(l));*/
-		/*return (format);*/
-	/*}*/
-	/*else if (*format == 'u' || *format == 'D')*/
-	/*{*/
-		/*l = va_arg(pa, unsigned long);*/
-		/*ft_put_ulong(l);*/
-		/*print->ret += ft_strlen(ft_ultoa(l));*/
-		/*return (format);*/
-	/*}*/
 	else if (*format == 'o')
 	{
 		l = va_arg(pa, unsigned long);
@@ -119,13 +110,6 @@ const char	*percent_l(va_list pa, t_printf *print, const char *format)
 		percent_S(pa, print);
 		return (format);
 	}
-	/*else if ((*++format == 'l') && (*++format == 'd' || *format == 'i'))*/
-	/*{*/
-		/*lld = va_arg(pa, long long int);*/
-		/*ft_put_long(lld);*/
-		/*print->ret += ft_strlen(ft_ltoa(lld));*/
-		/*return (format);*/
-	/*}*/
 	else if (*format == 'p')
 	{
 		percent_p(pa, print, format);

@@ -18,13 +18,13 @@ int main ()
 	/*printf("| ret = %d", ret);*/
 	/*printf("\n");*/
 
-	ft_putstr("ft_printf(\"%010x\", 542)|");
-	ret = ft_printf("%010x", 542);
+	ft_putstr("ft_printf(\"%#llx\", 9223372036854775807)|");
+	ret = ft_printf("%#llx", 9223372036854775807);
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"%010x\", 542)|");
-	ret = printf("%010x", 542);
+	ft_putstr("   printf(\"%#llx\", 9223372036854775807)|");
+	ret = printf("%#llx", 9223372036854775807);
 	printf("| ret = %d", ret);
 	printf("\n");
 
