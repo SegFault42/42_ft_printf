@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/04 06:14:00 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/04 09:05:38 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,7 @@ int	ft_printf(const char *format, ...)
 				return (print.ret);
 			if (ft_isdigit(*format) == TRUE && *format != '0')
 				format = take_precision(format, &print);
+			format = check_neg_sign(&print, format);
 			format = check_flag(format, &print);
 			format = check_flag(format, &print);
 			format = check_neg_sign(&print, format);

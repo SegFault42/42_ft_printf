@@ -6,6 +6,8 @@ const char	*percent_o(va_list pa, t_printf *print, const char *format)
 
 	++format;
 	o = va_arg(pa, unsigned int);
+	if (print->sharp == 1)
+		--print->space_number;
 	if (print->precision_zero > 0 || print->precision_space > 0)
 		put_space_or_zero_o(print, o);
 	if (print->space_number > 0 && print->point == 0)
