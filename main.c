@@ -8,13 +8,13 @@ int main ()
 {
 	int ret = 0;
 
-	ft_putstr("ft_printf(\"%10s is a string\", \"this\")|");
-	ret = ft_printf("%4.s", "42");
+	ft_putstr("ft_printf(\"%-10s is a string\", \"this\")|");
+	ret = ft_printf("%-10s is a string", "this");
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"%10s is a string\", \"this\")|");
-	ret = printf("%4.s", "42");
+	ft_putstr("   printf(\"%-10s is a string\", \"this\")|");
+	ret = printf("%-10s is a string", "this");
 	printf("| ret = %d", ret);
 	printf("\n");
 

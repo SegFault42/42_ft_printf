@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/06 07:20:36 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/04 06:15:41 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/04 06:28:53 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	percent_s(va_list pa, t_printf *print)
 			}
 			if (s != '\0' && print->point == 0)
 			{
-				/*print->precision_space -= ft_strlen(s);*/
 				ft_putstr(s);
 				print->ret += ft_strlen(s);
 			}
@@ -109,6 +108,15 @@ void	percent_s(va_list pa, t_printf *print)
 		{
 			ft_putstr(s);
 			print->ret += ft_strlen(s);
+			if (print->negatif == 1)
+			{
+				print->space_number -= space;
+				while (print->space_number-- > 0)
+				{
+					ft_putchar(' ');
+					print->ret++;
+				}
+			}
 		}
 		if (print->precision_space > 0)
 			write_space_percent_s(space, print);
