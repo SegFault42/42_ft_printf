@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 05:33:08 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/26 05:33:10 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/04 07:31:16 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,23 @@ const char	*percent_c(va_list pa, t_printf *print, const char *format)
 		i++;
 	}
 	++format;
+	/*while (--print->precision_space > 0)*/
+	/*{*/
+		/*ft_putchar(' ');*/
+		/*++print->ret;*/
+	/*}*/
 	if (ft_isdigit(*format) == TRUE)
-		put_space_or_zero(print, c);
+		put_space_or_zero(print, 1);
 	format += i - 1;
-	write_space_int(c, print);
+	write_space_int(1, print);
 	ft_putchar(c);
-	write_space_int(c, print);
+	/*if (print->negatif == 1)*/
+		/*while (--print->space_number > 0)*/
+		/*{*/
+			/*ft_putchar(' ');*/
+			/*++print->ret;*/
+		/*}*/
+	write_space_int(1, print);
 	++print->ret;
 	return (format);
 }
