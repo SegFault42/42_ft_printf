@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/06 07:20:36 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/04 06:28:53 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/04 07:02:41 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@ void	percent_s(va_list pa, t_printf *print)
 {
 	char	*s;
 	int		space;
+	int		nb_zero;
 	int		i;
 
 	i = 0;
 	s = va_arg(pa, char*);
+	nb_zero = print->precision_zero;
 	if (s == '\0')
 	{
 		if (print->space_number > 0)
@@ -76,17 +78,14 @@ void	percent_s(va_list pa, t_printf *print)
 				print->ret++;
 			}
 		}
-		else if (print->precision_space < print->precision_zero)
+		else if (print->precision_space < print->precision_zero && print->negatif == 0)
 		{
-			if (space < print->precision_space)
-			{
 				print->precision_space -= space;
-				while (print->precision_space-- != 0)
+				while (print->precision_space-- > 0)
 				{
 					ft_putchar(' ');
 					print->ret++;
 				}
-			}
 		}
 		else if (print->precision_zero > 0)
 		{
@@ -116,6 +115,15 @@ void	percent_s(va_list pa, t_printf *print)
 					ft_putchar(' ');
 					print->ret++;
 				}
+			}
+		}
+		if (print->space_number > 0)
+		{
+			print->space_number -= nb_zero;
+			while (print->space_number-- > 0)
+			{
+				ft_putchar(' ');
+				++print->ret;
 			}
 		}
 		if (print->precision_space > 0)
