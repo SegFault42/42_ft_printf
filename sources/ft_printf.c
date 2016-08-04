@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/03 07:22:38 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/04 06:14:00 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ const char	*precision(const char *format, int d, t_printf *print)
 	int	nb_zero;
 
 	++format;
-	/*nb_zero = ft_atoi(format) - ft_strlen(ft_itoa(d));*/
 	print->precision_zero -= ft_strlen(ft_itoa(d));
 	if (print->precision_zero > 0)
 		while (print->precision_zero--)
@@ -73,7 +72,6 @@ const char	*precision(const char *format, int d, t_printf *print)
 			ft_putchar('0');
 			++print->ret;
 		}
-	/*++format;*/
 	return (format);
 }
 
@@ -100,6 +98,8 @@ const char	*take_precision(const char *format, t_printf *print)
 			return(format);
 		++format;
 	}
+	if (*format == '.')
+		print->point = 1;
 	++format;
 	if (ft_isalpha(*format) == 1)
 		return (format);

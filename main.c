@@ -8,25 +8,25 @@ int main ()
 {
 	int ret = 0;
 
-	/*ft_putstr("ft_printf(\"%4.15S\", L\"我是一只猫。\")|");*/
-	/*ret = ft_printf("%4.15S", L"我是一只猫。");*/
-	/*printf("| ret = %d", ret);*/
-	/*printf("\n");*/
-
-	/*ft_putstr("   printf(\"%4.15S\", L\"我是一只猫。\") |");*/
-	/*ret = printf("%4.4S", L"我是一只猫。");*/
-	/*printf("| ret = %d", ret);*/
-	/*printf("\n");*/
-
-	ft_putstr("ft_printf(\"%#-08x\", 42)|");
-	ret = ft_printf("%#-08x", 42);
+	ft_putstr("ft_printf(\"%10s is a string\", \"this\")|");
+	ret = ft_printf("%4.s", "42");
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"%#-08x\", 42)|");
-	ret = printf("%#-08x", 42);
+	ft_putstr("   printf(\"%10s is a string\", \"this\")|");
+	ret = printf("%4.s", "42");
 	printf("| ret = %d", ret);
 	printf("\n");
+
+	/*ft_putstr("ft_printf(\"@moulitest: %5.x, %5.0x\", 0, 0)|");*/
+	/*ret = ft_printf("@moulitest: %5.x, %5.0x", 0, 0);*/
+	/*printf("| ret = %d", ret);*/
+	/*printf("\n");*/
+
+	/*ft_putstr("   printf(\"@moulitest: %5.x, %5.0x\", 0, 0)|");*/
+	/*ret = printf("@moulitest: %5.x, %5.0x", 0, 0);*/
+	/*printf("| ret = %d", ret);*/
+	/*printf("\n");*/
 
 	return (0);
 }
