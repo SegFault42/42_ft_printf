@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/04 09:05:38 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/05 01:34:18 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,6 +242,8 @@ int	ft_printf(const char *format, ...)
 					}
 						++format;
 				}
+				while (print.precision_zero > 0 && ft_isdigit(*format) == 1)
+					++format;
 				if (*format == 'l')
 					format = percent_l(pa, &print, format);
 				else if (*format == 'h')

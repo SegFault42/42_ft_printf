@@ -18,7 +18,7 @@ const char	*percent_o(va_list pa, t_printf *print, const char *format)
 		++print->ret;
 	}
 	ft_putstr(ft_ultoa_base(o, 8));
-	if (print->negatif_x == 1 && print->space_number > 0)
+	if (print->negatif_x == 1 && print->space_number > 0 && print->point == 0)
 	{
 		print->space_number -= ft_strlen(ft_itoa(o));
 		while (print->space_number-- > 0)
