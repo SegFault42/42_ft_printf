@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/05 06:04:49 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/05 07:36:39 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,14 +228,17 @@ int	ft_printf(const char *format, ...)
 			{
 				if (ft_isdigit(*format) == TRUE)
 					format = countSpace(format, &print);
-				if (*format == '.')
+				if (*format == '.' || *format == '+')
 				{
-					print.point = 1;
+					if (*format == '+')
+						print.plus = 1;
+					else if (*format == '.')
+						print.point = 1;
 					++format;
 				}
 				if (ft_isdigit(*format) == TRUE)
 				{
-					if (*--format == '.')
+					if (*--format == '.' || *format == '+')
 					{
 						++format;
 						print.precision_zero = ft_atoi(format);
