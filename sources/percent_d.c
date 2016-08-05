@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/25 00:56:11 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/27 00:31:07 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/05 07:13:05 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,14 @@ const char	*percent_d(va_list pa, t_printf *print, const char *format)
 {
 	int				d;
 	int				i;
+	int				neg_sign;
 
 	i = 0;
 	d = va_arg(pa, int);
 	print->d = d;
+	neg_sign = 0;
+	if (print->space_number > 0)
+		neg_sign = 1;
 	if (print->space_number > 0 && print->precision_zero > 0)
 	{
 		print->space_number -= print->precision_zero;
@@ -133,6 +137,8 @@ const char	*percent_d(va_list pa, t_printf *print, const char *format)
 	}
 	if (d < 0 && *++format == '0')
 	{
+		if (print->zero == 1 && neg_sign == 0)
+			ft_putchar('-');
 		ft_putnbr(d * -1);
 		print->zero = 1;
 	}
