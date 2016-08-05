@@ -6,6 +6,8 @@ const char	*percent_o(va_list pa, t_printf *print, const char *format)
 
 	++format;
 	o = va_arg(pa, unsigned int);
+	if (print->precision_zero > ft_strlen(ft_itoa(o)))
+		print->space_number -= print->precision_zero - ft_strlen(ft_itoa(o));
 	if (print->sharp == 1)
 		--print->space_number;
 	if (print->precision_zero > 0 || print->precision_space > 0)
@@ -19,6 +21,15 @@ const char	*percent_o(va_list pa, t_printf *print, const char *format)
 	}
 	ft_putstr(ft_ultoa_base(o, 8));
 	if (print->negatif_x == 1 && print->space_number > 0 && print->point == 0)
+	{
+		print->space_number -= ft_strlen(ft_itoa(o));
+		while (print->space_number-- > 0)
+		{
+			ft_putchar(' ');
+			++print->ret;
+		}
+	}
+	else if (print->space_number > 0)
 	{
 		print->space_number -= ft_strlen(ft_itoa(o));
 		while (print->space_number-- > 0)

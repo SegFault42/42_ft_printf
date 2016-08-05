@@ -8,13 +8,13 @@ int main ()
 {
 	int ret = 0;
 
-	ft_putstr("ft_printf(\"%-5.10o\", 2500)|");
-	ret = ft_printf("%-5.10o", 2500);
+	ft_putstr("ft_printf(\"%-10.5o\", 2500)|");
+	ret = ft_printf("%-10.5o", 2500);
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"%-5.10o\", 2500)|");
-	ret = printf("%-5.10o", 2500);
+	ft_putstr("   printf(\"%-10.5o\", 2500)|");
+	ret = printf("%-10.5o", 2500);
 	printf("| ret = %d", ret);
 	printf("\n");
 
