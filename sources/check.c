@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/06 09:20:53 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/06 09:25:41 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/07 01:18:55 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ const char	*check_valid_specifier(const char *format, t_printf *print)
 		&& *format != 'c' && *format != 'C' && *format != '%' && *format != 'l'
 		&& *format != 'h' && *format != 'j' && *format != 'z' && *format != 'C'
 		&& *format != 'S' && ft_isdigit(*format) == 0)
-	{
-	}
+		return (0);
 	else if (*format == ' ')
 	{
 		while (*format == ' ')
@@ -51,13 +50,10 @@ const char	*count_espace(const char *format, t_printf *print)
 	j = 0;
 	if (ft_isdigit(*format) == TRUE)
 	{
-		if (*format == '0')
-			print->zero = 1;
-		while (ft_isdigit(*format) == TRUE)
-		{
+		struct_is_zero(print, format);
+		--format;
+		while (ft_isdigit(*++format) == TRUE)
 			i++;
-			++format;
-		}
 		format -= i;
 		string = (char *)malloc(sizeof(char) * (i + 1));
 		while (i--)
@@ -66,9 +62,10 @@ const char	*count_espace(const char *format, t_printf *print)
 			j++;
 		}
 		string[j] = '\0';
+		print->space_number = ft_atoi(string);
+		format += ft_strlen(string);
+		free(string);
 	}
-	print->space_number = ft_atoi(string);
-	format += ft_strlen(string);
 	return (format);
 }
 

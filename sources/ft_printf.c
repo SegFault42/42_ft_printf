@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/06 09:24:55 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/06 22:10:23 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,12 @@
 
 void	percent_no_specifier(const char *format, t_printf *print)
 {
-	char	*string;
-
 	if (print->precision_space - 1 > 0)
 		while (--print->precision_space > 0)
 		{
 			ft_putchar(' ');
 			++print->ret;
 		}
-	string = ft_itoa(print->space_number);
 	write_space_int_other(print, format);
 	ft_putchar(*format);
 	write_space_int_other(print, format);

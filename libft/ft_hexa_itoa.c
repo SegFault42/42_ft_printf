@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 05:59:12 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/06 08:44:10 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/06 22:11:17 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char		*ft_hexa_itoa(unsigned int n, int up)
 		x /= 16;
 		size++;
 	}
-	str = (char *)malloc(sizeof(str) * (size + 1));
+	str = (char *)malloc(sizeof(char) * (size + 1));
 	if (str)
 	{
 		str[size + 1] = '\0';

@@ -1,35 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_count_2d_tab                                    :+:      :+:    :+:   */
+/*   check_struct.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/25 10:57:59 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/06 22:08:32 by rabougue         ###   ########.fr       */
+/*   Created: 2016/08/07 01:12:54 by rabougue          #+#    #+#             */
+/*   Updated: 2016/08/07 01:14:52 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/libft.h"
+#include "../includes/ft_printf.h"
 
-void	ft_count_2d_tab(char **tab)
+void	struct_is_zero(t_printf *print, const char *format)
 {
-	int		k;
-	int		j;
-	size_t	len;
-
-	k = 0;
-	j = 0;
-	while (tab[k])
-	{
-		j++;
-		if (tab[k][j])
-		{
-			len = ft_strlen(tab[k]);
-			k++;
-			j = 0;
-			ft_putnbr(len);
-			ft_putchar('\n');
-		}
-	}
+	if (*format == '0')
+		print->zero = 1;
 }

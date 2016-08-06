@@ -1,6 +1,6 @@
 #include "../includes/ft_printf.h"
 
-int		count_octet_wchar(wchar_t *s, t_printf *print, int zero_plus_wchar)
+int		count_octet_wchar(wchar_t *s, t_printf *print)
 {
 	int	i;
 	int	octet;
@@ -35,33 +35,15 @@ int		count_octet_wchar(wchar_t *s, t_printf *print, int zero_plus_wchar)
 }
 
 
-void	percent_S_precision(t_printf *print, wchar_t *s, int zero_plus_wchar, int cp_pre_space)
+void	percent_S_precision(t_printf *print, wchar_t *s, int cp_pre_space)
 {
 	int	i;
-	/*int	cp;*/
+	int	zero_plus_wchar;
 
-	/*cp = cp_pre_space;*/
 	i = 0;
-	/*while (s[i])*/
-	/*{*/
-		/*if (s[i] > 0 && s[i] <= 128)*/
-			/*cp -= 1;*/
-		/*else if (s[i] > 128 && s[i] <= 2048)*/
-			/*cp -= 2;*/
-		/*else if (s[i] > 2048 && s[i] <= 65536)*/
-			/*cp -= 3;*/
-		/*else if (s[i] > 65536 && s[i] <= 114112)*/
-			/*cp -= 4;*/
-		/*i++;*/
-	/*}*/
-	/*while (cp_pre_space-- > 0)*/
-	/*{*/
-		/*ft_putchar(' ');*/
-		/*++print->ret;*/
-	/*}*/
 	if (print->negatif == 0)
 	{
-		print->ret_wchar = count_octet_wchar(s, print, zero_plus_wchar);
+		print->ret_wchar = count_octet_wchar(s, print);
 		write_space_wchar(print);
 	}
 	zero_plus_wchar = print->precision_zero + print->ret_wchar;
@@ -122,10 +104,10 @@ void	percent_S_precision(t_printf *print, wchar_t *s, int zero_plus_wchar, int c
 			i++;
 		}
 	}
-	print->ret += count_octet_wchar(s, print, zero_plus_wchar);
+	print->ret += count_octet_wchar(s, print);
 }
 
-void	percent_S_normal(t_printf *print, wchar_t *s, int zero_plus_wchar)
+void	percent_S_normal(t_printf *print, wchar_t *s)
 {
 	int	i;
 
@@ -170,11 +152,11 @@ void	percent_S_normal(t_printf *print, wchar_t *s, int zero_plus_wchar)
 	}
 	if (print->negatif == 1)
 	{
-		print->ret_wchar = count_octet_wchar(s, print, zero_plus_wchar);
+		print->ret_wchar = count_octet_wchar(s, print);
 		write_space_wchar(print);
 		write_space_wchar(print);
 	}
-	print->ret += count_octet_wchar(s, print, zero_plus_wchar);
+	print->ret += count_octet_wchar(s, print);
 }
 
 void	print_space(t_printf *print)
@@ -204,7 +186,6 @@ void	percent_S(va_list pa, t_printf *print)
 {
 	wchar_t			*s;
 	int				i;
-	int				zero_plus_wchar;
 	int				cp_pre_space;
 
 	i = 0;
@@ -219,7 +200,7 @@ void	percent_S(va_list pa, t_printf *print)
 	}
 	if (print->zero == 1)
 	{
-		print->space_number -= count_octet_wchar(s, print, zero_plus_wchar);
+		print->space_number -= count_octet_wchar(s, print);
 		print_zero(print);
 	}
 	if (print->precision_space > 0 || print->precision_zero > 0)
@@ -231,20 +212,20 @@ void	percent_S(va_list pa, t_printf *print)
 			}
 			else
 			{
-				print->precision_space -= count_octet_wchar(s, print, zero_plus_wchar);
+				print->precision_space -= count_octet_wchar(s, print);
 				print->precision_space = cp_pre_space - 3;
 				print_space(print);
 			}
-			percent_S_precision(print, s, zero_plus_wchar, cp_pre_space);
+			percent_S_precision(print, s, cp_pre_space);
 		}
 		else
 		{
-			print->precision_space -= count_octet_wchar(s, print, zero_plus_wchar);
+			print->precision_space -= count_octet_wchar(s, print);
 			print_space(print);
-			percent_S_precision(print, s, zero_plus_wchar, cp_pre_space);
+			percent_S_precision(print, s, cp_pre_space);
 		}
 	}
 	else
-		percent_S_normal(print, s, zero_plus_wchar);
+		percent_S_normal(print, s);
 }
 

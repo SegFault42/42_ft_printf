@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/06 05:51:51 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/04 05:19:43 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/07 00:14:55 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@ int		count_space(const char *format)
 
 	j = 0;
 	i = 0;
-	while (ft_isdigit(*format) == 1)
-	{
-		format++;
-		i++;
-	}
-	space = (char *)malloc(sizeof(char) * i);
+	if (ft_isdigit(*format) == 1)
+		while (ft_isdigit(*format) == 1)
+		{
+			format++;
+			i++;
+		}
+	if (i > 0)
+		space = (char *)malloc(sizeof(char) * i);
 	format -= i;
 	nb_space = i * 2;
 	while (i < nb_space)
@@ -36,8 +38,10 @@ int		count_space(const char *format)
 		j++;
 		i++;
 	}
-	nb_space = ft_atoi(space);
-	free(space);
+	if (i > 0)
+		nb_space = ft_atoi(space);
+	if (i > 0)
+		free(space);
 	return(nb_space);
 }
 

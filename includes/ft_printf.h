@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/06 09:05:53 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/06 09:24:04 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/07 01:17:30 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ int				space_zero(t_printf *print, const char *format, int d);
 int				ft_printf(const char *format, ...);
 int				count_space(const char *format);
 int				is_precision_ok(const char *format, t_printf *print);
+void			struct_is_zero(t_printf *print, const char *format);
 
 #endif

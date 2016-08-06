@@ -41,7 +41,6 @@ void	write_space_percent_s(int space, t_printf *print)
 		print->negatif = 0;
 	else
 	{
-		char *string = ft_itoa(space);
 		print->space_number -= space;
 		if (print->space_number > 0)
 		{

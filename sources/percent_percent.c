@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 03:40:46 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/09 05:02:55 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/06 22:26:14 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ const char	*percent_percent(const char *format, t_printf *printf)
 	int		nb_char;
 	int		len_format;
 
-	nb_char = 0;
 	i = 0;
 	while (ft_isdigit(*format) == 1)
 	{
@@ -75,7 +74,6 @@ const char	*percent_percent_neg(const char *format, t_printf *printf)
 	int		nb_char;
 	int		len_format;
 
-	nb_char = 0;
 	i = 0;
 	while (ft_isdigit(*format) == 1)
 	{
