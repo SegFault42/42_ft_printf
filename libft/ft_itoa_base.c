@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 05:35:23 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/08 03:59:23 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/06 08:43:17 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char		ft_char(long nb)
 	return (nb + 'a' - 10);
 }
 
-char	*ft_itoa_base(int value, int base)
+char			*ft_itoa_base(int value, int base)
 {
 	long	nb;
 	int		neg;

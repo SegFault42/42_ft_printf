@@ -98,7 +98,7 @@ const char	*percent_h(va_list pa, t_printf *print, const char *format)
 	else if (*format == 'U')
 	{
 		h = va_arg(pa, unsigned long);
-		ft_putstr(ft_ultoa(h));
+		ft_put_ulong(h);
 		print->ret += ft_strlen(ft_ultoa(h));
 		return (format);
 	}

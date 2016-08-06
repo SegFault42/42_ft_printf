@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/07 23:35:22 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/08 01:29:51 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/06 08:44:57 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ char		*ft_ultoa(unsigned long n)
 	unsigned long		i;
 	unsigned long		stock;
 	unsigned long		res;
-	char		*str;
-	char		*cpystr;
+	char				*str;
+	char				*cpystr;
 
 	i = 0;
 	stock = 0;

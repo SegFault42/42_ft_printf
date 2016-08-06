@@ -6,13 +6,13 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 05:55:47 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/10 07:41:49 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/06 08:42:24 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/libft.h"
 
-static int		ft_len(unsigned long nb, int base)
+static int	ft_len(unsigned long nb, int base)
 {
 	int	len;
 
@@ -37,8 +37,8 @@ static char	ft_char(unsigned long nb)
 char	*ft_ultoa_base(unsigned long value, int base)
 {
 	unsigned long	nb;
-	char	*str;
-	int		len;
+	char			*str;
+	int				len;
 
 	nb = value;
 	len = ft_len(nb, base);

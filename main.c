@@ -8,13 +8,13 @@ int main ()
 {
 	int ret = 0;
 
-	ft_putstr("ft_printf(\"%03.2d\", -1)|");
-	ret = ft_printf("%03.2d", -1);
+	ft_putstr("ft_printf(\"%hU\", \"4294967296\")|");
+	ret = ft_printf("%hU", "4294967296");
 	printf("| ret = %d", ret);
 	printf("\n");
 
-	ft_putstr("   printf(\"%03.2d\", -1)|");
-	ret = printf("%03.2d", -1);
+	ft_putstr("   printf(\"%hU\", \"4294967296\")|");
+	ret = printf("%hU", "4294967296");
 	printf("| ret = %d", ret);
 	printf("\n");
 

@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/07 23:35:22 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/09 00:51:26 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/06 08:42:51 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	incr(size_t *i, size_t *res)
 	}
 }
 
-size_t	ft_size_ttoa(size_t n)
+size_t		ft_size_ttoa(size_t n)
 {
 	size_t			i;
 	size_t			res;

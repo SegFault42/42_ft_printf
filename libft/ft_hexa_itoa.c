@@ -6,13 +6,13 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/05 05:59:12 by rabougue          #+#    #+#             */
-/*   Updated: 2016/07/09 03:56:53 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/06 08:44:10 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/libft.h"
 
-static	int	switch_hexa(int x, int up)
+static int	switch_hexa(int x, int up)
 {
 	if (0 <= x && x <= 9)
 		return (48 + x);
@@ -27,7 +27,7 @@ static	int	switch_hexa(int x, int up)
 	return (0);
 }
 
-char	*ft_hexa_itoa(unsigned int n, int up)
+char		*ft_hexa_itoa(unsigned int n, int up)
 {
 	char				*str;
 	int					size;
