@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/25 00:56:11 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/06 06:53:38 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/06 07:02:15 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ const char	*percent_d(va_list pa, t_printf *print, const char *format)
 	print->d = d;
 	neg_sign = 0;
 	z = 0;
+	if (d < 0 && print->point == 1)
+		--print->space_number;
 	if (print->space_number > print->precision_zero)
 		z = 1;
 	if (print->space_number > 0)
