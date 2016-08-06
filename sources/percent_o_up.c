@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   percent_o_up.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/08/06 08:53:21 by rabougue          #+#    #+#             */
+/*   Updated: 2016/08/06 09:01:33 by rabougue         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
-void	percent_O(va_list pa, t_printf *print)
+void	percent_o_up(va_list pa, t_printf *print)
 {
 	long	o;
 
@@ -12,10 +24,10 @@ void	percent_O(va_list pa, t_printf *print)
 		ft_putchar('0');
 		++print->ret;
 	}
-	if (o == -9223372036854775807 -1)
+	if (o == -9223372036854775807 - 1)
 	{
 		ft_putstr("1000000000000000000000");
-		print->ret+=22;
+		print->ret += 22;
 	}
 	else
 	{
@@ -23,4 +35,3 @@ void	percent_O(va_list pa, t_printf *print)
 		print->ret += ft_strlen(ft_ltoa_base(o, 8));
 	}
 }
-

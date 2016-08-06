@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 05:55:47 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/06 08:42:24 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/06 08:59:07 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	ft_char(unsigned long nb)
 	return (nb + 'a' - 10);
 }
 
-char	*ft_ultoa_base(unsigned long value, int base)
+char		*ft_ultoa_base(unsigned long value, int base)
 {
 	unsigned long	nb;
 	char			*str;

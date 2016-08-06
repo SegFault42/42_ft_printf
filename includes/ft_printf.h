@@ -1,12 +1,12 @@
-
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/27 21:24:52 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/03 23:41:37 by rabougue         ###   ########.fr       */
+/*   Created: 2016/08/06 09:05:53 by rabougue          #+#    #+#             */
+/*   Updated: 2016/08/06 09:05:54 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdarg.h>
 # include <wchar.h>
-//# include <limits.h>
 # include "../libft/includes/libft.h"
 
 typedef struct	s_printf
@@ -48,7 +47,7 @@ const char		*percent_j(va_list pa, t_printf *print, const char *format);
 const char		*percent_h(va_list pa, t_printf *print, const char *format);
 const char		*percent_z(va_list pa, t_printf *print, const char *format);
 const char		*percent_d(va_list pa, t_printf *print, const char *format);
-const char		*percent_D(va_list pa, t_printf *print, const char *format);
+const char		*percent_d_up(va_list pa, t_printf *print, const char *format);
 const char		*percent_o(va_list pa, t_printf *print, const char *format);
 const char		*check_valid_specifier(const char *format, t_printf *print);
 const char		*countSpace(const char *format, t_printf *print);
@@ -61,7 +60,7 @@ void			write_space_wchar(t_printf *print);
 void			write_space_char(char *p, t_printf *print);
 void			write_space_int_other(t_printf *print, const char *format);
 void			percent_U(va_list pa, t_printf *print);
-void			percent_O(va_list pa, t_printf *print);
+void			percent_o_up(va_list pa, t_printf *print);
 void			percent_C(va_list pa, t_printf *print);
 void			percent_S(va_list pa, t_printf *print);
 void			percent_p(va_list pa, t_printf *print, const char *format);
