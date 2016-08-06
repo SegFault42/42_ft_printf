@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/25 00:56:11 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/05 08:02:51 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/06 06:43:39 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,37 +84,63 @@ const char	*percent_d(va_list pa, t_printf *print, const char *format)
 	int				d;
 	int				i;
 	int				neg_sign;
+	int				z;
 
 	i = 0;
 	d = va_arg(pa, int);
 	print->d = d;
 	neg_sign = 0;
+	z = 0;
+
+	if (print->space_number > print->precision_zero)
+		z = 1;
 	if (print->space_number > 0)
 		neg_sign = 1;
-	if (print->plus == 1 && print->precision_zero > 0 && d > 0)
-	{
-		ft_putchar('+');
-		--print->precision_zero;
-		++print->ret;
-	}
 	if (d < 0 && print->plus == 1)
 		print->precision_zero--;
-	if (print->space_number > 0 && print->precision_zero > 0)
+	if (print->space_number > 0 && print->precision_zero > 0 && print->negatif == 0)
 	{
 		print->space_number -= print->precision_zero;
+		if (print->plus == 1)
+			--print->space_number;
 		while (print->space_number-- > 0)
 		{
 			ft_putchar(' ');
 			++print->ret;
 		}
 	}
+	if (print->plus == 1 && print->precision_zero > 0 && d > 0)
+	{
+		ft_putchar('+');
+		if (z == 0)
+			--print->precision_zero;
+		++print->ret;
+	}
 	if (print->precision_zero > 0 || print->precision_space > 0)
 	{
+		/*if (print->precision_zero > 0)*/
+		/*{*/
+			/*print->precision_zero -= ft_strlen(ft_itoa(d));*/
+			/*while (print->precision_zero-- > 0)*/
+			/*{*/
+				/*ft_putchar('0');*/
+				/*++print->ret;*/
+			/*}*/
+		/*}*/
 		put_space_or_zero(print, d);
 		if (d < 0)
 			ft_putnbr(d * -1);
 		else
 			ft_putnbr(d);
+		if (print->negatif == 1)
+		{
+			print->space_number -= (ft_strlen(ft_itoa(d)) - print->precision_zero);
+			while (print->space_number-- > 0)
+			{
+				ft_putchar(' ');
+				++print->ret;
+			}
+		}
 		print->ret += ft_strlen(ft_itoa(d));
 		return (format);
 	}
