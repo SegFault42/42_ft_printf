@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/06 09:02:48 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/06 09:24:55 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,7 @@ int	ft_printf(const char *format, ...)
 			if (*format != '%')
 			{
 				if (ft_isdigit(*format) == TRUE)
-					format = countSpace(format, &print);
+					format = count_espace(format, &print);
 				if (*format == '.' || *format == '+')
 				{
 					if (*format == '+')

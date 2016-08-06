@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/08/06 09:20:53 by rabougue          #+#    #+#             */
+/*   Updated: 2016/08/06 09:25:41 by rabougue         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
 const char	*check_valid_specifier(const char *format, t_printf *print)
@@ -9,18 +21,10 @@ const char	*check_valid_specifier(const char *format, t_printf *print)
 		&& *format != 'h' && *format != 'j' && *format != 'z' && *format != 'C'
 		&& *format != 'S' && ft_isdigit(*format) == 0)
 	{
-		/*if (*format != ' ')*/
-		/*{*/
-			/*ft_putchar(*format);*/
-			/*++print->ret;*/
-		/*}*/
-		/*++format;*/
-		/*print->valid = 1;*/
-		/*return (format);*/
 	}
 	else if (*format == ' ')
 	{
-		while(*format == ' ')
+		while (*format == ' ')
 			++format;
 		return (format);
 	}
@@ -29,7 +33,7 @@ const char	*check_valid_specifier(const char *format, t_printf *print)
 
 const char	*check_space(const char *format, t_printf *print)
 {
-	while(*format == ' ')
+	while (*format == ' ')
 	{
 		++format;
 		++print->space;
@@ -37,12 +41,14 @@ const char	*check_space(const char *format, t_printf *print)
 	return (format);
 }
 
-const char *countSpace(const char *format, t_printf *print)
+const char	*count_espace(const char *format, t_printf *print)
 {
 	char	*string;
-	int		i = 0;
-	int		j = 0;
+	int		i;
+	int		j;
 
+	i = 0;
+	j = 0;
 	if (ft_isdigit(*format) == TRUE)
 	{
 		if (*format == '0')
@@ -63,8 +69,6 @@ const char *countSpace(const char *format, t_printf *print)
 	}
 	print->space_number = ft_atoi(string);
 	format += ft_strlen(string);
-	/*free(string);*/
-	/*return (nb_space);*/
 	return (format);
 }
 
