@@ -6,11 +6,13 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/07 03:02:26 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/07 03:02:28 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/07 09:15:18 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+	/*if (print->d == 1 && print->point == 1)*/
+		/*ft_putchar(' ');*/
 
 const char	*percent_o(va_list pa, t_printf *print, const char *format)
 {
@@ -31,7 +33,10 @@ const char	*percent_o(va_list pa, t_printf *print, const char *format)
 		ft_putchar('0');
 		++print->ret;
 	}
-	ft_putstr(ft_ultoa_base(o, 8));
+	if (print->d == 1 && print->point == 1)
+		ft_putchar(' ');
+	else
+		ft_putstr(ft_ultoa_base(o, 8));
 	if (print->negatif_x == 1 && print->space_number > 0 && print->point == 0)
 	{
 		print->space_number -= ft_strlen(ft_itoa(o));

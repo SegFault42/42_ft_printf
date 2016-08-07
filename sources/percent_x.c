@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/07 05:00:42 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/07 05:01:30 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/07 08:54:10 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ const char	*percent_x(va_list pa, t_printf *print, const char *format)
 			ft_putchar('X');
 		print->ret += 2;
 	}
-	if (*format == 'x')
+	if (print->d == 1 && print->point == 1)
+		ft_putchar(' ');
+	else if (*format == 'x')
 		ft_putstr(ft_hexa_itoa(x, 0));
 	else if (*format == 'X')
 		ft_putstr(ft_hexa_itoa(x, 1));

@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/07 02:54:07 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/07 04:52:33 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/07 05:45:53 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ const char	*percent_h(va_list pa, t_printf *print, const char *format)
 {
 	short int			hdi;
 	unsigned short int	h;
+	unsigned long		hl;
 	char				hh;
 	unsigned char		hhu;
 
@@ -109,9 +110,9 @@ const char	*percent_h(va_list pa, t_printf *print, const char *format)
 	}
 	else if (*format == 'U')
 	{
-		h = va_arg(pa, unsigned long);
-		ft_put_ulong(h);
-		print->ret += ft_strlen(ft_ultoa(h));
+		hl = va_arg(pa, unsigned long);
+		ft_put_ulong(hl);
+		print->ret += ft_strlen(ft_ultoa(hl));
 		return (format);
 	}
 	return (format);

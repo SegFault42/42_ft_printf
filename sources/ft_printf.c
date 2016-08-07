@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/07 05:15:50 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/07 08:54:04 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,8 @@ int			ft_printf(const char *format, ...)
 			format = check_flag(format, &print);
 			format = check_neg_sign(&print, format);
 			check_valid_specifier(format, &print);
+			if (print.precision_space > 0 && print.precision_zero <= 0)
+				print.d = 1;
 			if (*format == '%')
 				format = if_percent(format, &print);
 			if (*format != '%')
