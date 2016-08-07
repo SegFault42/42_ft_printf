@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   percent_u_up.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/08/07 05:00:32 by rabougue          #+#    #+#             */
+/*   Updated: 2016/08/07 05:00:33 by rabougue         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
-void	percent_U(va_list pa, t_printf *print)
+void	percent_u_up(va_list pa, t_printf *print)
 {
 	unsigned long	u;
 

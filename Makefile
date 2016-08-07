@@ -6,7 +6,7 @@
 #    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
-#    Updated: 2016/08/07 01:18:14 by rabougue         ###   ########.fr        #
+#    Updated: 2016/08/07 01:21:15 by rabougue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRCS = ./sources/ft_printf.c ./sources/padding.c ./sources/percent_percent.c \
 
 OBJS = $(SRCS:.c=.o)
 
-FLAGS = -g  -Wall -Wextra -Werror
+FLAGS = -g -Wall -Wextra -Werror
 
 CC = clang
 
@@ -31,11 +31,10 @@ HEADS = ./includes/ft_printf.h
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) ./Makefile
 	@make -s -C ./libft/
 	@cp libft/libft.a $(NAME)
 	@echo "\033[33mCompiling in .o ...\033[0m"
-	#@$(CC) $(FLAGS) -c $(SRCS) -I $(HEADS)
 	@echo "\033[33mCreating library ...\033[0m"
 	@ar r $(NAME) $(OBJS)
 	@echo "\033[33mIndexing library ...\033[0m"

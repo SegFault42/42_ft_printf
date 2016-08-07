@@ -1,13 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   width.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/08/07 05:08:54 by rabougue          #+#    #+#             */
+/*   Updated: 2016/08/07 05:11:13 by rabougue         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
-#include <stdio.h>
 
 void	write_space_hex(long space, t_printf *print)
 {
+	char	*string;
+
 	if (print->negatif == 1)
 		print->negatif = 0;
 	else
 	{
-		char *string = ft_hexa_ltoa(space, 0);
+		string = ft_hexa_ltoa(space, 0);
 		print->space_number -= ft_strlen(string);
 		if (print->sharp == 1)
 		{
@@ -18,7 +31,6 @@ void	write_space_hex(long space, t_printf *print)
 				print->ret += 2;
 			}
 		}
-		/*ft_putnbr(print->space_number);*/
 		if (print->space_number > 0)
 		{
 			if (print->zero == 1 && print->d < 0)
@@ -60,11 +72,13 @@ void	write_space_percent_s(int space, t_printf *print)
 
 void	write_space_int(int space, t_printf *print)
 {
+	char	*string;
+
 	if (print->negatif == 1)
 		print->negatif = 0;
 	else
 	{
-		char *string = ft_itoa(space);
+		string = ft_itoa(space);
 		print->space_number -= ft_strlen(string);
 		if (print->plus == 1)
 			print->space_number--;
@@ -132,11 +146,13 @@ void	write_space_int_other(t_printf *print, const char *format)
 
 void	write_space_char(char *p, t_printf *print)
 {
+	char	*test;
+
 	if (print->negatif == 1)
 		print->negatif = 0;
 	else
 	{
-		char *test = ft_hexa_ltoa((unsigned long long)p, 0);
+		test = ft_hexa_ltoa((unsigned long long)p, 0);
 		print->precision_space -= ft_strlen(test) + 2;
 		if (print->precision_space > 0)
 		{
@@ -151,4 +167,3 @@ void	write_space_char(char *p, t_printf *print)
 		}
 	}
 }
-

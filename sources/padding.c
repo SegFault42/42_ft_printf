@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/06 05:51:51 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/07 00:14:55 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/07 05:17:18 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		count_space(const char *format)
 		nb_space = ft_atoi(space);
 	if (i > 0)
 		free(space);
-	return(nb_space);
+	return (nb_space);
 }
 
 void	put_space_or_zero_u(t_printf *print, unsigned int d)
@@ -82,7 +82,8 @@ void	put_space_or_zero_o(t_printf *print, int d)
 	else if (ft_strlen(ft_ltoa(d)) < print->precision_zero)
 	{
 		print->precision_zero -= ft_strlen(ft_itoa_base(d, 8));
-		print->precision_space -= ft_strlen(ft_itoa_base(d, 8)) + print->precision_zero;
+		print->precision_space -= ft_strlen(ft_itoa_base(d, 8))
+			+ print->precision_zero;
 		print->zero = 1;
 	}
 	while (print->precision_space-- > 0)
@@ -108,7 +109,8 @@ void	put_space_or_zero_x(t_printf *print, int x)
 	else if (ft_strlen(ft_ltoa(x)) < print->precision_zero)
 	{
 		print->precision_zero -= ft_strlen(ft_hexa_itoa(x, 0));
-		print->precision_space -= ft_strlen(ft_hexa_itoa(x, 0)) + print->precision_zero;
+		print->precision_space -= ft_strlen(ft_hexa_itoa(x, 0))
+			+ print->precision_zero;
 		print->zero = 1;
 	}
 	while (print->precision_space-- > 0)
@@ -137,19 +139,9 @@ void	put_space_or_zero_s(t_printf *print, char *s)
 		print->precision_space -= ft_strlen(s);
 		print->zero = 1;
 	}
-	/*else if (ft_strlen(s) < print->precision_space)*/
-	/*{*/
-		/*print->precision_space -= ft_strlen(s);*/
-		/*print->zero = 1;*/
-	/*}*/
 	while (print->precision_space-- > 0)
 	{
 		ft_putchar(' ');
 		++print->ret;
 	}
-	/*while (print->precision_zero-- > 0)*/
-	/*{*/
-		/*ft_putchar('0');*/
-		/*++print->ret;*/
-	/*}*/
 }

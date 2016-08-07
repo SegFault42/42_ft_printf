@@ -6,13 +6,13 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/06 22:10:23 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/07 05:15:50 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	percent_no_specifier(const char *format, t_printf *print)
+void		percent_no_specifier(const char *format, t_printf *print)
 {
 	if (print->precision_space - 1 > 0)
 		while (--print->precision_space > 0)
@@ -40,7 +40,7 @@ const char	*check_flag(const char *format, t_printf *print)
 		++format;
 	}
 	else if (*format == '0')
-	{	
+	{
 		++format;
 		if (*format != '-')
 			--format;
@@ -85,14 +85,14 @@ const char	*take_precision(const char *format, t_printf *print)
 			ft_putchar(' ');
 			++print->ret;
 		}
-		return(format);
+		return (format);
 	}
 	else
 		--format;
 	while (*format != '.')
 	{
 		if (ft_isalpha(*format) == TRUE)
-			return(format);
+			return (format);
 		++format;
 	}
 	if (*format == '.')
@@ -105,7 +105,7 @@ const char	*take_precision(const char *format, t_printf *print)
 	return (format);
 }
 
-int	is_precision_ok(const char *format, t_printf *print)
+int			is_precision_ok(const char *format, t_printf *print)
 {
 	if (*format == '.')
 	{
@@ -116,12 +116,12 @@ int	is_precision_ok(const char *format, t_printf *print)
 			if (*format == 'p')
 			{
 				ft_putstr("0x");
-				print->ret+=2;
+				print->ret += 2;
 				while (*format != '%')
 				{
 					++format;
 					if (*format == '\0')
-						break;
+						break ;
 					if (*format == '%' && *++format == '.' && *++format == '0'
 					&& *++format == 'p')
 					{
@@ -143,7 +143,7 @@ int	is_precision_ok(const char *format, t_printf *print)
 	return (0);
 }
 
-int	particular_case(const char *format, va_list pa)
+int			particular_case(const char *format, va_list pa)
 {
 	wchar_t	*string;
 	char	cp_string[7];
@@ -165,7 +165,7 @@ int	particular_case(const char *format, va_list pa)
 	return (0);
 }
 
-int	particular_case2(const char *format, va_list pa)
+int			particular_case2(const char *format, va_list pa)
 {
 	wchar_t	*string;
 	char	cp_string[16];
@@ -187,22 +187,16 @@ int	particular_case2(const char *format, va_list pa)
 	return (0);
 }
 
-int	ft_printf(const char *format, ...)
+int			ft_printf(const char *format, ...)
 {
 	t_printf	print;
 	va_list		pa;
-	int i = 0;
 
 	init_struct(&print);
 	va_start(pa, format);
 	if (ft_strcmp(format, "%4.1S") == 0)
 		if (particular_case(format, pa) == 1)
 			return (4);
-	/*else if (ft_strcmp(format, "%4.15S") == 0)*/
-	/*{*/
-		/*if (particular_case2(format, pa) == 1)*/
-			/*return (15);*/
-	/*}*/
 	if (*format == '%' && ft_strlen(format) == 1)
 		return (0);
 	while (*format != '\0')
@@ -240,7 +234,7 @@ int	ft_printf(const char *format, ...)
 						++format;
 						print.precision_zero = ft_atoi(format);
 					}
-						++format;
+					++format;
 				}
 				if (print.negatif == 1 && *format != 'x')
 					print.zero = 0;
@@ -261,7 +255,7 @@ int	ft_printf(const char *format, ...)
 				else if (*format == 'D' || *format == 'u')
 					percent_d_up(pa, &print, format);
 				else if (*format == 'U')
-					percent_U(pa, &print);
+					percent_u_up(pa, &print);
 				else if (*format == 'p')
 					percent_p(pa, &print, format);
 				else if (*format == 'o')
@@ -273,9 +267,9 @@ int	ft_printf(const char *format, ...)
 				else if (*format == 'x' || *format == 'X')
 					format = percent_x(pa, &print, format);
 				else if (*format == 'C')
-					percent_C(pa, &print);
+					percent_c_up(pa, &print);
 				else if (*format == 'S')
-					percent_S(pa, &print);
+					percent_s_up(pa, &print);
 				else
 					percent_no_specifier(format, &print);
 			}

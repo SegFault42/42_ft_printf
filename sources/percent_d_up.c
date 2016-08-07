@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/06 09:01:45 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/07 00:42:55 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/07 02:49:05 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ static const char	*percent_d_up_1(va_list pa, t_printf *print, char const *f)
 	return (f);
 }
 
-const char	*percent_d_up(va_list pa, t_printf *print, char const *format)
+const char			*percent_d_up(va_list pa, t_printf *print, char const *f)
 {
-	long			d;
+	long	d;
 
 	if (print->space_number > ft_strlen(ft_ltoa(d)))
 		print->space_number -= ft_strlen(ft_ltoa(d));
@@ -43,14 +43,14 @@ const char	*percent_d_up(va_list pa, t_printf *print, char const *format)
 			++print->ret;
 		}
 	}
-	if (*format == 'D')
+	if (*f == 'D')
 	{
 		d = va_arg(pa, long);
 		ft_put_long(d);
 		print->ret += ft_strlen(ft_ltoa(d));
-		return (format);
+		return (f);
 	}
-	else if (*format == 'u')
-		percent_d_up_1(pa, print, format);
-	return (format);
+	else if (*f == 'u')
+		percent_d_up_1(pa, print, f);
+	return (f);
 }

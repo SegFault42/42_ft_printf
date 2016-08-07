@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   percent_h.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/08/07 02:54:07 by rabougue          #+#    #+#             */
+/*   Updated: 2016/08/07 04:52:33 by rabougue         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
 const char	*percent_h(va_list pa, t_printf *print, const char *format)
@@ -8,8 +20,8 @@ const char	*percent_h(va_list pa, t_printf *print, const char *format)
 	unsigned char		hhu;
 
 	if (*++format == 'h' && (*++format == 'd' || *format == 'i' ||
-		  *format == 'u' || *format == 'o' || *format == 'x' || *format == 'X'
-		  || *format == 'C' || *format == 'S'))
+		*format == 'u' || *format == 'o' || *format == 'x' || *format == 'X'
+		|| *format == 'C' || *format == 'S'))
 	{
 		if (*format == 'u')
 		{
@@ -34,12 +46,12 @@ const char	*percent_h(va_list pa, t_printf *print, const char *format)
 		}
 		else if (*format == 'C')
 		{
-			percent_C(pa, print);
+			percent_c_up(pa, print);
 			return (format);
 		}
 		else if (*format == 'S')
 		{
-			percent_S(pa, print);
+			percent_s_up(pa, print);
 			return (format);
 		}
 		else
@@ -102,5 +114,5 @@ const char	*percent_h(va_list pa, t_printf *print, const char *format)
 		print->ret += ft_strlen(ft_ultoa(h));
 		return (format);
 	}
-	return(format);
+	return (format);
 }

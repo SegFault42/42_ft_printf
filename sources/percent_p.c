@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 05:33:04 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/06 22:27:16 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/07 03:05:20 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,12 @@ void	percent_p(va_list pa, t_printf *print, const char *format)
 	i = 0;
 	ok = 0;
 	p = va_arg(pa, char*);
-	/*print->precision_space = print->space_number;*/
 	if (print->precision_zero <= 0 || print->precision_space <= 0)
 	{
 		if (*--format == '0')
 		{
 			ft_putstr("0x");
-			print->ret+=2;
+			print->ret += 2;
 			return ;
 		}
 		else
@@ -55,7 +54,7 @@ void	percent_p(va_list pa, t_printf *print, const char *format)
 		ft_putstr("0x");
 	if (print->precision_zero > 0)
 	{
-		print->precision_zero -= ft_strlen(ft_hexa_ltoa((unsigned long long)p, 0));
+		print->precision_zero -= ft_strlen(ft_hexa_ltoa((unsigned long)p, 0));
 		while (print->precision_zero-- > 0)
 		{
 			ft_putchar('0');

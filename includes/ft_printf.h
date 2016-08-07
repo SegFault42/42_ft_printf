@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/06 09:05:53 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/07 01:17:30 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/07 05:00:03 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ const char		*percent_j(va_list pa, t_printf *print, const char *format);
 const char		*percent_h(va_list pa, t_printf *print, const char *format);
 const char		*percent_z(va_list pa, t_printf *print, const char *format);
 const char		*percent_d(va_list pa, t_printf *print, const char *format);
-const char		*percent_d_up(va_list pa, t_printf *print, const char *format);
+const char		*percent_d_up(va_list pa, t_printf *print, const char *f);
 const char		*percent_o(va_list pa, t_printf *print, const char *format);
 const char		*check_valid_specifier(const char *format, t_printf *print);
 const char		*count_espace(const char *format, t_printf *print);
@@ -57,10 +57,10 @@ void			write_space_int(int space, t_printf *print);
 void			write_space_wchar(t_printf *print);
 void			write_space_char(char *p, t_printf *print);
 void			write_space_int_other(t_printf *print, const char *format);
-void			percent_U(va_list pa, t_printf *print);
+void			percent_u_up(va_list pa, t_printf *print);
 void			percent_o_up(va_list pa, t_printf *print);
-void			percent_C(va_list pa, t_printf *print);
-void			percent_S(va_list pa, t_printf *print);
+void			percent_c_up(va_list pa, t_printf *print);
+void			percent_s_up(va_list pa, t_printf *print);
 void			percent_p(va_list pa, t_printf *print, const char *format);
 void			init_struct(t_printf *printf);
 void			write_space_hex(long space, t_printf *print);
@@ -71,10 +71,10 @@ void			put_space_or_zero_o(t_printf *print, int o);
 void			put_space_or_zero_x(t_printf *print, int x);
 void			put_space_or_zero_s(t_printf *print, char *s);
 void			percent_s(va_list pa, t_printf *print);
+void			struct_is_zero(t_printf *print, const char *format);
 int				space_zero(t_printf *print, const char *format, int d);
 int				ft_printf(const char *format, ...);
 int				count_space(const char *format);
 int				is_precision_ok(const char *format, t_printf *print);
-void			struct_is_zero(t_printf *print, const char *format);
 
 #endif

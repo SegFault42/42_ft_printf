@@ -1,23 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   percent_z.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/08/07 05:01:45 by rabougue          #+#    #+#             */
+/*   Updated: 2016/08/07 05:08:46 by rabougue         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
 const char	*percent_z(va_list pa, t_printf *print, const char *format)
 {
 	unsigned long	z;
 
-	/*if ((*++format == 'z') && (*++format == 'd' || *format == 'i'))*/
-	/*{*/
-		/*lld = va_arg(pa, long long int);*/
-		/*ft_put_long(lld);*/
-		/*print->ret += ft_strlen(ft_ltoa(lld));*/
-		/*return (format);*/
-	/*}*/
-	/*if ((*format == 'z') && *++format == 'u')*/
-	/*{*/
-		/*z = va_arg(pa, size_t);*/
-		/*ft_put_ulong(z);*/
-		/*print->ret += ft_strlen(ft_ultoa(z));*/
-		/*return (format);*/
-	/*}*/
 	if (*++format == 'd' || *format == 'i')
 	{
 		z = va_arg(pa, size_t);

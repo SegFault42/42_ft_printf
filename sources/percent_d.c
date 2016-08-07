@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/25 00:56:11 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/06 07:02:15 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/07 02:35:12 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int			space_zero(t_printf *print, const char *format, int d)
 			++format;
 		if (ft_isdigit(*format) == TRUE)
 		{
-			nb_zero = ft_atoi(format) - ft_strlen(ft_itoa(d)) - 1 ;
+			nb_zero = ft_atoi(format) - ft_strlen(ft_itoa(d)) - 1;
 			while (nb_zero > 0)
 			{
 				ft_putchar('0');
@@ -46,7 +46,7 @@ int			space_zero(t_printf *print, const char *format, int d)
 	return (0);
 }
 
-void	put_space_or_zero(t_printf *print, int d)
+void		put_space_or_zero(t_printf *print, int d)
 {
 	if (ft_strlen(ft_itoa(d)) > print->precision_zero)
 	{
@@ -70,7 +70,7 @@ void	put_space_or_zero(t_printf *print, int d)
 		ft_putchar(' ');
 		++print->ret;
 	}
-	if (d < 0 )
+	if (d < 0)
 		ft_putchar('-');
 	while (print->precision_zero-- > 0)
 	{
@@ -99,7 +99,8 @@ const char	*percent_d(va_list pa, t_printf *print, const char *format)
 		neg_sign = 1;
 	if (d < 0 && print->plus == 1)
 		print->precision_zero--;
-	if (print->space_number > 0 && print->precision_zero > 0 && print->negatif == 0)
+	if (print->space_number > 0 && print->precision_zero > 0 &&
+			print->negatif == 0)
 	{
 		print->space_number -= print->precision_zero;
 		if (print->plus == 1)
@@ -121,15 +122,6 @@ const char	*percent_d(va_list pa, t_printf *print, const char *format)
 	}
 	if (print->precision_zero > 0 || print->precision_space > 0)
 	{
-		/*if (print->precision_zero > 0)*/
-		/*{*/
-			/*print->precision_zero -= ft_strlen(ft_itoa(d));*/
-			/*while (print->precision_zero-- > 0)*/
-			/*{*/
-				/*ft_putchar('0');*/
-				/*++print->ret;*/
-			/*}*/
-		/*}*/
 		put_space_or_zero(print, d);
 		if (d < 0)
 			ft_putnbr(d * -1);
@@ -137,7 +129,8 @@ const char	*percent_d(va_list pa, t_printf *print, const char *format)
 			ft_putnbr(d);
 		if (print->negatif == 1)
 		{
-			print->space_number -= (ft_strlen(ft_itoa(d)) - print->precision_zero);
+			print->space_number -= (ft_strlen(ft_itoa(d))
+					- print->precision_zero);
 			while (print->space_number-- > 0)
 			{
 				ft_putchar(' ');
@@ -181,7 +174,7 @@ const char	*percent_d(va_list pa, t_printf *print, const char *format)
 	}
 	else
 		ft_putnbr(d);
-	format+=(i - 1);
+	format += (i - 1);
 	write_space_int(d, print);
 	print->ret += ft_strlen(ft_itoa(d));
 	return (format);

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   percent_x.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/08/07 05:00:42 by rabougue          #+#    #+#             */
+/*   Updated: 2016/08/07 05:01:30 by rabougue         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_printf.h"
 
-void	precision_space_x(t_printf * print, int x)
+void		precision_space_x(t_printf *print, int x)
 {
 	print->space_number -= ft_strlen(ft_hexa_itoa(x, 0));
 	while (print->space_number-- > 0)
@@ -22,7 +34,7 @@ const char	*percent_x(va_list pa, t_printf *print, const char *format)
 			ft_putchar('x');
 		else if (*format == 'X')
 			ft_putchar('X');
-		print->ret+=2;
+		print->ret += 2;
 		print->space_number -= 2;
 	}
 	x = va_arg(pa, int);
@@ -40,7 +52,7 @@ const char	*percent_x(va_list pa, t_printf *print, const char *format)
 			ft_putchar('x');
 		else if (*format == 'X')
 			ft_putchar('X');
-		print->ret+=2;
+		print->ret += 2;
 	}
 	if (*format == 'x')
 		ft_putstr(ft_hexa_itoa(x, 0));
@@ -55,4 +67,3 @@ const char	*percent_x(va_list pa, t_printf *print, const char *format)
 	print->ret += ft_strlen(ft_hexa_itoa(x, 0));
 	return (format);
 }
-
