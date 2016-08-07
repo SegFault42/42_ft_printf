@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/07 08:54:04 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/07 13:02:31 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ const char	*precision(const char *format, int d, t_printf *print)
 {
 	int	nb_zero;
 
+	if (*format == 'd')
+		return (format);
 	++format;
 	print->precision_zero -= ft_strlen(ft_itoa(d));
 	if (print->precision_zero > 0)
@@ -131,6 +133,8 @@ int			is_precision_ok(const char *format, t_printf *print)
 				}
 				return (1);
 			}
+			else if (*format == 'd')
+				return (0);
 			++format;
 			ft_putchar(*format);
 			print->ret++;
