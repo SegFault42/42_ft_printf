@@ -6,44 +6,11 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/06 05:51:51 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/07 05:17:18 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/07 17:17:46 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
-int		count_space(const char *format)
-{
-	char	*space;
-	int		i;
-	int		nb_space;
-	int		j;
-
-	j = 0;
-	i = 0;
-	if (ft_isdigit(*format) == 1)
-		while (ft_isdigit(*format) == 1)
-		{
-			format++;
-			i++;
-		}
-	if (i > 0)
-		space = (char *)malloc(sizeof(char) * i);
-	format -= i;
-	nb_space = i * 2;
-	while (i < nb_space)
-	{
-		space[j] = *format;
-		format++;
-		j++;
-		i++;
-	}
-	if (i > 0)
-		nb_space = ft_atoi(space);
-	if (i > 0)
-		free(space);
-	return (nb_space);
-}
 
 void	put_space_or_zero_u(t_printf *print, unsigned int d)
 {
@@ -113,11 +80,7 @@ void	put_space_or_zero_x(t_printf *print, int x)
 			+ print->precision_zero;
 		print->zero = 1;
 	}
-	while (print->precision_space-- > 0)
-	{
-		ft_putchar(' ');
-		++print->ret;
-	}
+	loop_space(print);
 	if (print->sharp == 1)
 	{
 		ft_putstr("0x");
