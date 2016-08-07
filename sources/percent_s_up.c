@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/07 04:47:54 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/07 04:50:39 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/07 09:22:01 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,7 +202,8 @@ void	percent_s_up(va_list pa, t_printf *print)
 	i = 0;
 	cp_pre_space = print->precision_space;
 	s = va_arg(pa, wchar_t*);
-	if (print->space_number > 0 && print->precision_space == 0 && print->negatif == 0 && print->point == 1)
+	if (print->space_number > 0 && print->precision_space == 0 &&
+		print->negatif == 0 && print->point == 1)
 	{
 		print->ret += print->space_number;
 		while (print->space_number-- > 0)

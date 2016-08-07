@@ -6,13 +6,11 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/07 03:02:26 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/07 09:15:18 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/07 09:20:59 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-	/*if (print->d == 1 && print->point == 1)*/
-		/*ft_putchar(' ');*/
 
 const char	*percent_o(va_list pa, t_printf *print, const char *format)
 {
