@@ -6,11 +6,33 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/07 03:02:26 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/07 09:40:23 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/07 18:17:13 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+
+static void	percent_o_1(va_list pa, t_printf *print, unsigned int o)
+{
+	if (print->negatif_x == 1 && print->space_number > 0 && print->point == 0)
+	{
+		print->space_number -= ft_strlen(ft_itoa(o));
+		while (print->space_number-- > 0)
+		{
+			ft_putchar(' ');
+			++print->ret;
+		}
+	}
+	else if (print->space_number > 0)
+	{
+		print->space_number -= ft_strlen(ft_itoa(o));
+		while (print->space_number-- > 0)
+		{
+			ft_putchar(' ');
+			++print->ret;
+		}
+	}
+}
 
 const char	*percent_o(va_list pa, t_printf *print, const char *format)
 {
@@ -35,24 +57,7 @@ const char	*percent_o(va_list pa, t_printf *print, const char *format)
 		ft_putchar(' ');
 	else
 		ft_putstr(ft_ultoa_base(o, 8));
-	if (print->negatif_x == 1 && print->space_number > 0 && print->point == 0)
-	{
-		print->space_number -= ft_strlen(ft_itoa(o));
-		while (print->space_number-- > 0)
-		{
-			ft_putchar(' ');
-			++print->ret;
-		}
-	}
-	else if (print->space_number > 0)
-	{
-		print->space_number -= ft_strlen(ft_itoa(o));
-		while (print->space_number-- > 0)
-		{
-			ft_putchar(' ');
-			++print->ret;
-		}
-	}
+	percent_o_1(pa, print, o);
 	print->ret += ft_strlen(ft_ultoa_base(o, 8));
 	return (format);
 }

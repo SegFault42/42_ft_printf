@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/06 09:20:41 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/06 09:20:46 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/07 18:59:12 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_struct(t_printf *printf)
 	printf->negatif_x = 0;
 	printf->zero = 0;
 	printf->d = 0;
+	printf->ok = 0;
 	printf->sharp = 0;
 	printf->plus = 0;
 	printf->space = 0;

@@ -6,43 +6,45 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 05:33:04 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/07 03:05:20 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/07 19:11:22 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	percent_p(va_list pa, t_printf *print, const char *format)
+static const char	*percent_p_1(t_printf *print, char const *format)
 {
-	char	*p;
-	int		i;
-	int		ok;
-
-	i = 0;
-	ok = 0;
-	p = va_arg(pa, char*);
 	if (print->precision_zero <= 0 || print->precision_space <= 0)
 	{
 		if (*--format == '0')
 		{
 			ft_putstr("0x");
 			print->ret += 2;
-			return ;
+			print->ok = 2;
+			return (format);
 		}
 		else
 			++format;
 	}
 	while (*format != '%')
-	{
 		--format;
-		++i;
-	}
 	++format;
 	if (*format == '0')
 	{
 		ft_putstr("0x");
-		ok = 1;
+		print->ok = 1;
 	}
+	return (format);
+}
+
+void		percent_p(va_list pa, t_printf *print, const char *format)
+{
+	char	*p;
+
+	p = va_arg(pa, char*);
+	format = percent_p_1(print, format);
+	if (print->ok == 2)
+		return ;
 	format = take_precision(format, print);
 	if (*format != '0' && *format != '-')
 	{
@@ -50,22 +52,15 @@ void	percent_p(va_list pa, t_printf *print, const char *format)
 			ft_putstr("0x");
 		write_space_char(p, print);
 	}
-	if (*format != '0' && ok == 0)
+	if (*format != '0' && print->ok == 0)
 		ft_putstr("0x");
 	if (print->precision_zero > 0)
 	{
 		print->precision_zero -= ft_strlen(ft_hexa_ltoa((unsigned long)p, 0));
-		while (print->precision_zero-- > 0)
-		{
-			ft_putchar('0');
-			++print->ret;
-		}
+		loop_zero(print);
 	}
 	if (*format == '-')
-	{
-		while (print->precision_space-- > 0)
-			ft_putchar(' ');
-	}
+		loop_space_no_ret(print);
 	ft_putstr(ft_hexa_ltoa((unsigned long long)p, 0));
 	write_space_char(p, print);
 	print->ret += ft_strlen(ft_hexa_ltoa((unsigned long long)p, 0)) + 2;
