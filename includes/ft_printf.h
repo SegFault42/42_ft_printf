@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/06 09:05:53 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/08 13:06:48 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/08 15:46:15 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,9 @@ const char		*percent_d(va_list pa, t_printf *print, const char *format);
 ** percent_d_2.c
 */
 const char		*percent_d_5(const char *f, t_printf *print, int d);
+/*
+** percent_d.c
+*/
+const char	*percent_x(va_list pa, t_printf *print, const char *format);
 
 #endif
