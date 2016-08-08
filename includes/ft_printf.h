@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/06 09:05:53 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/07 18:58:55 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/08 07:06:09 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,14 @@ int				is_precision_ok(const char *format, t_printf *print);
 void			loop_zero(t_printf *print);
 void			loop_space(t_printf *print);
 void			loop_space_no_ret(t_printf *print);
+/*
+** percent_l.c
+*/
+const char		*percent_l(va_list pa, t_printf *print, const char *format);
+/*
+** percent_l_2.c
+*/
+const char		*percent_l_5(va_list pa, t_printf *print, const char *f);
+const char		*percent_l_6(va_list pa, t_printf *print, const char *f);
 
 #endif

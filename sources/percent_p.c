@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/26 05:33:04 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/07 19:11:22 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/08 07:07:15 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static const char	*percent_p_1(t_printf *print, char const *format)
 	return (format);
 }
 
-void		percent_p(va_list pa, t_printf *print, const char *format)
+void				percent_p(va_list pa, t_printf *print, const char *format)
 {
 	char	*p;
 
