@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/06 09:05:53 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/08 15:46:15 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/08 16:12:16 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,13 @@ void			percent_l_6(va_list pa, t_printf *print, const char *f);
 */
 void			loop_zero(t_printf *print);
 void			loop_space(t_printf *print);
-void			loop_space_no_ret(t_printf *print);
 void			while_nb_zero(int nb_zero, t_printf *print);
 void			while_space_number(t_printf *print);
 void			while_space(t_printf *print);
+/*
+** write_space_or_zero_2.c
+*/
+void			loop_space_no_ret(t_printf *print);
 /*
 ** space_or_zero.c
 */
@@ -119,6 +122,10 @@ const char		*percent_d_5(const char *f, t_printf *print, int d);
 /*
 ** percent_d.c
 */
-const char	*percent_x(va_list pa, t_printf *print, const char *format);
+const char		*percent_x(va_list pa, t_printf *print, const char *format);
+/*
+** width_2.c
+*/
+void			write_space_hex(long space, t_printf *print);
 
 #endif

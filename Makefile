@@ -6,7 +6,7 @@
 #    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
-#    Updated: 2016/08/08 13:02:53 by rabougue         ###   ########.fr        #
+#    Updated: 2016/08/08 16:13:07 by rabougue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRCS = ./sources/ft_printf.c ./sources/padding.c ./sources/percent_percent.c \
 		./sources/percent_o_up.c ./sources/percent_c_up.c ./sources/percent_d_2.c\
 		./sources/percent_s_up.c ./sources/percent_u_up.c ./sources/init.c \
 		./sources/check.c ./sources/check_struct.c ./sources/percent_l_2.c\
-		./sources/write_space_or_zero.c ./sources/space_or_zero.c
+		./sources/write_space_or_zero.c ./sources/space_or_zero.c ./sources/width_2.c \
+		./sources/write_space_or_zero_2.c \
 
 OBJS = $(SRCS:.c=.o)
 
