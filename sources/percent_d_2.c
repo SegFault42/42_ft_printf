@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   percent_d_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/06 09:20:41 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/08 12:41:11 by rabougue         ###   ########.fr       */
+/*   Created: 2016/08/08 13:00:54 by rabougue          #+#    #+#             */
+/*   Updated: 2016/08/08 13:01:25 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	init_struct(t_printf *printf)
+const char	*percent_d_5(const char *f, t_printf *print, int d)
 {
-	printf->ret = 0;
-	printf->ret_wchar = 0;
-	printf->valid = 0;
-	printf->space_number = 0;
-	printf->negatif = 0;
-	printf->neg_sign = 0;
-	printf->negatif_x = 0;
-	printf->zero = 0;
-	printf->d = 0;
-	printf->ok = 0;
-	printf->sharp = 0;
-	printf->plus = 0;
-	printf->space = 0;
-	printf->point = 0;
-	printf->precision_zero = 0;
-	printf->precision_space = 0;
-	printf->i = 0;
+	if (d < 0 && *++f == '0')
+	{
+		if (print->zero == 1 && print->neg_sign == 0)
+			ft_putchar('-');
+		ft_putnbr(d * -1);
+		print->zero = 1;
+	}
+	else if (print->point == 0)
+		ft_putnbr(d);
+	else if (print->point == 1 && d > 0)
+	{
+		ft_putnbr(d);
+		print->ret += ft_strlen(ft_itoa(d));
+	}
+	return (f);
 }

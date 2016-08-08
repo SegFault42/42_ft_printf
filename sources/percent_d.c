@@ -6,99 +6,21 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/25 00:56:11 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/07 14:56:59 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/08 13:05:06 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int			space_zero(t_printf *print, const char *format, int d)
+static int			percent_d_1(va_list pa, t_printf *print, int z, int d)
 {
-	int	i;
-	int	nb_zero;
-
-	i = 0;
-	while (*format != '%')
-	{
-		--format;
-		i++;
-	}
-	if (*++format == ' ' && *++format == '0')
-	{
-		ft_putchar(' ');
-		++print->ret;
-		while (*format == '0')
-			++format;
-		if (ft_isdigit(*format) == TRUE)
-		{
-			nb_zero = ft_atoi(format) - ft_strlen(ft_itoa(d)) - 1;
-			while (nb_zero > 0)
-			{
-				ft_putchar('0');
-				nb_zero--;
-				++print->ret;
-			}
-			ft_putnbr(d);
-			print->ret += ft_strlen(ft_itoa(d));
-			return (1);
-		}
-	}
-	return (0);
-}
-
-void		put_space_or_zero(t_printf *print, int d)
-{
-	if (ft_strlen(ft_itoa(d)) > print->precision_zero)
-	{
-		print->precision_space -= ft_strlen(ft_itoa(d));
-		print->space = 1;
-	}
-	else if (ft_strlen(ft_itoa(d)) < print->precision_zero)
-	{
-		if (d < 0)
-			print->precision_space -= print->precision_zero + 1;
-		else
-			print->precision_space -= print->precision_zero;
-		print->zero = 1;
-	}
-	if (d < 0)
-		print->precision_zero -= ft_strlen(ft_itoa(d)) - 1;
-	else
-		print->precision_zero -= ft_strlen(ft_itoa(d));
-	while (print->precision_space-- > 0)
-	{
-		ft_putchar(' ');
-		++print->ret;
-	}
-	if (d < 0)
-		ft_putchar('-');
-	while (print->precision_zero-- > 0)
-	{
-		ft_putchar('0');
-		++print->ret;
-	}
-}
-
-const char	*percent_d(va_list pa, t_printf *print, const char *format)
-{
-	int				d;
-	int				i;
-	int				neg_sign;
-	int				z;
-	int				dd;
-
-	i = 0;
-	d = va_arg(pa, int);
-	dd = print->d;
-	print->d = d;
-	neg_sign = 0;
 	z = 0;
 	if (d < 0 && print->point == 1)
 		--print->space_number;
 	if (print->space_number > print->precision_zero)
 		z = 1;
 	if (print->space_number > 0)
-		neg_sign = 1;
+		print->neg_sign = 1;
 	if (d < 0 && print->plus == 1)
 		print->precision_zero--;
 	if (print->space_number > 0 && print->precision_zero > 0 &&
@@ -113,15 +35,22 @@ const char	*percent_d(va_list pa, t_printf *print, const char *format)
 			++print->ret;
 		}
 	}
+	return (z);
+}
+
+static void			percent_d_2(t_printf *print, int z, int d)
+{
 	if (print->plus == 1 && print->precision_zero > 0 && d > 0)
 	{
 		ft_putchar('+');
-		if (print->negatif == 1)
-			--print->space_number;
-		if (z == 0)
-			--print->precision_zero;
+		decr_space_number(print);
+		decr_precision_zero(print, z);
 		++print->ret;
 	}
+}
+
+static int			percent_d_3(t_printf *print, int dd, int d)
+{
 	if (print->precision_zero > 0 || print->precision_space > 0)
 	{
 		put_space_or_zero(print, d);
@@ -135,55 +64,54 @@ const char	*percent_d(va_list pa, t_printf *print, const char *format)
 		{
 			print->space_number -= (ft_strlen(ft_itoa(d))
 					- print->precision_zero);
-			while (print->space_number-- > 0)
-			{
-				ft_putchar(' ');
-				++print->ret;
-			}
+			while_space_number(print);
 		}
 		print->ret += ft_strlen(ft_itoa(d));
-		return (format);
+		return (1);
 	}
-	if (space_zero(print, format, d) == 1)
-		return (format);
+	return (0);
+}
+
+static const char	*percent_d_4(const char *f, t_printf *print, int dd, int d)
+{
 	if (print->plus == 0 && print->point != 1)
 		write_space_int(d, print);
 	if (print->point == 1)
-		format = precision(format, d, print);
+		f = precision(f, d, print);
 	if (d >= 0 && print->plus == 0)
-	{
-		while (print->space)
-		{
-			ft_putchar(' ');
-			++print->ret;
-			--print->space;
-		}
-	}
+		while_space(print);
 	if (print->plus == 1 && d >= 0)
 	{
 		ft_putchar('+');
 		++print->ret;
 	}
-	while (*format != '%')
+	while (*f != '%')
 	{
-		--format;
-		i++;
+		--f;
+		print->i++;
 	}
-	if (d < 0 && *++format == '0')
-	{
-		if (print->zero == 1 && neg_sign == 0)
-			ft_putchar('-');
-		ft_putnbr(d * -1);
-		print->zero = 1;
-	}
-	else if (print->point == 0)
-		ft_putnbr(d);
-	else if (print->point == 1 && d > 0)
-	{
-		ft_putnbr(d);
-		print->ret += ft_strlen(ft_itoa(d));
-	}
-	format += (i - 1);
+	return (f);
+}
+
+const char			*percent_d(va_list pa, t_printf *print, const char *format)
+{
+	int	d;
+	int	z;
+	int	dd;
+
+	d = va_arg(pa, int);
+	dd = print->d;
+	print->d = d;
+	print->neg_sign = 0;
+	z = percent_d_1(pa, print, z, d);
+	percent_d_2(print, z, d);
+	if (percent_d_3(print, dd, d) == 1)
+		return (format);
+	if (space_zero(print, format, d) == 1)
+		return (format);
+	format = percent_d_4(format, print, dd, d);
+	format = percent_d_5(format, print, d);
+	format += (print->i - 1);
 	write_space_int(d, print);
 	if (print->point == 0)
 		print->ret += ft_strlen(ft_itoa(d));

@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/06 09:05:53 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/08 07:15:03 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/08 13:06:48 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct	s_printf
 	int			space_number;
 	int			valid;
 	int			negatif;
+	int			neg_sign;
 	int			negatif_x;
 	int			zero;
 	int			d;
@@ -34,6 +35,7 @@ typedef struct	s_printf
 	int			point;
 	int			precision_zero;
 	int			precision_space;
+	int			i;
 }				t_printf;
 
 const char		*percent_percent(const char *format, t_printf *printf);
@@ -77,9 +79,6 @@ int				space_zero(t_printf *print, const char *format, int d);
 int				ft_printf(const char *format, ...);
 int				count_space(const char *format);
 int				is_precision_ok(const char *format, t_printf *print);
-void			loop_zero(t_printf *print);
-void			loop_space(t_printf *print);
-void			loop_space_no_ret(t_printf *print);
 /*
 ** percent_l.c
 */
@@ -89,5 +88,33 @@ const char		*percent_l(va_list pa, t_printf *print, const char *format);
 */
 void			percent_l_5(va_list pa, t_printf *print, const char *f);
 void			percent_l_6(va_list pa, t_printf *print, const char *f);
+/*
+** write_space_or_zero.c
+*/
+void			loop_zero(t_printf *print);
+void			loop_space(t_printf *print);
+void			loop_space_no_ret(t_printf *print);
+void			while_nb_zero(int nb_zero, t_printf *print);
+void			while_space_number(t_printf *print);
+void			while_space(t_printf *print);
+/*
+** space_or_zero.c
+*/
+int				space_zero(t_printf *print, const char *format, int d);
+void			put_space_or_zero(t_printf *print, int d);
+/*
+** check_struct.c
+*/
+void			decr_space_number(t_printf *print);
+void			decr_precision_zero(t_printf *print, int z);
+void			struct_is_zero(t_printf *print, const char *format);
+/*
+** percent_d.c
+*/
+const char		*percent_d(va_list pa, t_printf *print, const char *format);
+/*
+** percent_d_2.c
+*/
+const char		*percent_d_5(const char *f, t_printf *print, int d);
 
 #endif
