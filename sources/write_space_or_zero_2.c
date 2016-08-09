@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/08 16:11:29 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/08 16:12:36 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/09 06:56:20 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,4 +16,28 @@ void	loop_space_no_ret(t_printf *print)
 {
 	while (print->precision_space-- > 0)
 		ft_putchar(' ');
+}
+
+void	while_precision_space(t_printf *print)
+{
+	while (print->precision_space-- > 0)
+	{
+		ft_putchar('0');
+		++print->ret;
+	}
+}
+
+void	while_space_number_zero(t_printf *print)
+{
+	while (print->space_number-- > 0)
+	{
+		ft_putchar('0');
+		++print->ret;
+	}
+}
+
+void	write_null(t_printf *print)
+{
+	ft_putstr("(null)");
+	print->ret += 6;
 }

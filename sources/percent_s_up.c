@@ -6,13 +6,27 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/07 04:47:54 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/07 16:18:48 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/09 06:41:46 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int		count_octet_wchar(wchar_t *s, t_printf *print)
+static int		count_octet_wchar_1(t_printf *print, int octet)
+{
+	if (print->precision_space > 0)
+		if (print->precision_space < octet)
+		{
+			++print->ret;
+			print->precision_space -= 3;
+			print->i = 1;
+			return (octet);
+		}
+	octet += 3;
+	return (octet);
+}
+
+int				count_octet_wchar(wchar_t *s, t_printf *print)
 {
 	int	i;
 	int	octet;
@@ -29,14 +43,9 @@ int		count_octet_wchar(wchar_t *s, t_printf *print)
 				octet += 2;
 			else if (s[i] < 65536)
 			{
-				if (print->precision_space > 0)
-					if (print->precision_space < octet)
-					{
-						++print->ret;
-						print->precision_space -= 3;
-						return (octet);
-					}
-				octet += 3;
+				octet = count_octet_wchar_1(print, octet);
+				if (print->i == 1)
+					return (octet);
 			}
 			else if (s[i] < 1114112)
 				octet += 4;
@@ -46,79 +55,7 @@ int		count_octet_wchar(wchar_t *s, t_printf *print)
 	return (octet);
 }
 
-void	percent_s_up_precision(t_printf *print, wchar_t *s, int cp_pre_space)
-{
-	int	i;
-	int	zero_plus_wchar;
-
-	i = 0;
-	if (print->negatif == 0)
-	{
-		print->ret_wchar = count_octet_wchar(s, print);
-		write_space_wchar(print);
-	}
-	zero_plus_wchar = print->precision_zero + print->ret_wchar;
-	if (s != NULL)
-	{
-		while (s[i])
-		{
-			if (s[i] > 0 && s[i] < 128)
-			{
-				print->ret_wchar++;
-				if (print->precision_zero > 0)
-					if (print->ret_wchar > zero_plus_wchar)
-					{
-						++print->ret;
-						return ;
-					}
-				ft_putchar(s[i]);
-			}
-			else if (s[i] < 2048)
-			{
-				print->ret_wchar += 2;
-				if (print->precision_zero > 0)
-					if (print->ret_wchar > zero_plus_wchar)
-					{
-						print->ret += 2;
-						return ;
-					}
-				ft_putchar(192 | (s[i] >> 6));
-				ft_putchar(128 | (s[i] & 63));
-			}
-			else if (s[i] < 65536)
-			{
-				print->ret_wchar += 3;
-				if (print->precision_zero > 0)
-					if (print->ret_wchar > zero_plus_wchar)
-					{
-						print->ret += 3;
-						return ;
-					}
-				ft_putchar(224 | (s[i] >> 12));
-				ft_putchar(128 | ((s[i] >> 6) & 63));
-				ft_putchar(128 | (s[i] & 63));
-			}
-			else if (s[i] < 1114112)
-			{
-				print->ret_wchar += 4;
-				if (print->precision_zero > 0)
-					if (print->ret_wchar > zero_plus_wchar)
-					{
-						print->ret += 4;
-						return ;
-					}
-				ft_putchar(240 | (s[i] >> 18));
-				ft_putchar(128 | ((s[i] >> 12) & 63));
-				ft_putchar(128 | ((s[i] >> 6) & 63));
-				ft_putchar(128 | (s[i] & 63));
-			}
-			i++;
-		}
-	}
-	print->ret += count_octet_wchar(s, print);
-}
-
-void	percent_s_up_normal(t_printf *print, wchar_t *s)
+void			percent_s_up_normal(t_printf *print, wchar_t *s)
 {
 	int	i;
 
@@ -127,32 +64,7 @@ void	percent_s_up_normal(t_printf *print, wchar_t *s)
 	{
 		while (s[i])
 		{
-			if (s[i] > 0 && s[i] < 128)
-			{
-				print->ret_wchar++;
-				ft_putchar(s[i]);
-			}
-			else if (s[i] < 2048)
-			{
-				print->ret_wchar += 2;
-				ft_putchar(192 | (s[i] >> 6));
-				ft_putchar(128 | (s[i] & 63));
-			}
-			else if (s[i] < 65536)
-			{
-				print->ret_wchar += 3;
-				ft_putchar(224 | (s[i] >> 12));
-				ft_putchar(128 | ((s[i] >> 6) & 63));
-				ft_putchar(128 | (s[i] & 63));
-			}
-			else if (s[i] < 1114112)
-			{
-				print->ret_wchar += 4;
-				ft_putchar(240 | (s[i] >> 18));
-				ft_putchar(128 | ((s[i] >> 12) & 63));
-				ft_putchar(128 | ((s[i] >> 6) & 63));
-				ft_putchar(128 | (s[i] & 63));
-			}
+			percent_s_up_normal_1(print, s, i);
 			i++;
 		}
 	}
@@ -170,30 +82,35 @@ void	percent_s_up_normal(t_printf *print, wchar_t *s)
 	print->ret += count_octet_wchar(s, print);
 }
 
-void	print_space(t_printf *print)
+static void		percent_s_up_1(t_printf *print, wchar_t *s, int cp_pre_space)
 {
-	while (print->precision_space-- > 0)
+	if (print->precision_space > 0 || print->precision_zero > 0)
 	{
-		ft_putchar(' ');
-		++print->ret;
+		if (print->precision_space > 0 && print->precision_zero > 0)
+		{
+			if (print->precision_space < print->precision_zero)
+			{
+			}
+			else
+			{
+				print->precision_space -= count_octet_wchar(s, print);
+				print->precision_space = cp_pre_space - 3;
+				loop_space(print);
+			}
+			percent_s_up_precision(print, s);
+		}
+		else
+		{
+			print->precision_space -= count_octet_wchar(s, print);
+			loop_space(print);
+			percent_s_up_precision(print, s);
+		}
 	}
+	else
+		percent_s_up_normal(print, s);
 }
 
-void	print_zero(t_printf *print)
-{
-	while (print->precision_space-- > 0)
-	{
-		ft_putchar('0');
-		++print->ret;
-	}
-	while (print->space_number-- > 0)
-	{
-		ft_putchar('0');
-		++print->ret;
-	}
-}
-
-void	percent_s_up(va_list pa, t_printf *print)
+void			percent_s_up(va_list pa, t_printf *print)
 {
 	wchar_t			*s;
 	int				i;
@@ -213,30 +130,8 @@ void	percent_s_up(va_list pa, t_printf *print)
 	if (print->zero == 1)
 	{
 		print->space_number -= count_octet_wchar(s, print);
-		print_zero(print);
+		while_precision_space(print);
+		while_space_number_zero(print);
 	}
-	if (print->precision_space > 0 || print->precision_zero > 0)
-	{
-		if (print->precision_space > 0 && print->precision_zero > 0)
-		{
-			if (print->precision_space < print->precision_zero)
-			{
-			}
-			else
-			{
-				print->precision_space -= count_octet_wchar(s, print);
-				print->precision_space = cp_pre_space - 3;
-				print_space(print);
-			}
-			percent_s_up_precision(print, s, cp_pre_space);
-		}
-		else
-		{
-			print->precision_space -= count_octet_wchar(s, print);
-			print_space(print);
-			percent_s_up_precision(print, s, cp_pre_space);
-		}
-	}
-	else
-		percent_s_up_normal(print, s);
+	percent_s_up_1(print, s, cp_pre_space);
 }

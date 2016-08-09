@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/06 09:05:53 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/08 16:12:16 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/09 07:08:45 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void			put_space_or_zero_u(t_printf *print, unsigned int d);
 void			put_space_or_zero_o(t_printf *print, int o);
 void			put_space_or_zero_x(t_printf *print, int x);
 void			put_space_or_zero_s(t_printf *print, char *s);
-void			percent_s(va_list pa, t_printf *print);
+void			percent_s(va_list pa, t_printf *p);
 void			struct_is_zero(t_printf *print, const char *format);
 int				space_zero(t_printf *print, const char *format, int d);
 int				ft_printf(const char *format, ...);
@@ -100,6 +100,9 @@ void			while_space(t_printf *print);
 ** write_space_or_zero_2.c
 */
 void			loop_space_no_ret(t_printf *print);
+void			while_precision_space(t_printf *print);
+void			while_space_number_zero(t_printf *print);
+void			write_null(t_printf *print);
 /*
 ** space_or_zero.c
 */
@@ -127,5 +130,17 @@ const char		*percent_x(va_list pa, t_printf *print, const char *format);
 ** width_2.c
 */
 void			write_space_hex(long space, t_printf *print);
+/*
+** wchar_t.c
+*/
+void			percent_s_up_normal_1(t_printf *print, wchar_t *s, int i);
+/*
+** percent_s_up_precision.c
+*/
+void			percent_s_up_precision(t_printf *print, wchar_t *s);
+/*
+** percent_s_up.c
+*/
+int				count_octet_wchar(wchar_t *s, t_printf *print);
 
 #endif

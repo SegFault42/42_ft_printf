@@ -6,16 +6,93 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/06 07:20:36 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/07 04:47:28 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/09 15:36:13 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	percent_s(va_list pa, t_printf *print)
+static int	percent_s_1(va_list pa, t_printf *print, char *s, int space)
+{
+	if (print->zero == 1)
+	{
+		print->space_number -= space;
+		while_space_number_zero(print);
+	}
+	if (print->precision_zero == 0 && print->precision_space > 0)
+	{
+		if (s != '\0' && print->point == 0)
+			print->precision_space -= space;
+		loop_space(print);
+		if (s != '\0' && print->point == 0)
+		{
+			print->i = 1;
+			ft_putstr(s);
+			print->ret += space;
+		}
+		return (1);
+	}
+	return (0);
+}
+
+static void	percent_s_2(va_list pa, t_printf *print, int space, char *s)
+{
+	if (print->precision_space > print->precision_zero)
+	{
+		if (ft_strlen(s) < print->precision_zero)
+			print->precision_space -= ft_strlen(s);
+		else
+			print->precision_space -= print->precision_zero;
+		loop_space(print);
+	}
+	else if (print->precision_space < print->precision_zero &&
+			print->negatif == 0)
+	{
+		print->precision_space -= space;
+		loop_space(print);
+	}
+	else if (print->precision_zero > 0)
+	{
+		if (print->precision_zero < space)
+			print->precision_space -= print->precision_zero;
+		else if (print->precision_zero > space)
+			print->precision_space -= space;
+	}
+	if (print->precision_space > 0)
+		write_space_percent_s(space, print);
+}
+
+static void	percent_s_3(t_printf *print, char *s, int i, int nb_zero)
+{
+	if (print->precision_zero > 0 && ft_strlen(s) > print->precision_zero)
+		while (print->precision_zero != 0)
+		{
+			ft_putchar(s[i++]);
+			print->precision_zero--;
+			++print->ret;
+		}
+	else
+	{
+		ft_putstr(s);
+		print->ret += ft_strlen(s);
+		if (print->negatif == 1)
+		{
+			print->space_number -= ft_strlen(s);
+			while_space_number(print);
+		}
+	}
+	if (print->space_number > 0)
+	{
+		print->space_number -= nb_zero;
+		while_space_number(print);
+	}
+	if (print->precision_space > 0)
+		write_space_percent_s(ft_strlen(s), print);
+}
+
+void		percent_s(va_list pa, t_printf *print)
 {
 	char	*s;
-	int		space;
 	int		nb_zero;
 	int		i;
 
@@ -23,111 +100,13 @@ void	percent_s(va_list pa, t_printf *print)
 	s = va_arg(pa, char*);
 	nb_zero = print->precision_zero;
 	if (s == '\0')
-	{
-		if (print->space_number > 0)
-		{
-			while (print->space_number-- > 0)
-			{
-				ft_putchar('0');
-				++print->ret;
-			}
-		}
-		else
-		{
-			ft_putstr("(null)");
-			print->ret += 6;
-		}
-	}
+		print->space_number > 0 ? while_space_number_zero(print)
+			: write_null(print);
 	else
 	{
-		space = ft_strlen(s);
-		if (print->zero == 1)
-		{
-			print->space_number -= space;
-			while (print->space_number-- > 0)
-			{
-				ft_putchar('0');
-				++print->ret;
-			}
-		}
-		if (print->precision_zero == 0 && print->precision_space > 0)
-		{
-			if (s != '\0' && print->point == 0)
-				print->precision_space -= ft_strlen(s);
-			while (print->precision_space-- != 0)
-			{
-				ft_putchar(' ');
-				++print->ret;
-			}
-			if (s != '\0' && print->point == 0)
-			{
-				ft_putstr(s);
-				print->ret += ft_strlen(s);
-			}
+		if (percent_s_1(pa, print, s, ft_strlen(s)) == 1)
 			return ;
-		}
-		else if (print->precision_space > print->precision_zero)
-		{
-			if (space < print->precision_zero)
-				print->precision_space -= space;
-			else
-				print->precision_space -= print->precision_zero;
-			while (print->precision_space-- != 0)
-			{
-				ft_putchar(' ');
-				print->ret++;
-			}
-		}
-		else if (print->precision_space < print->precision_zero &&
-				print->negatif == 0)
-		{
-			print->precision_space -= space;
-			while (print->precision_space-- > 0)
-			{
-				ft_putchar(' ');
-				print->ret++;
-			}
-		}
-		else if (print->precision_zero > 0)
-		{
-			if (print->precision_zero < ft_strlen(s))
-				print->precision_space -= print->precision_zero;
-			else if (print->precision_zero > ft_strlen(s))
-				print->precision_space -= ft_strlen(s);
-		}
-		if (print->precision_space > 0)
-			write_space_percent_s(space, print);
-		if (print->precision_zero > 0 && space > print->precision_zero)
-			while (print->precision_zero != 0)
-			{
-				ft_putchar(s[i++]);
-				print->precision_zero--;
-				++print->ret;
-			}
-		else
-		{
-			ft_putstr(s);
-			print->ret += ft_strlen(s);
-			if (print->negatif == 1)
-			{
-				print->space_number -= space;
-				while (print->space_number-- > 0)
-				{
-					ft_putchar(' ');
-					print->ret++;
-				}
-			}
-		}
-		if (print->space_number > 0)
-		{
-			print->space_number -= nb_zero;
-			while (print->space_number-- > 0)
-			{
-				ft_putchar(' ');
-				++print->ret;
-			}
-		}
-		if (print->precision_space > 0)
-			write_space_percent_s(space, print);
+		percent_s_2(pa, print, ft_strlen(s), s);
+		percent_s_3(print, s, i, nb_zero);
 	}
 }

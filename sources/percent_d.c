@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/25 00:56:11 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/08 13:05:06 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/09 02:00:57 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ const char			*percent_d(va_list pa, t_printf *print, const char *format)
 	format = percent_d_4(format, print, dd, d);
 	format = percent_d_5(format, print, d);
 	format += (print->i - 1);
+	print->i = 0;
 	write_space_int(d, print);
 	if (print->point == 0)
 		print->ret += ft_strlen(ft_itoa(d));
