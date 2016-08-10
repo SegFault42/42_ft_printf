@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/06 09:05:53 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/10 06:29:45 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/10 09:28:23 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,5 +175,9 @@ const char		*if_point_or_plus(const char *format, t_printf *print);
 */
 int				particular_case(const char *format, va_list pa);
 int				particular_case_2(const char *format, va_list pa);
+/*
+** write_space_or_zero_3.c
+*/
+void			loop_zero_no_ret(t_printf *print);
 
 #endif

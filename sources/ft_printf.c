@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/10 06:24:59 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/10 09:59:19 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,7 @@ int			ft_printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
-			format++;
-			if (is_precision_ok(format, &print) == 1)
+			if (format++ && is_precision_ok(format, &print) == 1)
 				return (print.ret);
 			format = ft_printf_1(format, &print);
 			format = ft_printf_2(format, &print, pa);
