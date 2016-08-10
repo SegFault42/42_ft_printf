@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/08 16:11:29 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/09 06:56:20 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/09 16:30:05 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,13 @@ void	write_null(t_printf *print)
 {
 	ft_putstr("(null)");
 	print->ret += 6;
+}
+
+void	space_number_inf(t_printf *print)
+{
+	while (--print->precision_space > 0)
+	{
+		ft_putchar(' ');
+		++print->ret;
+	}
 }

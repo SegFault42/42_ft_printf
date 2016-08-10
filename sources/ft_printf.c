@@ -6,56 +6,11 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/07 13:02:31 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/10 01:47:30 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
-void		percent_no_specifier(const char *format, t_printf *print)
-{
-	if (print->precision_space - 1 > 0)
-		while (--print->precision_space > 0)
-		{
-			ft_putchar(' ');
-			++print->ret;
-		}
-	write_space_int_other(print, format);
-	ft_putchar(*format);
-	write_space_int_other(print, format);
-	++print->ret;
-}
-
-const char	*check_flag(const char *format, t_printf *print)
-{
-	format = check_space(format, print);
-	if (*format == '#')
-	{
-		print->sharp = 1;
-		++format;
-	}
-	else if (*format == '+')
-	{
-		print->plus = 1;
-		++format;
-	}
-	else if (*format == '0')
-	{
-		++format;
-		if (*format != '-')
-			--format;
-	}
-	else if (*format == '.')
-	{
-		print->point = 1;
-		++format;
-		print->precision_zero = ft_atoi(format);
-		while (ft_isdigit(*format) == TRUE)
-			++format;
-	}
-	format = check_space(format, print);
-	return (format);
-}
 
 const char	*precision(const char *format, int d, t_printf *print)
 {
@@ -82,11 +37,7 @@ const char	*take_precision(const char *format, t_printf *print)
 		print->precision_space = ft_atoi(format);
 	if (*++format == '%')
 	{
-		while (--print->precision_space > 0)
-		{
-			ft_putchar(' ');
-			++print->ret;
-		}
+		space_number_inf(print);
 		return (format);
 	}
 	else
@@ -105,46 +56,6 @@ const char	*take_precision(const char *format, t_printf *print)
 	print->precision_zero = ft_atoi(format);
 	++format;
 	return (format);
-}
-
-int			is_precision_ok(const char *format, t_printf *print)
-{
-	if (*format == '.')
-	{
-		format++;
-		if (*format == 'd' || *format == 'i' || *format == 'u' ||
-		*format == 'o' || *format == 'x' || *format == 'X' || *format == 'p')
-		{
-			if (*format == 'p')
-			{
-				ft_putstr("0x");
-				print->ret += 2;
-				while (*format != '%')
-				{
-					++format;
-					if (*format == '\0')
-						break ;
-					if (*format == '%' && *++format == '.' && *++format == '0'
-					&& *++format == 'p')
-					{
-						ft_putstr(", 0x");
-						print->ret += 4;
-					}
-				}
-				return (1);
-			}
-			else if (*format == 'd')
-				return (0);
-			++format;
-			ft_putchar(*format);
-			print->ret++;
-			++format;
-			ft_putchar(*format);
-			print->ret++;
-			return (1);
-		}
-	}
-	return (0);
 }
 
 int			particular_case(const char *format, va_list pa)
