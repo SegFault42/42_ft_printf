@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/10 02:49:22 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/10 02:51:30 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/10 06:20:34 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,28 @@ const char	*ft_printf_1(const char *format, t_printf *print)
 	return (format);
 }
 
-const char	*ft_printf_2(const char *format, t_printf *print)
+const char	*ft_printf_2(const char *format, t_printf *print, va_list pa)
 {
-	if (ft_isdigit(*format) == TRUE)
-		format = count_espace(format, print);
-	if (*format == '.' || *format == '+')
+	if (*format != '%')
 	{
-		if (*format == '+')
-			print->plus = 1;
-		else if (*format == '.')
-			print->point = 1;
-		++format;
-	}
-	if (ft_isdigit(*format) == TRUE)
-	{
-		if (*--format == '.' || *format == '+')
-		{
+		if (ft_isdigit(*format) == TRUE)
+			format = count_espace(format, print);
+		if (*format == '.' || *format == '+')
+			format = if_point_or_plus(format, print);
+		if (ft_isdigit(*format) == TRUE)
+			format = if_is_digit(format, print);
+		if (print->negatif == 1 && *format != 'x')
+			print->zero = 0;
+		while (print->precision_zero > 0 && ft_isdigit(*format) == 1)
 			++format;
-			print->precision_zero = ft_atoi(format);
-		}
-		++format;
+		if (*F == 'l' || *F == 'h' || *F == 'j' || *F == 'z' || *F == 's' ||
+				*F == 'd' || *F == 'i' || *F == 'D' || *F == 'u')
+			F = ft_printf_3(F, print, pa);
+		else if (*F == 'U' || *F == 'p' || *F == 'o' || *F == 'O' ||
+				*F == 'c' || *F == 'x' || *F == 'X' || *F == 'C' || *F == 'S')
+			F = ft_printf_4(F, print, pa);
+		else
+			percent_no_specifier(format, print);
 	}
 	return (format);
 }
@@ -90,26 +92,4 @@ const char	*ft_printf_4(const char *format, t_printf *print, va_list pa)
 	else if (*format == 'S')
 		percent_s_up(pa, print);
 	return (format);
-}
-
-const char	*ft_printf_5(const char *f, t_printf *print, va_list pa)
-{
-	f = ft_printf_1(f, print);
-	if (*f != '%')
-	{
-		f = ft_printf_2(f, print);
-		if (print->negatif == 1 && *f != 'x')
-			print->zero = 0;
-		while (print->precision_zero > 0 && ft_isdigit(*f) == 1)
-			++f;
-		if (*f == 'l' || *f == 'h' || *f == 'j' || *f == 'z' || *f == 's' ||
-				*f == 'd' || *f == 'i' || *f == 'D' || *f == 'u')
-			f = ft_printf_3(f, print, pa);
-		else if (*f == 'U' || *f == 'p' || *f == 'o' || *f == 'O' ||
-				*f == 'c' || *f == 'x' || *f == 'X' || *f == 'C' || *f == 'S')
-			f = ft_printf_4(f, print, pa);
-		else
-			percent_no_specifier(f, print);
-	}
-	return (f);
 }

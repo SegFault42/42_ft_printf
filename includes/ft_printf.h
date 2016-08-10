@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/06 09:05:53 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/09 07:08:45 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/10 06:29:45 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdarg.h>
 # include <wchar.h>
 # include "../libft/includes/libft.h"
+
+# define F format
 
 typedef struct	s_printf
 {
@@ -103,6 +105,7 @@ void			loop_space_no_ret(t_printf *print);
 void			while_precision_space(t_printf *print);
 void			while_space_number_zero(t_printf *print);
 void			write_null(t_printf *print);
+void			space_number_inf(t_printf *print);
 /*
 ** space_or_zero.c
 */
@@ -142,5 +145,35 @@ void			percent_s_up_precision(t_printf *print, wchar_t *s);
 ** percent_s_up.c
 */
 int				count_octet_wchar(wchar_t *s, t_printf *print);
+/*
+** misc.c
+*/
+const char		*check_flag(const char *format, t_printf *print);
+const char		*check_flag_1(const char *format, t_printf *print);
+void			percent_no_specifier(const char *format, t_printf *print);
+int				is_precision_ok(const char *format, t_printf *print);
+void			is_precision_ok_2(const char *format, t_printf *print);
+/*
+** precision.c
+*/
+const char		*precision(const char *format, int d, t_printf *print);
+const char		*take_precision(const char *format, t_printf *print);
+/*
+** ft_printf_2.c
+*/
+const char		*ft_printf_1(const char *format, t_printf *print);
+const char		*ft_printf_2(const char *format, t_printf *print, va_list pa);
+const char		*ft_printf_3(const char *format, t_printf *print, va_list pa);
+const char		*ft_printf_4(const char *format, t_printf *print, va_list pa);
+/*
+** ft_printf.c
+*/
+const char		*if_is_digit(const char *format, t_printf *print);
+const char		*if_point_or_plus(const char *format, t_printf *print);
+/*
+** particular_case.c
+*/
+int				particular_case(const char *format, va_list pa);
+int				particular_case_2(const char *format, va_list pa);
 
 #endif

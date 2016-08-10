@@ -6,63 +6,40 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/29 15:44:19 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/10 03:18:34 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/10 06:24:59 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int		particular_case(const char *format, va_list pa)
+const char	*if_is_digit(const char *format, t_printf *print)
 {
-	wchar_t	*string;
-	char	cp_string[7];
-	int		i;
-
-	i = 0;
-	string = va_arg(pa, wchar_t*);
-	while (string[i] != '\0')
+	if (*--format == '.' || *format == '+')
 	{
-		cp_string[i] = string[i];
-		i++;
+		++format;
+		print->precision_zero = ft_atoi(format);
 	}
-	cp_string[i] = '\0';
-	if (ft_strcmp(cp_string, "Jambon") == 0)
-	{
-		ft_putstr("   J");
-		return (1);
-	}
-	return (0);
+	++format;
+	return (format);
 }
 
-int		particular_case2(const char *format, va_list pa)
+const char	*if_point_or_plus(const char *format, t_printf *print)
 {
-	wchar_t	*string;
-	char	cp_string[16];
-	int		i;
-
-	i = 0;
-	string = va_arg(pa, wchar_t*);
-	while (string[i] != '\0')
-	{
-		cp_string[i] = string[i];
-		i++;
-	}
-	cp_string[i] = '\0';
-	if (ft_strcmp(cp_string, "我是一只猫。") == 0)
-	{
-		ft_putstr("我是一只猫。");
-		return (1);
-	}
-	return (0);
+	if (*format == '+')
+		print->plus = 1;
+	else if (*format == '.')
+		print->point = 1;
+	++format;
+	return (format);
 }
 
-void	print_format(t_printf *print, const char *format)
+void		write_format(const char *format, t_printf *print)
 {
 	ft_putchar(*format);
 	++print->ret;
 }
 
-int		ft_printf(const char *format, ...)
+int			ft_printf(const char *format, ...)
 {
 	t_printf	print;
 	va_list		pa;
@@ -81,10 +58,11 @@ int		ft_printf(const char *format, ...)
 			format++;
 			if (is_precision_ok(format, &print) == 1)
 				return (print.ret);
-			format = ft_printf_5(format, &print, pa);
+			format = ft_printf_1(format, &print);
+			format = ft_printf_2(format, &print, pa);
 		}
 		else
-			print_format(&print, format);
+			write_format(format, &print);
 		++format;
 	}
 	va_end(pa);
