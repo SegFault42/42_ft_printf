@@ -6,13 +6,13 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/25 00:56:11 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/09 02:00:57 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/10 17:33:29 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static int			percent_d_1(va_list pa, t_printf *print, int z, int d)
+static int			percent_d_1(t_printf *print, int z, int d)
 {
 	z = 0;
 	if (d < 0 && print->point == 1)
@@ -72,7 +72,7 @@ static int			percent_d_3(t_printf *print, int dd, int d)
 	return (0);
 }
 
-static const char	*percent_d_4(const char *f, t_printf *print, int dd, int d)
+static const char	*percent_d_4(const char *f, t_printf *print, int d)
 {
 	if (print->plus == 0 && print->point != 1)
 		write_space_int(d, print);
@@ -103,13 +103,14 @@ const char			*percent_d(va_list pa, t_printf *print, const char *format)
 	dd = print->d;
 	print->d = d;
 	print->neg_sign = 0;
-	z = percent_d_1(pa, print, z, d);
+	z = 0;
+	z = percent_d_1(print, z, d);
 	percent_d_2(print, z, d);
 	if (percent_d_3(print, dd, d) == 1)
 		return (format);
 	if (space_zero(print, format, d) == 1)
 		return (format);
-	format = percent_d_4(format, print, dd, d);
+	format = percent_d_4(format, print, d);
 	format = percent_d_5(format, print, d);
 	format += (print->i - 1);
 	print->i = 0;

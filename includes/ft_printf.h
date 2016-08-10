@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/06 09:05:53 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/10 09:28:23 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/10 18:14:40 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ const char		*percent_z(va_list pa, t_printf *print, const char *format);
 const char		*percent_d(va_list pa, t_printf *print, const char *format);
 const char		*percent_d_up(va_list pa, t_printf *print, const char *f);
 const char		*percent_o(va_list pa, t_printf *print, const char *format);
-const char		*check_valid_specifier(const char *format, t_printf *print);
+const char		*check_valid_specifier(const char *format);
 const char		*count_espace(const char *format, t_printf *print);
 const char		*check_neg_sign(t_printf *print, const char *format);
 const char		*check_space(const char *format, t_printf *print);
@@ -173,8 +173,8 @@ const char		*if_point_or_plus(const char *format, t_printf *print);
 /*
 ** particular_case.c
 */
-int				particular_case(const char *format, va_list pa);
-int				particular_case_2(const char *format, va_list pa);
+int				particular_case(va_list pa);
+int				particular_case_2(va_list pa);
 /*
 ** write_space_or_zero_3.c
 */

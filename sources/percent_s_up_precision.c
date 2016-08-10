@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/09 05:45:21 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/10 07:01:10 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/10 18:11:07 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,22 +50,6 @@ static void	percent_s_up_precision_3(t_printf *print, wchar_t *s, int z, int i)
 			return ;
 		}
 	ft_putchar(224 | (s[i] >> 12));
-	ft_putchar(128 | ((s[i] >> 6) & 63));
-	ft_putchar(128 | (s[i] & 63));
-}
-
-static void	percent_s_up_precision_4(t_printf *print, wchar_t *s, int z, int i)
-{
-	print->ret_wchar += 4;
-	if (print->precision_zero > 0)
-		if (print->ret_wchar > z)
-		{
-			print->ret += 4;
-			print->i = 1;
-			return ;
-		}
-	ft_putchar(240 | (s[i] >> 18));
-	ft_putchar(128 | ((s[i] >> 12) & 63));
 	ft_putchar(128 | ((s[i] >> 6) & 63));
 	ft_putchar(128 | (s[i] & 63));
 }

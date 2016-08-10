@@ -6,13 +6,13 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/07 01:32:24 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/07 01:32:25 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/10 18:09:42 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static void	percent_c_up_2(va_list pa, t_printf *print, wint_t c)
+static void	percent_c_up_2(t_printf *print, wint_t c)
 {
 	if (c < 65536)
 	{
@@ -48,5 +48,5 @@ void		percent_c_up(va_list pa, t_printf *print)
 		print->ret += 2;
 	}
 	else
-		percent_c_up_2(pa, print, c);
+		percent_c_up_2(print, c);
 }

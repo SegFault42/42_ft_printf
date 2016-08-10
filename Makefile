@@ -6,7 +6,7 @@
 #    By: rabougue <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/10 19:16:51 by rabougue          #+#    #+#              #
-#    Updated: 2016/08/10 09:29:08 by rabougue         ###   ########.fr        #
+#    Updated: 2016/08/10 18:13:49 by rabougue         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRCS = ./sources/ft_printf.c ./sources/padding.c ./sources/percent_percent.c \
 
 OBJS = $(SRCS:.c=.o)
 
-FLAGS = -g -Wall -Wextra -Werror
+FLAG = -Wall -Wextra -Werror
 
 CC = clang
 

@@ -6,13 +6,13 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/10 06:23:52 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/10 06:26:08 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/10 18:14:19 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int			particular_case(const char *format, va_list pa)
+int			particular_case(va_list pa)
 {
 	wchar_t	*string;
 	char	cp_string[7];
@@ -34,7 +34,7 @@ int			particular_case(const char *format, va_list pa)
 	return (0);
 }
 
-int			particular_case_2(const char *format, va_list pa)
+int			particular_case_2(va_list pa)
 {
 	wchar_t	*string;
 	char	cp_string[16];

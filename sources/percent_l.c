@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/07 02:55:50 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/08 07:12:54 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/10 17:29:34 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static void	percent_l_4(va_list pa, t_printf *print, const char *f)
 
 static void	percent_l_3(va_list pa, t_printf *print, const char *f)
 {
-	wint_t				c;
 	unsigned long int	l;
 
 	if (*f == 'O')

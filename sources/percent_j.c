@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/07 02:55:31 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/07 17:59:00 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/10 17:30:56 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,10 +110,6 @@ static const char	*percent_j_1(va_list pa, t_printf *print, const char *f)
 
 const char			*percent_j(va_list pa, t_printf *print, const char *format)
 {
-	long			ld;
-	unsigned long	l;
-	long long int	lld;
-
 	if ((*++format == 'j') && (*++format == 'd' || *format == 'i'))
 		percent_j_1(pa, print, format);
 	else if (*format == 'd' || *format == 'i' || *format == 'D')

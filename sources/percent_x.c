@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/07 05:00:42 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/08 15:46:53 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/10 17:28:24 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ static void	percent_x_1(const char *format, t_printf *print, int x)
 const char	*percent_x(va_list pa, t_printf *print, const char *format)
 {
 	int		x;
-	char	num[10];
 
 	particular_case_x(print, format);
 	x = va_arg(pa, int);

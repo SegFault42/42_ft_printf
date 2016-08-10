@@ -6,13 +6,13 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/06 07:20:36 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/10 07:15:47 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/10 17:27:06 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static int	percent_s_1(va_list pa, t_printf *print, char *s, int space)
+static int	percent_s_1(t_printf *print, char *s, int space)
 {
 	if (print->zero == 1)
 	{
@@ -35,7 +35,7 @@ static int	percent_s_1(va_list pa, t_printf *print, char *s, int space)
 	return (0);
 }
 
-static void	percent_s_2(va_list pa, t_printf *print, int space, char *s)
+static void	percent_s_2(t_printf *print, int space, char *s)
 {
 	if (print->precision_space > print->precision_zero)
 	{
@@ -104,9 +104,9 @@ void		percent_s(va_list pa, t_printf *print)
 			: write_null(print);
 	else
 	{
-		if (percent_s_1(pa, print, s, ft_strlen(s)) == 1)
+		if (percent_s_1(print, s, ft_strlen(s)) == 1)
 			return ;
-		percent_s_2(pa, print, ft_strlen(s), s);
+		percent_s_2(print, ft_strlen(s), s);
 		percent_s_3(print, s, i, nb_zero);
 	}
 }

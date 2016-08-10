@@ -6,13 +6,13 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/06 09:20:53 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/07 01:18:55 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/10 18:10:09 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-const char	*check_valid_specifier(const char *format, t_printf *print)
+const char	*check_valid_specifier(const char *format)
 {
 	if (*format != 's' && *format != 'S' && *format != 'p' && *format != 'd'
 		&& *format != 'D' && *format != 'i' && *format != 'o' && *format != 'O'

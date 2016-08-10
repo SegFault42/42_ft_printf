@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/10 02:05:10 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/10 02:06:25 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/10 18:13:06 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 const char	*precision(const char *format, int d, t_printf *print)
 {
-	int	nb_zero;
-
 	if (*format == 'd')
 		return (format);
 	++format;

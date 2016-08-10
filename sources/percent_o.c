@@ -6,13 +6,13 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/07 03:02:26 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/07 18:17:13 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/10 18:08:12 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static void	percent_o_1(va_list pa, t_printf *print, unsigned int o)
+static void	percent_o_1(t_printf *print, unsigned int o)
 {
 	if (print->negatif_x == 1 && print->space_number > 0 && print->point == 0)
 	{
@@ -57,7 +57,7 @@ const char	*percent_o(va_list pa, t_printf *print, const char *format)
 		ft_putchar(' ');
 	else
 		ft_putstr(ft_ultoa_base(o, 8));
-	percent_o_1(pa, print, o);
+	percent_o_1(print, o);
 	print->ret += ft_strlen(ft_ultoa_base(o, 8));
 	return (format);
 }
