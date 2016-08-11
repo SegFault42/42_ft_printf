@@ -6,7 +6,7 @@
 /*   By: rabougue <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/06 09:01:45 by rabougue          #+#    #+#             */
-/*   Updated: 2016/08/10 18:07:30 by rabougue         ###   ########.fr       */
+/*   Updated: 2016/08/11 08:01:02 by rabougue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,16 @@ static const char	*percent_d_up_1(va_list pa, t_printf *print, char const *f)
 	unsigned int	u;
 
 	u = va_arg(pa, unsigned int);
+	if (print->space_number > ft_strlen(ft_ltoa(u)))
+		print->space_number -= ft_strlen(ft_ltoa(u));
+	if (print->zero == 1)
+	{
+		while (print->space_number-- > 0)
+		{
+			ft_putchar('0');
+			++print->ret;
+		}
+	}
 	if (print->precision_zero > 0 || print->precision_space > 0)
 		put_space_or_zero_u(print, u);
 	ft_put_long(u);
@@ -34,16 +44,6 @@ const char			*percent_d_up(va_list pa, t_printf *print, char const *f)
 	long	d;
 
 	d = 0;
-	if (print->space_number > ft_strlen(ft_ltoa(4294967295)))
-		print->space_number -= ft_strlen(ft_ltoa(4294967295));
-	if (print->zero == 1)
-	{
-		while (print->space_number-- > 0)
-		{
-			ft_putchar('0');
-			++print->ret;
-		}
-	}
 	if (*f == 'D')
 	{
 		d = va_arg(pa, long);
